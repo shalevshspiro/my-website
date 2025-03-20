@@ -6,6 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("✅ Firebase נטען! מוודא שהכל מחובר...");
 
+    // בדיקה אם auth נטען לפני שמנסים להשתמש בו
+    if (!firebase.auth) {
+        console.error("❌ Firebase Auth לא נטען כראוי!");
+        return;
+    }
+
     const loginForm = document.getElementById("loginForm");
     const articleForm = document.getElementById("articleForm");
     const adminPanel = document.getElementById("adminPanel");
