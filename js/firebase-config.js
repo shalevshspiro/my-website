@@ -1,4 +1,4 @@
-// חיבור האתר ל-Firebase
+// חיבור האתר ל-Firebase// חיבור האתר ל-Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCQ6IhT215CKJBMr8gkvnKuyJLqJe63fZk",
   authDomain: "my-mind-bdd8d.firebaseapp.com",
@@ -13,5 +13,5 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
 
-// בדיקת טעינה תקינה
-console.log("🔥 Firebase נטען בהצלחה!", firebase);
+// בדיקה אם Firebase נטען כראוי
+console.log("🔥 Firebase נטען בהצלחה!");
