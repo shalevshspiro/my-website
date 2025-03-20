@@ -62,3 +62,28 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+articleForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const newArticle = {
+        title: document.getElementById("title").value,
+        intro: document.getElementById("intro").value,
+        content: document.getElementById("content").value,
+        category: document.getElementById("category").value,  // ✅ שומר קטגוריה
+        genre: document.getElementById("genre").value,
+        images: document.getElementById("images").value ? document.getElementById("images").value.split(",") : [],
+        logoImage: document.getElementById("logoImage").value,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    console.log("📌 מנסה לשלוח את הנתונים הבאים ל-Firebase:", newArticle);
+
+    db.collection("articles").add(newArticle).then(() => {
+        console.log("✅ הנתונים נשלחו בהצלחה ל-Firebase!");
+        alert("✅ כתבה נוספה בהצלחה!");
+        articleForm.reset();
+    }).catch(error => {
+        console.error("❌ שגיאה בשליחה ל-Firebase:", error);
+        alert("❌ שגיאה בהוספת הכתבה: " + error.message);
+    });
+});
