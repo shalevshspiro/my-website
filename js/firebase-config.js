@@ -1,11 +1,11 @@
 // חיבור האתר ל-Firebase
 const firebaseConfig = {
-  apiKey: "הכנס-את-ה-API-KEY-שלך",
-  authDomain: "my-mind.firebaseapp.com",
-  projectId: "my-mind",
-  storageBucket: "my-mind.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "הכנס-את-ה-APP-ID-שלך"
+  apiKey: "AIzaSyCQ6IhT215CKJBMr8gkvnKuyJLqJe63fZk",
+  authDomain: "my-mind-bdd8d.firebaseapp.com",
+  projectId: "my-mind-bdd8d",
+  storageBucket: "my-mind-bdd8d.appspot.com",
+  messagingSenderId: "377040977122",
+  appId: "1:377040977122:web:b833bb0f0fe2d685b2b2bb"
 };
 
 // אתחול Firebase
