@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         auth.signInWithEmailAndPassword(email, password)
             .then(() => {
-                alert("✅ התחברת בהצלחה!");
+                alert("✅ יאללה ביתר");
                 showAdminPanel();
             })
             .catch(error => {
@@ -61,29 +61,32 @@ document.addEventListener("DOMContentLoaded", function () {
             logoutButton.style.display = "none";
         }
     });
-});
-articleForm.addEventListener("submit", function(event) {
-    event.preventDefault();
 
-    const newArticle = {
-        title: document.getElementById("title").value,
-        intro: document.getElementById("intro").value,
-        content: document.getElementById("content").value,
-        category: document.getElementById("category").value,  // ✅ שומר קטגוריה
-        genre: document.getElementById("genre").value,
-        images: document.getElementById("images").value ? document.getElementById("images").value.split(",") : [],
-        logoImage: document.getElementById("logoImage").value,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    };
+    // ✅ הוספת כתבה - עכשיו בתוך ה-DOMContentLoaded
+    articleForm.addEventListener("submit", function(event) {
+        event.preventDefault();
 
-    console.log("📌 מנסה לשלוח את הנתונים הבאים ל-Firebase:", newArticle);
+        const newArticle = {
+            title: document.getElementById("title").value,
+            intro: document.getElementById("intro").value,
+            content: document.getElementById("content").value,
+            category: document.getElementById("category").value,  // ✅ שומר קטגוריה
+            genre: document.getElementById("genre").value,
+            images: document.getElementById("images").value ? document.getElementById("images").value.split(",") : [],
+            logoImage: document.getElementById("logoImage").value,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        };
 
-    db.collection("articles").add(newArticle).then(() => {
-        console.log("✅ הנתונים נשלחו בהצלחה ל-Firebase!");
-        alert("✅ כתבה נוספה בהצלחה!");
-        articleForm.reset();
-    }).catch(error => {
-        console.error("❌ שגיאה בשליחה ל-Firebase:", error);
-        alert("❌ שגיאה בהוספת הכתבה: " + error.message);
+        console.log("📌 מנסה לשלוח את הנתונים הבאים ל-Firebase:", newArticle);
+
+        db.collection("articles").add(newArticle).then(() => {
+            console.log("✅ הנתונים נשלחו בהצלחה ל-Firebase!");
+            alert("✅ כתבה נוספה בהצלחה!");
+            articleForm.reset();
+        }).catch(error => {
+            console.error("❌ שגיאה בשליחה ל-Firebase:", error);
+            alert("❌ שגיאה בהוספת הכתבה: " + error.message);
+        });
     });
+
 });
