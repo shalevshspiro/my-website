@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ניהול כתבות - My Mind</title>
-<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"></script>
-<script src="js/firebase.js"></script>
-<script src="js/admin.js"></script>
+
+    <!-- טעינת Firebase (גרסה 8.10.1 שמתאימה לשימוש בדפדפן) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+
+    <!-- חיבור לקובץ הגדרות ה-Firebase ול-JavaScript של הניהול -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/admin.js"></script>
 </head>
 <body>
     <h2>🔑 התחברות לניהול כתבות</h2>
@@ -29,7 +34,7 @@
             <label>📖 הקדמה:</label>
             <input type="text" id="intro" placeholder="הקדמה">
 
-            <label>📂 קטגוריה (לאיזה דף HTML זה שייך):</label>
+            <label>📂 קטגוריה:</label>
             <select id="category">
                 <option value="life">Life</option>
                 <option value="articles">Articles</option>
