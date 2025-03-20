@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ניהול כתבות - My Mind</title>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"></script>
+    <script src="../js/firebase-config.js"></script>
+    <script src="../js/admin.js"></script>
+</head>
+<body>
+    <h2>🔑 התחברות לניהול כתבות</h2>
+    <form id="loginForm">
+        <input type="email" id="email" placeholder="אימייל" required>
+        <input type="password" id="password" placeholder="סיסמה" required>
+        <button type="submit">📌 התחבר</button>
+    </form>
+
+    <button id="logout" style="display:none;">🚪 התנתק</button>
+
+    <div id="adminPanel" style="display:none;">
+        <h2>📝 הוספת כתבה חדשה</h2>
+        <form id="articleForm">
+            <label>🔹 כותרת הכתבה:</label>
+            <input type="text" id="title" placeholder="כותרת" required>
+
+            <label>📖 הקדמה:</label>
+            <input type="text" id="intro" placeholder="הקדמה">
+
+            <label>📂 קטגוריה (לאיזה דף HTML זה שייך):</label>
+            <select id="category">
+                <option value="life">Life</option>
+                <option value="articles">Articles</option>
+            </select>
+
+            <label>🎭 ז'אנר:</label>
+            <select id="genre">
+                <option value="sports">ספורט</option>
+                <option value="news">חדשות</option>
+                <option value="personal">חוויה אישית</option>
+                <option value="history">מפעם</option>
+            </select>
+
+            <label>📄 תוכן הכתבה:</label>
+            <textarea id="content" placeholder="תוכן הכתבה"></textarea>
+
+            <label>🖼️ תמונות (רשות, הפרד עם פסיקים אם יש כמה):</label>
+            <input type="text" id="images" placeholder="קישורים לתמונות">
+
+            <label>🔖 תמונת לוגו (חובה):</label>
+            <input type="text" id="logoImage" placeholder="קישור ללוגו" required>
+
+            <button type="submit">✅ צור כתבה</button>
+        </form>
+    </div>
+</body>
+</html>
