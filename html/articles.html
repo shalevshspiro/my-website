@@ -4,33 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>כתבות</title>
-<link rel="stylesheet" href="../css/articles.css">
+
+    <!-- טעינת Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <!-- חיבור ל-Firebase -->
+    <script src="../js/firebase-config.js"></script>
+
+    <!-- טעינת כתבות -->
+    <script src="../js/articles.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1>כתבות ודעות</h1>
-        <nav>
-            <ul>
-                <li><a href="../index.html">דף השער</a></li>
-                <li><a href="articles.html">כתבות</a></li>
-                <li><a href="life.html">החיים שלי</a></li>
-                <li><a href="career.html">קריירה מקצועית</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-            <h1>הכתבות שלי- קריאה מהנה ביותר</h1>
+    <h1>📚 כתבות</h1>
     <div id="articles-container"></div>
-
-		
-		
-		
-		
-		
-		
-		
-    </main>
 </body>
-	    <script src="../js/articles.js" defer></script>
-
 </html>

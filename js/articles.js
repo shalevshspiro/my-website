@@ -1,71 +1,36 @@
-console.log("ולא תהיה כמו ביתר");
-
 document.addEventListener("DOMContentLoaded", () => {
-    const welcomeMessage = document.createElement("h2");
-    welcomeMessage.textContent = "פרוגרסיבם קיצוני=נאו קומוניזם";
-    document.body.appendChild(welcomeMessage);
+    const articlesContainer = document.getElementById("articles-container");
 
-	
-	
-	// טוען את הנתונים מה-JSON
-fetch("../Data/articles.json")
-    .then(response => response.json())
-    .then(data => {
-        const container = document.getElementById("articles-container");
+    if (!articlesContainer) {
+        console.error("❌ לא נמצא אלמנט להצגת הכתבות!");
+        return;
+    }
 
-        data.forEach(article => {
-            // יצירת אלמנט כתבה
-            const articleDiv = document.createElement("div");
+    db.collection("articles")
+        .where("category", "==", "articles") // ✅ מציג רק כתבות ששייכות ל-"articles"
+        .orderBy("createdAt", "desc")
+        .get()
+        .then(snapshot => {
+            snapshot.forEach(doc => {
+                const article = doc.data();
 
-            // כותרת
-            const titleElement = document.createElement("h2");
-            titleElement.textContent = article.title;
+                // יצירת אלמנט לכתבה
+                const articleDiv = document.createElement("div");
+                articleDiv.classList.add("article");
 
-            // כפתור להצגת הכתבה
-            const button = document.createElement("button");
-            button.textContent = "קרא עוד";
-            button.classList.add("read-more-btn");
+                articleDiv.innerHTML = `
+                    <h2>${article.title}</h2>
+                    <p><strong>${article.intro}</strong></p>
+                    <p>${article.content}</p>
+                    <p><small>ז'אנר: ${article.genre}</small></p>
+                    ${article.logoImage ? `<img src="${article.logoImage}" alt="תמונת לוגו" style="max-width: 200px;">` : ""}
+                    ${article.images ? article.images.map(img => `<img src="${img}" alt="תמונה" style="max-width: 200px;">`).join("") : ""}
+                `;
 
-            // תוכן הכתבה (מוסתר בהתחלה)
-            const contentElement = document.createElement("p");
-            contentElement.textContent = article.content;
-            contentElement.classList.add("article-content");
-
-            // פונקציה להצגת התוכן בלחיצה
-            button.addEventListener("click", () => {
-                contentElement.style.display = 
-                    contentElement.style.display === "none" ? "block" : "none";
+                articlesContainer.appendChild(articleDiv);
             });
-
-            // הוספת האלמנטים לדף
-            articleDiv.appendChild(titleElement);
-            articleDiv.appendChild(button);
-            articleDiv.appendChild(contentElement);
-            container.appendChild(articleDiv);
+        })
+        .catch(error => {
+            console.error("❌ שגיאה בטעינת הכתבות:", error);
         });
-    })
-    .catch(error => console.error("שגיאה בטעינת JSON:", error));
-
-	
-		});
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
+});
