@@ -13,7 +13,5 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
 
-// בדיקה אם Firebase נטען כראוי
-if (typeof firebase === 'undefined') {
-    console.error("❌ Firebase לא נטען כראוי. בדוק את הסקריפטים ב-HTML.");
-}
+// בדיקת טעינה תקינה
+console.log("🔥 Firebase נטען בהצלחה!", firebase);

@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
+    if (typeof firebase === 'undefined') {
+        console.error("❌ Firebase לא נטען, בדוק את הסקריפטים!");
+        return;
+    }
+
+    console.log("✅ Firebase נטען! מוודא שהכל מחובר...");
+
     const loginForm = document.getElementById("loginForm");
     const articleForm = document.getElementById("articleForm");
     const adminPanel = document.getElementById("adminPanel");
@@ -40,33 +47,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     auth.onAuthStateChanged(user => {
         if (user) {
+            console.log("✅ משתמש מחובר: ", user.email);
             showAdminPanel();
         } else {
+            console.log("❌ אף משתמש לא מחובר.");
             adminPanel.style.display = "none";
             logoutButton.style.display = "none";
         }
-    });
-
-    // הוספת כתבה ל-Firestore
-    articleForm.addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        const newArticle = {
-            title: document.getElementById("title").value,
-            intro: document.getElementById("intro").value,
-            content: document.getElementById("content").value,
-            category: document.getElementById("category").value,
-            genre: document.getElementById("genre").value,
-            images: document.getElementById("images").value ? document.getElementById("images").value.split(",") : [],
-            logoImage: document.getElementById("logoImage").value,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        };
-
-        db.collection("articles").add(newArticle).then(() => {
-            alert("✅ כתבה נוספה בהצלחה!");
-            articleForm.reset();
-        }).catch(error => {
-            alert("❌ שגיאה בהוספה: " + error.message);
-        });
     });
 });
