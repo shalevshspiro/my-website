@@ -72,4 +72,22 @@ function getOriginalText(id) {
         case "contact": return "צור קשר";
         default: return "הצג";
     }
+	
+	// תמונות צד ברקע האפור
+const leftFloating = ["img/fcbj.webp", "img/z.webp", "img/ko.webp"];
+const rightFloating = ["img/b.webp", "img/fi.webp", "img/gilboa.webp"];
+
+const addFloatingImages = (images, side) => {
+    const container = document.getElementById(`${side}-images`);
+    images.forEach(src => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = "תמונה";
+        container.appendChild(img);
+    });
+};
+
+addFloatingImages(leftFloating, "left");
+addFloatingImages(rightFloating, "right");
+
 }
