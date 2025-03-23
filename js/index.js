@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </a>
       </li>
       <li>
-        <img src="img/twitter.svg" class="icon" alt="Twitter" />
+        <img src="../img/twitter.png" class="icon" alt="Twitter" />
         <a href="https://x.com/shalevshapiro" target="_blank">
           טוויטר
         </a>
