@@ -144,12 +144,13 @@ button:hover {
 }
 
 .floating-images img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-  transition: transform 0.2s ease;
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease;
+}
 }
 
 .floating-images img:hover {
