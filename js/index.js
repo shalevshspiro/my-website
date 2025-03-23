@@ -3,20 +3,20 @@ console.log("קובץ index.js נטען בהצלחה!");
 document.addEventListener("DOMContentLoaded", () => {
     // טעינת תמונת פרופיל
     const img = document.createElement("img");
-    img.src = "img/processed_0T8A7900-Edit.webp";
+    img.src = "..img/prof.webp";
     img.alt = "התמונה שלי";
     document.getElementById("my-photo").appendChild(img);
 
     // טעינת תמונות צד
     const leftImages = [
-        "img/processed_20221029_140751.webp",
-        "img/processed_317E94CC-3E71-4948-8236-F98B8E927A0C.webp",
-        "img/processed_22BAC913-DEA4-45C3-A97B-1028D1350B53.webp"
+        "../img/b.webp",
+        "../img/z.webp",
+        "../img/fi.webp"
     ];
     const rightImages = [
-        "img/processed_me.webp",
-        "img/processed_4F91A34E-3F27-4CE7-8966-252F90A8BE33.webp",
-        "img/processed_6203C457-2898-4A1F-AC80-B252E9A671EE.webp"
+        "../img/fcbj.webp",
+        "../img/gilboa.webp",
+        "../img/ko.webp",
     ];
 
     const leftContainer = document.querySelector(".side-images.left");
