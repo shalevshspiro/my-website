@@ -1,52 +1,45 @@
 console.log("קובץ index.js נטען בהצלחה!");
 
 document.addEventListener("DOMContentLoaded", () => {
-    // טעינת תמונת פרופיל
     const img = document.createElement("img");
-    img.src = "../img/prof.webp";
+    img.src = "img/processed_0T8A7900-Edit.webp";
     img.alt = "התמונה שלי";
     document.getElementById("my-photo").appendChild(img);
 
-    // טעינת תמונות צד
-    const leftImages = [
-        "../img/b.webp",
-        "../img/z.webp",
-        "../img/fi.webp"
-    ];
-    const rightImages = [
-        "../img/fcbj.webp",
-        "../img/gilboa.webp",
-        "../img/ko.webp",
-    ];
+    // תמונות צד
+    const wrapper = document.createElement("div");
+    wrapper.className = "side-images-wrapper";
 
-    const leftContainer = document.querySelector(".side-images.left");
-    const rightContainer = document.querySelector(".side-images.right");
+    const leftImages = ["img/fcbj.webp", "img/z.webp", "img/ko.webp"];
+    const rightImages = ["img/b.webp", "img/fi.webp", "img/gilboa.webp"];
 
-    leftImages.forEach(src => {
-        const image = document.createElement("img");
-        image.src = src;
-        image.alt = "צד שמאל";
-        leftContainer.appendChild(image);
-    });
+    const createImageColumn = (images, side) => {
+        const container = document.createElement("div");
+        container.className = `side-images ${side}`;
+        images.forEach(src => {
+            const image = document.createElement("img");
+            image.src = src;
+            image.alt = side;
+            container.appendChild(image);
+        });
+        return container;
+    };
 
-    rightImages.forEach(src => {
-        const image = document.createElement("img");
-        image.src = src;
-        image.alt = "צד ימין";
-        rightContainer.appendChild(image);
-    });
+    wrapper.appendChild(createImageColumn(leftImages, "left"));
+    wrapper.appendChild(createImageColumn(rightImages, "right"));
 
-    // טקסט \"עליי\"
+    const main = document.querySelector("main");
+    main.insertBefore(wrapper, main.children[1]);
+
+    // טקסטים
     document.getElementById("about-me").innerHTML = `
         <p>אני מפתח ווב ואני מתעסק עם בניית אתרים ופיתוח תוכנה. יש לי רקע בלימודי הנדסת תוכנה ואני אוהב ליצור תוכן חדש.</p>
     `;
 
-    // טקסט עמותת משפאחה
     document.getElementById("mishpacha").innerHTML = `
         <p class="mishpacha-text">עמותת משפאחה היא עמותה שהקמתי יחד עם חברי הטוב דללין דסטאו ומטרתה היא לעזור לילדים יתומים. אני מזמין אתכם להתרשם ביחד איתנו מהעשייה המבורכת שלנו ולעזור לנו להגשים את המטרות.</p>
     `;
 
-    // טקסט צור קשר
     document.getElementById("contact").innerHTML = `
         <ul>
             <li><p>האימייל שלי : shalev6005@gmail.com</p></li>
