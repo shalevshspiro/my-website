@@ -1,28 +1,48 @@
 console.log("קובץ index.js נטען בהצלחה!");
 
 document.addEventListener("DOMContentLoaded", () => {
+  // הוספת תמונת פרופיל
   const img = document.createElement("img");
   img.src = "../img/prof.webp";
   img.alt = "התמונה שלי";
   document.getElementById("my-photo").appendChild(img);
 
+  // עליי
   document.getElementById("about-me").innerHTML = `
     <p>אני מפתח ווב ואני מתעסק עם בניית אתרים ופיתוח תוכנה. יש לי רקע בלימודי הנדסת תוכנה ואני אוהב ליצור תוכן חדש.</p>
   `;
 
+  // על עמותת משפאחה
   document.getElementById("mishpacha").innerHTML = `
     <p class="mishpacha-text">עמותת משפאחה היא עמותה שהקמתי יחד עם חברי הטוב דללין דסטאו ומטרתה היא לעזור לילדים יתומים. אני מזמין אתכם להתרשם ביחד איתנו מהעשייה המבורכת שלנו ולעזור לנו להגשים את המטרות.</p>
   `;
 
+  // צור קשר – כולל אייקונים וקישורים
   document.getElementById("contact").innerHTML = `
-    <ul>
-      <li><p>האימייל שלי : shalev6005@gmail.com</p></li>
-      <li><a href="https://www.linkedin.com/in/shalevshiloshapiro">לינקדין</a></li>
-      <li><a href="https://x.com/shalevshapiro">טוויטר</a></li>
+    <ul class="contact-list">
+      <li>
+        <img src="img/gmail.png" class="icon" alt="Gmail" />
+        <a href="mailto:shalev6005@gmail.com?subject=פנייה מהאתר&body=שלום שלו,">
+          shalev6005@gmail.com
+        </a>
+      </li>
+      <li>
+        <img src="img/linkedin.png" class="icon" alt="LinkedIn" />
+        <a href="https://www.linkedin.com/in/shalevshiloshapiro" target="_blank">
+          לינקדין
+        </a>
+      </li>
+      <li>
+        <img src="img/twitter.svg" class="icon" alt="Twitter" />
+        <a href="https://x.com/shalevshapiro" target="_blank">
+          טוויטר
+        </a>
+      </li>
     </ul>
   `;
 });
 
+// כפתורי פתיחה/סגירה
 function toggleSection(id, btn) {
   const sections = ["about-me", "mishpacha", "contact"];
   sections.forEach(sectionId => {
@@ -48,7 +68,7 @@ function getOriginalText(id) {
   }
 }
 
-// הוספת התמונות לצדדים ברקע האפור
+// הוספת תמונות לצדדים
 const leftFloating = ["img/fcbj.webp", "img/z.webp", "img/ko.webp"];
 const rightFloating = ["img/b.webp", "img/fi.webp", "img/gilboa.webp"];
 
