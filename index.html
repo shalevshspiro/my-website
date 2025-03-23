@@ -22,21 +22,23 @@
 
     <main>
         <section id="intro">
-            <div id="my-photo"></div>
             <div id="short-text">
                 <p>היי לכולם כאן שלו שפירו, אני מזמין אתכם להתעניין באתר שלי ולגלות עוד עליי ואולי אפילו גם עוד על עצמכם, תודה על ההתעניינות וקריאה מהנה</p>
                 <p>כאן תמצאו שילוב של טכנולוגיה, סיפור אישי וערכים.</p>
                 <p>מוזמנים ללחוץ ולגלות בעצמכם.</p>
             </div>
+
+            <div id="my-photo"></div>
+
+            <div id="buttons">
+                <button onclick="toggleSection('about-me', this)">קרא עוד עליי</button>
+                <button onclick="toggleSection('mishpacha', this)">על עמותת משפאחה</button>
+                <button onclick="toggleSection('contact', this)">צור קשר</button>
+            </div>
         </section>
 
-        <button onclick="toggleSection('about-me')">קרא עוד עליי</button>
         <div id="about-me" style="display:none;"></div>
-
-        <button onclick="toggleSection('mishpacha')">על עמותת משפאחה</button>
         <div id="mishpacha" style="display:none;"></div>
-
-        <button onclick="toggleSection('contact')">צור קשר</button>
         <div id="contact" style="display:none;"></div>
     </main>
 
