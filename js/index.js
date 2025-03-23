@@ -3,7 +3,7 @@ console.log("קובץ index.js נטען בהצלחה!");
 document.addEventListener("DOMContentLoaded", () => {
     // טעינת תמונת פרופיל
     const img = document.createElement("img");
-    img.src = "..img/prof.webp";
+    img.src = "../img/prof.webp";
     img.alt = "התמונה שלי";
     document.getElementById("my-photo").appendChild(img);
 
