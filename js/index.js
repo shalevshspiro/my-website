@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // טעינת תמונת פרופיל
     const img = document.createElement("img");
-    img.src = "..\img\prof.webp";
+    img.src = "../img/prof.webp";
     img.alt = "התמונה שלי";
     img.style.width = "200px";
     img.style.borderRadius = "50%";
