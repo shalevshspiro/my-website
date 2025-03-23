@@ -7,23 +7,25 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-    <header>
-        <h1>ברוכים הבאים לאתר שלי</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">דף השער</a></li>
-                <li><a href="html/articles.html">כתבות</a></li>
-                <li><a href="html/life.html">החיים שלי</a></li>
-                <li><a href="html/career.html">קריירה מקצועית</a></li>
-                <li><a href="admin.html">🔑 כניסה לניהול כתבות</a></li>
-            </ul>
-        </nav>
+    <header class="custom-header">
+        <div class="header-content">
+            <h1>ברוכים הבאים לאתר שלי</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">דף השער</a></li>
+                    <li><a href="html/articles.html">כתבות</a></li>
+                    <li><a href="html/life.html">החיים שלי</a></li>
+                    <li><a href="html/career.html">קריירה מקצועית</a></li>
+                    <!-- <li><a href="admin.html">🔑 כניסה לניהול כתבות</a></li> -->
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main>
         <section id="intro">
-            <div id="short-text">
-                <p>היי לכולם כאן שלו שפירו, אני מזמין אתכם להתעניין באתר שלי ולגלות עוד עליי ואולי אפילו גם עוד על עצמכם, תודה על ההתעניינות וקריאה מהנה</p>
+            <div id="short-text" class="highlight-box">
+                <p>היי לכולם, כאן שלו שפירו. אני מזמין אתכם להתעניין באתר שלי ולגלות עוד עליי – ואולי אפילו גם עוד על עצמכם.</p>
                 <p>כאן תמצאו שילוב של טכנולוגיה, סיפור אישי וערכים.</p>
                 <p>מוזמנים ללחוץ ולגלות בעצמכם.</p>
             </div>
@@ -31,9 +33,9 @@
             <div id="my-photo"></div>
 
             <div id="buttons">
-                <button onclick="toggleSection('about-me', this)">קרא עוד עליי</button>
-                <button onclick="toggleSection('mishpacha', this)">על עמותת משפאחה</button>
-                <button onclick="toggleSection('contact', this)">צור קשר</button>
+                <button onclick="toggleSection('about-me', this)">🧍‍♂️ מי אני באמת?</button>
+                <button onclick="toggleSection('mishpacha', this)">❤️ מאחורי משפאחה</button>
+                <button onclick="toggleSection('contact', this)">✉️ צור קשר</button>
             </div>
         </section>
 

@@ -1,41 +1,48 @@
 body {
     direction: rtl;
     text-align: right;
-    font-family: Arial, sans-serif;
+    font-family: 'Assistant', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    background: linear-gradient(to bottom, #f0f8ff, #e9f1f7);
 }
 
-header {
-    background-color: #008cba;
+.custom-header {
+    background: linear-gradient(to right, #007ea7, #00a6fb);
     color: white;
-    padding: 20px 0;
+    padding: 30px 0;
     text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.header-content h1 {
+    font-size: 32px;
+    margin: 0;
+    font-weight: 700;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 15px 0 0 0;
 }
 
 nav ul li {
     display: inline-block;
-    margin: 0 15px;
+    margin: 0 10px;
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
-    font-size: 18px;
-    padding: 8px 12px;
+    font-size: 16px;
+    padding: 6px 10px;
     transition: all 0.3s ease-in-out;
 }
 
 nav ul li a:hover {
     background-color: white;
-    color: #008cba;
+    color: #007ea7;
     border-radius: 5px;
 }
 
@@ -48,29 +55,24 @@ main {
     border-radius: 10px;
 }
 
-h1 {
-    font-size: 36px;
-    margin: 10px 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-h2 {
-    font-size: 24px;
-    margin: 20px 0;
+.highlight-box {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
 }
 
 p {
-    font-size: 20px;
-    line-height: 1.4; /* פחות רווח בין שורות */
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    color: #444;
-    margin-bottom: 10px; /* ריווח אחיד וקטן יותר בין פסקאות */
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
 }
 
 a {
-    color: #008cba;
+    color: #007ea7;
     text-decoration: none;
     font-weight: bold;
 }
@@ -82,17 +84,18 @@ a:hover {
 button {
     margin: 10px 5px 0 0;
     padding: 10px 15px;
-    background-color: #008cba;
+    background-color: #00a6fb;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 button:hover {
-    background-color: #005f7f;
+    background-color: #007ea7;
+    transform: translateY(-2px);
 }
 
 #my-photo {
@@ -101,12 +104,21 @@ button:hover {
 }
 
 #my-photo img {
-    width: 200px;
+    width: 240px;
     border-radius: 50%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border: 4px solid white;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 #buttons {
     text-align: center;
     margin-bottom: 30px;
+}
+
+#about-me, #mishpacha, #contact {
+    background-color: #fefefe;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 6px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.1);
 }
