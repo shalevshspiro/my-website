@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <li><a href="https://x.com/shalevshapiro">טוויטר</a></li>
         </ul>
     `;
+});
 
 function toggleSection(id) {
     const section = document.getElementById(id);
@@ -38,23 +39,7 @@ function toggleSection(id) {
     } else {
         section.style.display = "none";
     }
-}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-});
+} 
+
 
 
