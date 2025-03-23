@@ -13,9 +13,18 @@ document.addEventListener("DOMContentLoaded", () => {
     img.style.boxShadow = "0px 0px 10px rgba(0, 0, 0, 0.2)";
     document.getElementById("my-photo").appendChild(img);
 
-    // טקסט "עליי"
-    const about = document.getElementById("about-me");
-    about.innerHTML = `<p>אני מפתח ווב ואני מתעסק עם בניית אתרים ופיתוח תוכנה. יש לי רקע בלימודי הנדסת תוכנה ואני אוהב ליצור תוכן חדש.</p>`;
+
+
+
+function toggleSection(id) {
+    console.log("לחצו על כפתור:", id);
+    const section = document.getElementById(id);
+    if (section) {
+        section.style.display = section.style.display === "none" ? "block" : "none";
+    } else {
+        console.error("לא נמצא אלמנט עם id:", id);
+    }
+}
 
     // טקסט עמותת משפאחה
     const mishpacha = document.getElementById("mishpacha");
