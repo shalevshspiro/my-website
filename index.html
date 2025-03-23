@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>האתר שלי</title>
-<link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
     <header>
@@ -15,30 +15,31 @@
                 <li><a href="html/articles.html">כתבות</a></li>
                 <li><a href="html/life.html">החיים שלי</a></li>
                 <li><a href="html/career.html">קריירה מקצועית</a></li>
-<li><a  href="admin.html">🔑 כניסה לניהול כתבות</a>
-</li>
+                <li><a href="admin.html">🔑 כניסה לניהול כתבות</a></li>
             </ul>
         </nav>
     </header>
+
     <main>
-        <section id="about-me">
-            <h2>עליי</h2>
-            <p>אני מפתח ווב ואני מתעסק עם בניית אתרים ופיתוח תוכנה. יש לי רקע בלימודי הנדסת תוכנה ואני אוהב ליצור תוכן חדש.</p>
-            <p>עמותת משפאחה היא עמותה שהקמתי יחד עם חברי הטוב דללין דסטאו ומטרתה היא לעזור לילדים יתומים. אני מזמין אתכם להתרשם ביחד איתנו מהעשייה המבורכת שלנו ולעזור לנו להגשים את המטרות.</p>
+        <section id="intro">
+            <div id="my-photo"></div>
+            <div id="short-text">
+                <p>היי לכולם כאן שלו שפירו, אני מזמין אתכם להתעניין באתר שלי ולגלות עוד עליי ואולי אפילו גם עוד על עצמכם, תודה על ההתעניינות וקריאה מהנה</p>
+                <p>כאן תמצאו שילוב של טכנולוגיה, סיפור אישי וערכים.</p>
+                <p>מוזמנים ללחוץ ולגלות בעצמכם.</p>
+            </div>
         </section>
-        <section id="contact">
-            <h2>צור קשר</h2>
-            <ul>
-                <li><p>האימייל שלי : shalev6005@gmail.com</p></li>
-                <li><a href="https://www.linkedin.com/in/shalevshiloshapiro">לינקדין</a></li>
-                <li><a href="https://x.com/shalevshapiro">טוויטר</a></li>
-            </ul>
-			
-			
 
-        </section>
+        <button onclick="toggleSection('about-me')">קרא עוד עליי</button>
+        <div id="about-me" style="display:none;"></div>
+
+        <button onclick="toggleSection('mishpacha')">על עמותת משפאחה</button>
+        <div id="mishpacha" style="display:none;"></div>
+
+        <button onclick="toggleSection('contact')">צור קשר</button>
+        <div id="contact" style="display:none;"></div>
     </main>
-	    <script src="js/index.js"></script>
 
+    <script src="js/index.js"></script>
 </body>
 </html>

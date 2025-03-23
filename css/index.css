@@ -1,10 +1,10 @@
-body {
+body {body {
     direction: rtl;
     text-align: right;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4; /* רקע עדין */
+    background-color: #f9f9f9;
 }
 
 header {
@@ -52,6 +52,7 @@ h1 {
     font-size: 36px;
     margin: 10px 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 h2 {
@@ -60,8 +61,11 @@ h2 {
 }
 
 p {
-    font-size: 18px;
+    font-size: 20px;
     line-height: 1.8;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #444;
 }
 
 a {
@@ -74,39 +78,29 @@ a:hover {
     text-decoration: underline;
 }
 
-#about-me a {
-    display: inline-block;
+button {
+    margin: 10px 0;
     padding: 10px 15px;
     background-color: #008cba;
     color: white;
+    border: none;
     border-radius: 5px;
-    margin-top: 10px;
-    transition: 0.3s;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-#about-me a:hover {
+button:hover {
     background-color: #005f7f;
 }
 
-/* עיצוב לרשימת הקישורים בצור קשר */
-#contact ul {
-    padding: 0;
-    list-style: none;
+#my-photo {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-#contact ul li {
-    margin-bottom: 10px;
-}
-
-#contact ul li a {
-    display: inline-block;
-    padding: 8px 12px;
-    background-color: #008cba;
-    color: white;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-
-#contact ul li a:hover {
-    background-color: #005f7f;
+#my-photo img {
+    width: 200px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
