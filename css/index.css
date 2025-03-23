@@ -126,27 +126,40 @@ button:hover {
 }
 
 .side-images {
-    position: absolute;
-    top: 150px;
-    width: 100px;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 150px; /* אפשר לשנות לפי הצורך */
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
     z-index: 0;
 }
 
 .side-images.left {
-    left: 10px;
+    left: 15px;
 }
 
 .side-images.right {
-    right: 10px;
+    right: 15px;
 }
 
 .side-images img {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 150px; /* גובה אחיד */
     object-fit: cover;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.side-images img:hover {
+    transform: scale(1.05);
+}
+
+
+@media screen and (max-width: 768px) {
+    .side-images {
+        display: none;
+    }
 }
