@@ -5,6 +5,7 @@ body {
     margin: 0;
     padding: 0;
     background: linear-gradient(to bottom, #f0f8ff, #e9f1f7);
+    position: relative;
 }
 
 .custom-header {
@@ -53,6 +54,8 @@ main {
     background: white;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    position: relative;
+    z-index: 1;
 }
 
 .highlight-box {
@@ -106,7 +109,6 @@ button:hover {
 #my-photo img {
     width: 240px;
     border-radius: 50%;
-    border: 4px solid white;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -121,4 +123,30 @@ button:hover {
     margin: 10px 0;
     border-radius: 6px;
     box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+}
+
+.side-images {
+    position: absolute;
+    top: 150px;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 0;
+}
+
+.side-images.left {
+    left: 10px;
+}
+
+.side-images.right {
+    right: 10px;
+}
+
+.side-images img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
