@@ -157,8 +157,4 @@ button:hover {
   transform: scale(1.05);
 }
 
-@media screen and (max-width: 768px) {
-  .floating-images {
-    display: none;
-  }
 }
