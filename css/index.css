@@ -153,7 +153,8 @@ button:hover {
 }
 
 .floating-images img:hover {
-  transform: scale(1.05);
+    transform: scale(2);
+    z-index: 10;
 }
 
 @media screen and (max-width: 768px) {
