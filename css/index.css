@@ -162,3 +162,31 @@ button:hover {
     display: none;
   }
 }
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact-list li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.contact-list a {
+  font-size: 16px;
+  font-weight: 500;
+  color: #007ea7;
+}
+
+.contact-list a:hover {
+  text-decoration: underline;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+}

@@ -14,14 +14,28 @@ document.addEventListener("DOMContentLoaded", () => {
     <p class="mishpacha-text">עמותת משפאחה היא עמותה שהקמתי יחד עם חברי הטוב דללין דסטאו ומטרתה היא לעזור לילדים יתומים. אני מזמין אתכם להתרשם ביחד איתנו מהעשייה המבורכת שלנו ולעזור לנו להגשים את המטרות.</p>
   `;
 
-  document.getElementById("contact").innerHTML = `
-    <ul>
-      <li><p>האימייל שלי : shalev6005@gmail.com</p></li>
-      <li><a href="https://www.linkedin.com/in/shalevshiloshapiro">לינקדין</a></li>
-      <li><a href="https://x.com/shalevshapiro">טוויטר</a></li>
-    </ul>
-  `;
-});
+document.getElementById("contact").innerHTML = `
+  <ul class="contact-list">
+    <li>
+      <img src="../img/gmail.png" class="icon" alt="Gmail">
+      <a href="mailto:shalev6005@gmail.com?subject=פנייה מהאתר&body=שלום שלו,">
+        shalev6005@gmail.com
+      </a>
+    </li>
+    <li>
+      <img src="../img/linkedin.png" class="icon" alt="LinkedIn">
+      <a href="https://www.linkedin.com/in/shalevshiloshapiro" target="_blank">
+        לינקדין
+      </a>
+    </li>
+    <li>
+      <img src="img/twitter.svg" class="icon" alt="Twitter">
+      <a href="https://x.com/shalevshapiro" target="_blank">
+        טוויטר
+      </a>
+    </li>
+  </ul>
+`;
 
 function toggleSection(id, btn) {
   const sections = ["about-me", "mishpacha", "contact"];
