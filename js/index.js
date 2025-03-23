@@ -2,7 +2,6 @@ console.log("קובץ index.js נטען בהצלחה!");
 
 document.addEventListener("DOMContentLoaded", () => {
     const welcomeMessage = document.createElement("h1");
-    welcomeMessage.textContent = "ברוך הבא לאתר שלי!";
     document.body.appendChild(welcomeMessage);
 
     // טעינת תמונת פרופיל
