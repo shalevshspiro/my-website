@@ -1,188 +1,163 @@
 body {
-    direction: rtl;
-    text-align: right;
-    font-family: 'Assistant', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to bottom, #f0f8ff, #e9f1f7);
-    position: relative;
+  direction: rtl;
+  text-align: right;
+  font-family: 'Assistant', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #f0f8ff, #e9f1f7);
+  position: relative;
 }
 
 .custom-header {
-    background: linear-gradient(to right, #007ea7, #00a6fb);
-    color: white;
-    padding: 30px 0;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  background: linear-gradient(to right, #007ea7, #00a6fb);
+  color: white;
+  padding: 30px 0;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 .header-content h1 {
-    font-size: 32px;
-    margin: 0;
-    font-weight: 700;
+  font-size: 32px;
+  margin: 0;
+  font-weight: 700;
 }
 
 nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 15px 0 0 0;
+  list-style: none;
+  padding: 0;
+  margin: 15px 0 0 0;
 }
 
 nav ul li {
-    display: inline-block;
-    margin: 0 10px;
+  display: inline-block;
+  margin: 0 10px;
 }
 
 nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    padding: 6px 10px;
-    transition: all 0.3s ease-in-out;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 6px 10px;
+  transition: all 0.3s ease-in-out;
 }
 
 nav ul li a:hover {
-    background-color: white;
-    color: #007ea7;
-    border-radius: 5px;
+  background-color: white;
+  color: #007ea7;
+  border-radius: 5px;
 }
 
 main {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background: white;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    position: relative;
-    z-index: 1;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  position: relative;
+  z-index: 1;
 }
 
 .highlight-box {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    margin-bottom: 20px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
 }
 
 p {
-    font-size: 18px;
-    line-height: 1.5;
-    font-weight: 500;
-    color: #333;
-    margin-bottom: 8px;
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
 }
 
 a {
-    color: #007ea7;
-    text-decoration: none;
-    font-weight: bold;
+  color: #007ea7;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 button {
-    margin: 10px 5px 0 0;
-    padding: 10px 15px;
-    background-color: #00a6fb;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+  margin: 10px 5px 0 0;
+  padding: 10px 15px;
+  background-color: #00a6fb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 button:hover {
-    background-color: #007ea7;
-    transform: translateY(-2px);
+  background-color: #007ea7;
+  transform: translateY(-2px);
 }
 
 #my-photo {
-    text-align: center;
-    margin: 20px 0;
+  text-align: center;
+  margin: 20px 0;
 }
 
 #my-photo img {
-    width: 240px;
-    border-radius: 50%;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  width: 240px;
+  border-radius: 50%;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 #buttons {
-    text-align: center;
-    margin-bottom: 30px;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 #about-me, #mishpacha, #contact {
-    background-color: #fefefe;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 6px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+  background-color: #fefefe;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 6px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
 }
 
-.side-images-wrapper {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
-    gap: 20px;
-}
-
-.side-images {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 140px;
-}
-
-.side-images img {
-    width: 100%;
-    border-radius: 8px;
-    object-fit: cover;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease;
-}
-
-.side-images img:hover {
-    transform: scale(1.05);
-}
-
+/* תמונות צד ברקע האפור */
 .floating-images {
-    position: absolute;
-    top: 180px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    z-index: 0;
+  position: absolute;
+  top: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 0;
 }
 
 .floating-images.left {
-    left: 10px;
+  left: 10px;
 }
 
 .floating-images.right {
-    right: 10px;
+  right: 10px;
 }
 
 .floating-images img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-    transition: transform 0.2s ease;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease;
 }
 
 .floating-images img:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 @media screen and (max-width: 768px) {
-    .floating-images {
-        display: none;
-    }
+  .floating-images {
+    display: none;
+  }
 }

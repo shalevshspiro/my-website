@@ -1,52 +1,53 @@
 <!DOCTYPE html>
 <html lang="he">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>האתר שלי</title>
-    <link rel="stylesheet" href="css/index.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>האתר שלי</title>
+  <link rel="stylesheet" href="css/index.css" />
 </head>
 <body>
+  <!-- תמונות צפות בצדדים -->
   <div class="floating-images left" id="left-images"></div>
   <div class="floating-images right" id="right-images"></div>
 
-    <header class="custom-header">
-        <div class="header-content">
-            <h1>ברוכים הבאים לאתר שלי</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html">דף השער</a></li>
-                    <li><a href="html/articles.html">כתבות</a></li>
-                    <li><a href="html/life.html">החיים שלי</a></li>
-                    <li><a href="html/career.html">קריירה מקצועית</a></li>
-                    <li><a href="admin.html">🔑 כניסה לניהול כתבות</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <header class="custom-header">
+    <div class="header-content">
+      <h1>ברוכים הבאים לאתר שלי</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">דף השער</a></li>
+          <li><a href="html/articles.html">כתבות</a></li>
+          <li><a href="html/life.html">החיים שלי</a></li>
+          <li><a href="html/career.html">קריירה מקצועית</a></li>
+          <li><a href="admin.html">🔑 כניסה לניהול כתבות</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <main>
-        <section id="intro">
-            <div id="short-text" class="highlight-box">
-                <p>היי לכולם, כאן שלו שפירו. אני מזמין אתכם להתעניין באתר שלי ולגלות עוד עליי – ואולי אפילו גם עוד על עצמכם.</p>
-                <p>כאן תמצאו שילוב של טכנולוגיה, סיפור אישי וערכים.</p>
-                <p>מוזמנים ללחוץ ולגלות בעצמכם.</p>
-            </div>
+  <main>
+    <section id="intro">
+      <div id="short-text" class="highlight-box">
+        <p>היי לכולם, כאן שלו שפירו. אני מזמין אתכם להתעניין באתר שלי ולגלות עוד עליי – ואולי אפילו גם עוד על עצמכם.</p>
+        <p>כאן תמצאו שילוב של טכנולוגיה, סיפור אישי וערכים.</p>
+        <p>מוזמנים ללחוץ ולגלות בעצמכם.</p>
+      </div>
 
-            <div id="my-photo"></div>
+      <div id="my-photo"></div>
 
-            <div id="buttons">
-                <button onclick="toggleSection('about-me', this)">🧍‍♂️ מי אני באמת?</button>
-                <button onclick="toggleSection('mishpacha', this)">❤️ מאחורי משפאחה</button>
-                <button onclick="toggleSection('contact', this)">✉️ צור קשר</button>
-            </div>
-        </section>
+      <div id="buttons">
+        <button onclick="toggleSection('about-me', this)">🧍‍♂️ מי אני באמת?</button>
+        <button onclick="toggleSection('mishpacha', this)">❤️ מאחורי משפאחה</button>
+        <button onclick="toggleSection('contact', this)">✉️ צור קשר</button>
+      </div>
+    </section>
 
-        <div id="about-me" style="display:none;"></div>
-        <div id="mishpacha" style="display:none;"></div>
-        <div id="contact" style="display:none;"></div>
-    </main>
+    <div id="about-me" style="display:none;"></div>
+    <div id="mishpacha" style="display:none;"></div>
+    <div id="contact" style="display:none;"></div>
+  </main>
 
-    <script src="js/index.js"></script>
+  <script src="js/index.js"></script>
 </body>
 </html>
