@@ -2,7 +2,7 @@ console.log("קובץ index.js נטען בהצלחה!");
 
 document.addEventListener("DOMContentLoaded", () => {
   const img = document.createElement("img");
-  img.src = "img/processed_0T8A7900-Edit.webp";
+  img.src = "../img/prof.webp";
   img.alt = "התמונה שלי";
   document.getElementById("my-photo").appendChild(img);
 
