@@ -22,9 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
     <ul class="contact-list">
       <li>
         <img src="img/gmail.png" class="icon" alt="Gmail" />
-        <a href="mailto:shalev6005@gmail.com?subject=פנייה מהאתר&body=שלום שלו,">
-          shalev6005@gmail.com
-        </a>
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=shalev6005@gmail.com&su=פנייה מהאתר&body=שלום שלו," target="_blank">
+  שלח לי מייל דרך Gmail
+</a>
       </li>
       <li>
         <img src="img/linkedin.png" class="icon" alt="LinkedIn" />
