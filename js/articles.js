@@ -90,6 +90,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const contentId = `content-${Math.random().toString(36).substr(2, 9)}`;
 
+        // יצירת פסקאות מהטקסט
+        const formattedContent = article.content
+            .split("\\n")
+            .map(p => `<p>${p}</p>`)
+            .join("");
+
         articleDiv.innerHTML = `
             <button onclick="document.getElementById('${contentId}').style.display =
                 document.getElementById('${contentId}').style.display === 'none' ? 'block' : 'none'">
@@ -97,12 +103,12 @@ document.addEventListener("DOMContentLoaded", () => {
             </button>
             <p><strong>${article.intro || ""}</strong></p>
             <div id="${contentId}" class="article-content" style="display:none;">
-                ${article.logoImage ? `<img src="${article.logoImage}" alt="לוגו" class="logo" onerror="console.warn('❌ שגיאה בטעינת לוגו:', this.src)">` : ""}
-                <p>${article.content}</p>
+                ${article.logoImage ? `<img src="${article.logoImage}" alt="לוגו" class="logo">` : ""}
+                ${formattedContent}
                 <p><small>ז'אנר: ${article.genre}</small></p>
                 ${article.images && article.images.length ? `
                     <div class="image-gallery">
-                        ${article.images.map(img => `<img src="${img}" alt="תמונה" onerror="console.warn('❌ שגיאה בטעינת תמונה:', this.src)">`).join("")}
+                        ${article.images.map(img => `<img src="${img}" alt="תמונה">`).join("")}
                     </div>
                 ` : ""}
             </div>
