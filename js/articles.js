@@ -33,10 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-            // הצגת 3 כתבות אחרונות
+            // הצגת 3 כתבות אחרונות (במצב סגור, עם הקדמה)
             allArticles.slice(0, 3).forEach(article => {
                 const div = buildArticleDiv(article);
-                recentArticlesContainer.appendChild(div.cloneNode(true));
+                recentArticlesContainer.appendChild(div);
             });
 
             // הצגת כל כתבה לפי קטגוריה
@@ -69,9 +69,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById('${contentId}').style.display === 'none' ? 'block' : 'none'">
                 ${article.title}
             </button>
+            <p><strong>${article.intro || ""}</strong></p>
             <div id="${contentId}" class="article-content" style="display:none;">
                 ${article.logoImage ? `<img src="${article.logoImage}" alt="לוגו" class="logo">` : ""}
-                <p><strong>${article.intro}</strong></p>
                 <p>${article.content}</p>
                 <p><small>ז'אנר: ${article.genre}</small></p>
                 ${article.images && article.images.length ? `
