@@ -129,3 +129,19 @@ section {
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
+
+.category-toggle {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 10px 10px 20px 0;
+    background-color: #fff8e1;
+    border: 2px solid #ff9800;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.category-toggle:hover {
+    background-color: #ffe0b2;
+    transform: scale(1.05);
+}
