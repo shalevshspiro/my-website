@@ -33,30 +33,56 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-            // הצגת 3 כתבות אחרונות (במצב סגור, עם הקדמה)
+            // הצגת 3 כתבות אחרונות (סגורות, עם intro)
             allArticles.slice(0, 3).forEach(article => {
                 const div = buildArticleDiv(article);
                 recentArticlesContainer.appendChild(div);
             });
 
-            // הצגת כל כתבה לפי קטגוריה
-            Object.entries(categories).forEach(([genre, articles]) => {
-                if (articles.length === 0) return;
+            // הצגת כפתורי קטגוריות בלבד
+            const categoryButtonsContainer = document.createElement("div");
+            categoryButtonsContainer.id = "category-buttons";
+            categoryButtonsContainer.style.marginTop = "40px";
+            articlesContainer.appendChild(categoryButtonsContainer);
 
+            Object.keys(categories).forEach(genre => {
+                const btn = document.createElement("button");
+                btn.textContent = genre;
+                btn.style.margin = "0 10px 20px 0";
+                btn.className = "category-toggle";
+                btn.addEventListener("click", () => showCategory(genre));
+                categoryButtonsContainer.appendChild(btn);
+            });
+        })
+        .catch(error => {
+            console.error("❌ שגיאה בטעינת הכתבות:", error);
+        });
+
+    function showCategory(genre) {
+        // הסתר את כל הקטגוריות שכבר נטענו
+        const existing = document.querySelectorAll(".category-section");
+        existing.forEach(el => el.remove());
+
+        // צור והצג כתבות לז'אנר שנבחר
+        db.collection("articles")
+            .where("category", "==", "articles")
+            .where("genre", "==", genre)
+            .orderBy("createdAt", "desc")
+            .get()
+            .then(snapshot => {
                 const section = document.createElement("section");
+                section.classList.add("category-section");
                 section.innerHTML = `<h2>${genre}</h2>`;
 
-                articles.forEach(article => {
+                snapshot.forEach(doc => {
+                    const article = doc.data();
                     const div = buildArticleDiv(article);
                     section.appendChild(div);
                 });
 
                 articlesContainer.appendChild(section);
             });
-        })
-        .catch(error => {
-            console.error("❌ שגיאה בטעינת הכתבות:", error);
-        });
+    }
 
     function buildArticleDiv(article) {
         const articleDiv = document.createElement("div");
