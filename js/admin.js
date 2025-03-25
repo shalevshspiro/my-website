@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    if (typeof firebase === 'undefined') {
-        console.error("❌ Firebase לא נטען, בדוק את הסקריפטים!");
-        return;
-    }
+    const cloudName = "dtuomb64g";
+    const unsignedPreset = "unsigned";
 
     const categorySelect = document.getElementById("category");
     const genreSelect = document.getElementById("genre");
@@ -67,6 +65,54 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    // העלאת לוגו ל־Cloudinary
+    document.getElementById("uploadLogoBtn").addEventListener("click", () => {
+        const file = document.getElementById("logoUpload").files[0];
+        if (!file) return alert("יש לבחור קובץ קודם");
+
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", unsignedPreset);
+
+        fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+            method: "POST",
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.secure_url) {
+                document.getElementById("logoImage").value = data.secure_url;
+                alert("✅ הלוגו הועלה!");
+            }
+        })
+        .catch(err => alert("❌ שגיאה בהעלאת הלוגו"));
+    });
+
+    // העלאת תמונות נוספות ל־Cloudinary
+    document.getElementById("uploadImagesBtn").addEventListener("click", () => {
+        const files = document.getElementById("imageUpload").files;
+        if (!files.length) return alert("יש לבחור קבצים");
+
+        const uploadPromises = [...files].map(file => {
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", unsignedPreset);
+
+            return fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+                method: "POST",
+                body: formData
+            }).then(res => res.json());
+        });
+
+        Promise.all(uploadPromises)
+            .then(results => {
+                const urls = results.map(r => r.secure_url);
+                document.getElementById("images").value = urls.join(", ");
+                alert("✅ כל התמונות הועלו!");
+            })
+            .catch(err => alert("❌ שגיאה בהעלאת תמונות"));
+    });
+
     articleForm.addEventListener("submit", function(event) {
         event.preventDefault();
 
@@ -75,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const imageURLs = imageLinksRaw ? imageLinksRaw.split(",").map(s => s.trim()) : [];
 
         if (!logoImage) {
-            alert("❌ יש להזין קישור לתמונת לוגו מגוגל דרייב!");
+            alert("❌ יש להזין קישור לתמונת לוגו מ־Cloudinary!");
             return;
         }
 
@@ -100,31 +146,4 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("❌ שגיאה בהוספת כתבה: " + error.message);
             });
     });
-
-    // ✅ המרה אוטומטית לקישורי גוגל דרייב + לוגים
-    function convertDriveLink(link) {
-        const match = link.match(/https?:\/\/drive\.google\.com\/file\/d\/([\w-]+)\/view/);
-        const final = match ? `https://drive.google.com/uc?export=view&id=${match[1]}` : link;
-        console.log("🎯 קלט:", link, "➡️ פלט:", final);
-        return final;
-    }
-
-    const logoInput = document.getElementById("logoImage");
-    const imagesInput = document.getElementById("images");
-
-    if (logoInput) {
-        logoInput.addEventListener("blur", () => {
-            console.log("🟡 יציאה משדה לוגו");
-            logoInput.value = convertDriveLink(logoInput.value.trim());
-        });
-    }
-
-    if (imagesInput) {
-        imagesInput.addEventListener("blur", () => {
-            console.log("🟡 יציאה משדה תמונות");
-            const raw = imagesInput.value.trim();
-            const links = raw.split(",").map(link => convertDriveLink(link.trim()));
-            imagesInput.value = links.join(", ");
-        });
-    }
 });
