@@ -49,8 +49,78 @@ document.addEventListener("DOMContentLoaded", function () {
         auth.signOut().then(() => {
             alert("🚪 התנתקת!");
             location.reload();
-
         });
     });
 
-    function showAdmin
+    function showAdminPanel() {
+        loginForm.style.display = "none";
+        adminPanel.style.display = "block";
+        logoutButton.style.display = "block";
+    }
+
+    auth.onAuthStateChanged(user => {
+        if (user) {
+            showAdminPanel();
+        } else {
+            adminPanel.style.display = "none";
+            logoutButton.style.display = "none";
+        }
+    });
+
+    articleForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const logoImage = document.getElementById("logoImage").value.trim();
+        const imageLinksRaw = document.getElementById("images").value.trim();
+        const imageURLs = imageLinksRaw ? imageLinksRaw.split(",").map(s => s.trim()) : [];
+
+        if (!logoImage) {
+            alert("❌ יש להזין קישור לתמונת לוגו מגוגל דרייב!");
+            return;
+        }
+
+        const newArticle = {
+            title: document.getElementById("title").value,
+            intro: document.getElementById("intro").value,
+            content: document.getElementById("content").value,
+            category: document.getElementById("category").value,
+            genre: document.getElementById("genre").value,
+            images: imageURLs,
+            logoImage: logoImage,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        };
+
+        db.collection("articles").add(newArticle)
+            .then(() => {
+                alert("✅ כתבה נוספה בהצלחה!");
+                articleForm.reset();
+            })
+            .catch(error => {
+                console.error("❌ שגיאה בהוספה:", error);
+                alert("❌ שגיאה בהוספת כתבה: " + error.message);
+            });
+    });
+
+    // ✅ פונקציית המרה אוטומטית לקישורים מדרייב
+    function convertDriveLink(link) {
+        const match = link.match(/https?:\/\/drive\.google\.com\/file\/d\/([\w-]+)\/view/);
+        return match ? `https://drive.google.com/uc?export=view&id=${match[1]}` : link;
+    }
+
+    const logoInput = document.getElementById("logoImage");
+    const imagesInput = document.getElementById("images");
+
+    if (logoInput) {
+        logoInput.addEventListener("blur", () => {
+            logoInput.value = convertDriveLink(logoInput.value.trim());
+        });
+    }
+
+    if (imagesInput) {
+        imagesInput.addEventListener("blur", () => {
+            const raw = imagesInput.value.trim();
+            const links = raw.split(",").map(link => convertDriveLink(link.trim()));
+            imagesInput.value = links.join(", ");
+        });
+    }
+});
