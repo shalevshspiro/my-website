@@ -1,113 +1,97 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     const articlesContainer = document.getElementById("articles-container");
-    const recentArticlesContainer = document.getElementById("recent-articles");
+    const categoriesContainer = document.getElementById("categories-container");
+    const introSection = document.getElementById("intro");
+    const latestSection = document.getElementById("latest");
 
-    if (!articlesContainer || !recentArticlesContainer) {
-        console.error("❌ אלמנט להצגת הכתבות לא נמצא!");
-        return;
-    }
+    function renderArticle(article, isLatest = false) {
+        const articleElement = document.createElement("div");
+        articleElement.classList.add("article");
 
-    const categories = {
-        "ספורט": [],
-        "ביטחון": [],
-        "פוליטיקה": [],
-        "אחר": []
-    };
+        // בדיקות על התמונות
+        console.log("🟢 מציג כתבה:", article.title);
 
-    db.collection("articles")
-        .where("category", "==", "articles")
-        .orderBy("createdAt", "desc")
-        .get()
-        .then(snapshot => {
-            const allArticles = [];
+        const logoImgTag = article.logoImage
+            ? `<img src="${article.logoImage}" alt="לוגו" class="logo" onerror="console.warn('❌ שגיאה בטעינת לוגו:', this.src)">`
+            : "";
 
-            snapshot.forEach(doc => {
-                const article = doc.data();
-                allArticles.push(article);
+        const imagesGallery = article.images && article.images.length
+            ? `
+            <div class="image-gallery">
+                ${article.images.map(img => `
+                    <img src="${img}" alt="תמונה" onerror="console.warn('❌ שגיאה בטעינת תמונה:', this.src)">
+                `).join("")}
+            </div>
+            `
+            : "";
 
-                const genre = article.genre || "אחר";
-                if (categories[genre]) {
-                    categories[genre].push(article);
-                } else {
-                    categories["אחר"].push(article);
-                }
-            });
-
-            // הצגת 3 כתבות אחרונות (סגורות, עם intro)
-            allArticles.slice(0, 3).forEach(article => {
-                const div = buildArticleDiv(article);
-                recentArticlesContainer.appendChild(div);
-            });
-
-            // הצגת כפתורי קטגוריות בלבד
-            const categoryButtonsContainer = document.createElement("div");
-            categoryButtonsContainer.id = "category-buttons";
-            categoryButtonsContainer.style.marginTop = "40px";
-            articlesContainer.appendChild(categoryButtonsContainer);
-
-            Object.keys(categories).forEach(genre => {
-                const btn = document.createElement("button");
-                btn.textContent = genre;
-                btn.style.margin = "0 10px 20px 0";
-                btn.className = "category-toggle";
-                btn.addEventListener("click", () => showCategory(genre));
-                categoryButtonsContainer.appendChild(btn);
-            });
-        })
-        .catch(error => {
-            console.error("❌ שגיאה בטעינת הכתבות:", error);
-        });
-
-    function showCategory(genre) {
-        // הסתר את כל הקטגוריות שכבר נטענו
-        const existing = document.querySelectorAll(".category-section");
-        existing.forEach(el => el.remove());
-
-        // צור והצג כתבות לז'אנר שנבחר
-        db.collection("articles")
-            .where("category", "==", "articles")
-            .where("genre", "==", genre)
-            .orderBy("createdAt", "desc")
-            .get()
-            .then(snapshot => {
-                const section = document.createElement("section");
-                section.classList.add("category-section");
-                section.innerHTML = `<h2>${genre}</h2>`;
-
-                snapshot.forEach(doc => {
-                    const article = doc.data();
-                    const div = buildArticleDiv(article);
-                    section.appendChild(div);
-                });
-
-                articlesContainer.appendChild(section);
-            });
-    }
-
-    function buildArticleDiv(article) {
-        const articleDiv = document.createElement("div");
-        articleDiv.classList.add("article");
-
-        const contentId = `content-${Math.random().toString(36).substr(2, 9)}`;
-
-        articleDiv.innerHTML = `
-            <button onclick="document.getElementById('${contentId}').style.display =
-                document.getElementById('${contentId}').style.display === 'none' ? 'block' : 'none'">
-                ${article.title}
+        articleElement.innerHTML = `
+            <button class="article-toggle">
+                <h3>${article.title}</h3>
+                ${logoImgTag}
+                <p>${article.intro || ""}</p>
+                <small>ז'אנר: ${article.genre}</small>
             </button>
-            <p><strong>${article.intro || ""}</strong></p>
-            <div id="${contentId}" class="article-content" style="display:none;">
-                ${article.logoImage ? `<img src="${article.logoImage}" alt="לוגו" class="logo">` : ""}
+            <div class="article-content" style="display: none;">
                 <p>${article.content}</p>
-                <p><small>ז'אנר: ${article.genre}</small></p>
-                ${article.images && article.images.length ? `
-                    <div class="image-gallery">
-                        ${article.images.map(img => `<img src="${img}" alt="תמונה">`).join("")}
-                    </div>
-                ` : ""}
+                ${imagesGallery}
             </div>
         `;
 
-        return articleDiv;
+        const toggleButton = articleElement.querySelector(".article-toggle");
+        const contentDiv = articleElement.querySelector(".article-content");
+        toggleButton.addEventListener("click", () => {
+            contentDiv.style.display = contentDiv.style.display === "none" ? "block" : "none";
+        });
+
+        if (isLatest) {
+            latestSection.appendChild(articleElement);
+        } else {
+            articlesContainer.appendChild(articleElement);
+        }
     }
+
+    function renderCategoryButtons(categories) {
+        categoriesContainer.innerHTML = "";
+        categories.forEach(category => {
+            const btn = document.createElement("button");
+            btn.textContent = category;
+            btn.classList.add("category-button");
+            btn.addEventListener("click", () => loadArticlesByGenre(category));
+            categoriesContainer.appendChild(btn);
+        });
+    }
+
+    async function loadLatestArticles() {
+        const snapshot = await db.collection("articles")
+            .orderBy("createdAt", "desc")
+            .limit(3)
+            .get();
+
+        snapshot.forEach(doc => {
+            const article = doc.data();
+            renderArticle(article, true);
+        });
+    }
+
+    async function loadArticlesByGenre(genre) {
+        articlesContainer.innerHTML = "";
+        console.log("📘 טוען כתבות בז'אנר:", genre);
+
+        const snapshot = await db.collection("articles")
+            .where("category", "==", "articles")
+            .where("genre", "==", genre)
+            .orderBy("createdAt", "desc")
+            .get();
+
+        snapshot.forEach(doc => {
+            const article = doc.data();
+            renderArticle(article);
+        });
+    }
+
+    // התחלה
+    const categories = ["ספורט", "ביטחון", "פוליטיקה", "אחר"];
+    renderCategoryButtons(categories);
+    await loadLatestArticles();
 });
