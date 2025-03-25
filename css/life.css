@@ -1,7 +1,7 @@
 body {
     direction: rtl;
     text-align: right;
-    font-family: 'Heebo', Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(to top left, #fdfdfd, #e9f5ec);
     color: #2d2d2d;
     margin: 0;
@@ -46,7 +46,7 @@ h2 {
 
 p {
     font-size: 18px;
-    line-height: 1.8;
+    line-height: 1.6;
 }
 
 a {
@@ -54,7 +54,13 @@ a {
     text-decoration: none;
 }
 
-/* כפתורי כתבות */
+.article-icon {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
 .article button {
     width: 100%;
     font-size: 20px;
@@ -74,42 +80,55 @@ a {
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* פריסת כתבה */
-.article {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    gap: 20px;
-    margin-bottom: 50px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ccc;
-}
-
 .article-content {
-    width: 60%;
     display: none;
     background-color: #ffffff;
     padding: 20px;
     border: 1px solid #c8e6c9;
+    margin-bottom: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
+section {
+    margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    .article button {
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+}
+
+.article-content img.logo {
+    display: block;
+    max-width: 150px;
+    max-height: 100px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
 .image-gallery {
-    width: 35%;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 10px;
+    margin-top: 15px;
 }
 
-.image-gallery img,
-.logo {
-    max-width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+.image-gallery img {
+    max-height: 180px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
-/* כפתורי קטגוריה */
 .category-toggle {
     font-size: 18px;
     padding: 10px 20px;
@@ -124,31 +143,4 @@ a {
 .category-toggle:hover {
     background-color: #c8e6c9;
     transform: scale(1.05);
-}
-
-section {
-    margin-bottom: 40px;
-}
-
-@media (max-width: 768px) {
-    .article {
-        flex-direction: column;
-    }
-
-    .article-content,
-    .image-gallery {
-        width: 100%;
-    }
-
-    h1 {
-        font-size: 28px;
-    }
-
-    .article button {
-        font-size: 18px;
-    }
-
-    p {
-        font-size: 16px;
-    }
 }
