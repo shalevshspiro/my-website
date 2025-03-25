@@ -80,6 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(res => res.json())
         .then(data => {
+            console.log("תוצאה מהעלאה:", data);
             if (data.secure_url) {
                 document.getElementById("logoImage").value = data.secure_url;
                 alert("✅ הלוגו הועלה!");
@@ -116,6 +117,19 @@ document.addEventListener("DOMContentLoaded", function () {
     articleForm.addEventListener("submit", function(event) {
         event.preventDefault();
 
+        // שליפת שדות החובה
+        const title = document.getElementById("title").value.trim();
+        const intro = document.getElementById("intro").value.trim();
+        const content = document.getElementById("content").value.trim();
+        const category = document.getElementById("category").value;
+        const genre = document.getElementById("genre").value;
+
+        // בדיקת חובה
+        if (!title || !intro || !content || !category || !genre) {
+            alert("❌ חובה למלא את כל שדות התוכן, הכותרת, ההקדמה, הקטגוריה והז'אנר!");
+            return;
+        }
+
         let logoImage = document.getElementById("logoImage").value.trim();
         if (!logoImage) logoImage = null;
 
@@ -123,11 +137,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const imageURLs = imageLinksRaw ? imageLinksRaw.split(",").map(s => s.trim()) : [];
 
         const newArticle = {
-            title: document.getElementById("title").value,
-            intro: document.getElementById("intro").value,
-            content: document.getElementById("content").value,
-            category: document.getElementById("category").value,
-            genre: document.getElementById("genre").value,
+            title,
+            intro,
+            content,
+            category,
+            genre,
             images: imageURLs,
             logoImage: logoImage,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
