@@ -49,7 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
         auth.signOut().then(() => {
             alert("🚪 התנתקת!");
             location.reload();
-			    function showAdmin
 
         });
     });
