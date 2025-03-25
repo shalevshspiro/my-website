@@ -4,12 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>כתבות</title>
-<!DOCTYPE html>
-<html lang="he">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>כתבות</title>
     <link rel="stylesheet" href="../css/articles.css">
 
     <!-- טעינת Firebase -->
@@ -32,11 +26,25 @@
             </ul>
         </nav>
     </header>
+
     <main>
-        <h1>הכתבות שלי - קריאה מהנה ביותר</h1>
+        <!-- שלושה משפטי פתיחה -->
+        <section id="intro">
+            <p>ברוכים הבאים לדף הכתבות שלי.</p>
+            <p>כאן תמצאו טקסטים שחיברתי – על ספורט, ביטחון, פוליטיקה ונושאים אחרים.</p>
+            <p>הכל נכתב מתוך מחשבה, לב ודיוק.</p>
+        </section>
+
+        <!-- אזור "הכתבות האחרונות" -->
+        <section id="recent-articles-section">
+            <h2>הכתבות האחרונות</h2>
+            <div id="recent-articles"></div>
+        </section>
+
+        <!-- אזור ראשי להצגת כתבות לפי קטגוריות -->
         <div id="articles-container"></div>
     </main>
-    
+
     <script src="../js/articles.js" defer></script>
 </body>
 </html>
