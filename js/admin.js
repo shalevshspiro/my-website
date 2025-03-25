@@ -100,4 +100,27 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("❌ שגיאה בהוספת כתבה: " + error.message);
             });
     });
+
+    // ✅ המרה אוטומטית לקישורי דרייב בפורמט הנכון
+    function convertDriveLink(link) {
+        const match = link.match(/https?:\\/\\/drive\\.google\\.com\\/file\\/d\\/([\\w-]+)\\/view/);
+        return match ? `https://drive.google.com/uc?export=view&id=${match[1]}` : link;
+    }
+
+    const logoInput = document.getElementById("logoImage");
+    const imagesInput = document.getElementById("images");
+
+    if (logoInput) {
+        logoInput.addEventListener("blur", () => {
+            logoInput.value = convertDriveLink(logoInput.value.trim());
+        });
+    }
+
+    if (imagesInput) {
+        imagesInput.addEventListener("blur", () => {
+            const raw = imagesInput.value.trim();
+            const links = raw.split(",").map(link => convertDriveLink(link.trim()));
+            imagesInput.value = links.join(", ");
+        });
+    }
 });
