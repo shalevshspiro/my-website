@@ -54,7 +54,6 @@ a {
     text-decoration: none;
 }
 
-/* כפתורי כתבות */
 .article button {
     width: 100%;
     font-size: 20px;
@@ -74,32 +73,34 @@ a {
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* פריסת כתבה */
 .article {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
-    gap: 20px;
+    gap: 30px;
     margin-bottom: 50px;
     padding-bottom: 20px;
     border-bottom: 1px solid #ccc;
+    align-items: flex-start;
 }
 
 .article-content {
-    width: 60%;
+    width: 70%;
     display: none;
     background-color: #ffffff;
-    padding: 20px;
+    padding: 25px;
     border: 1px solid #cfd8dc;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    line-height: 1.9;
+    font-size: 1.1em;
 }
 
 .image-gallery {
-    width: 35%;
+    width: 30%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 .image-gallery img,
@@ -109,7 +110,6 @@ a {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
-/* כפתורי קטגוריה */
 .category-toggle {
     font-size: 18px;
     padding: 10px 20px;
