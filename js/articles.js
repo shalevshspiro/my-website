@@ -33,13 +33,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-            // --- הצגת שלוש כתבות אחרונות ---
+            // הצגת 3 כתבות אחרונות
             allArticles.slice(0, 3).forEach(article => {
                 const div = buildArticleDiv(article);
                 recentArticlesContainer.appendChild(div.cloneNode(true));
             });
 
-            // --- הצגת כתבות לפי קטגוריה ---
+            // הצגת כל כתבה לפי קטגוריה
             Object.entries(categories).forEach(([genre, articles]) => {
                 if (articles.length === 0) return;
 
@@ -65,16 +65,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const contentId = `content-${Math.random().toString(36).substr(2, 9)}`;
 
         articleDiv.innerHTML = `
-            <button onclick="document.getElementById('${contentId}').style.display = 
+            <button onclick="document.getElementById('${contentId}').style.display =
                 document.getElementById('${contentId}').style.display === 'none' ? 'block' : 'none'">
                 ${article.title}
             </button>
             <div id="${contentId}" class="article-content" style="display:none;">
+                ${article.logoImage ? `<img src="${article.logoImage}" alt="לוגו" class="logo">` : ""}
                 <p><strong>${article.intro}</strong></p>
                 <p>${article.content}</p>
                 <p><small>ז'אנר: ${article.genre}</small></p>
-                ${article.logoImage ? `<img src="${article.logoImage}" alt="תמונת לוגו" style="max-width: 200px;">` : ""}
-                ${article.images ? article.images.map(img => `<img src="${img}" alt="תמונה" style="max-width: 200px;">`).join("") : ""}
+                ${article.images && article.images.length ? `
+                    <div class="image-gallery">
+                        ${article.images.map(img => `<img src="${img}" alt="תמונה">`).join("")}
+                    </div>
+                ` : ""}
             </div>
         `;
 

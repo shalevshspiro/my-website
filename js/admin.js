@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    console.log("✅ Firebase נטען! מוודא שהכל מחובר...");
-
     const categorySelect = document.getElementById("category");
     const genreSelect = document.getElementById("genre");
 
@@ -32,11 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const adminPanel = document.getElementById("adminPanel");
     const logoutButton = document.getElementById("logout");
 
-    if (!loginForm || !articleForm || !adminPanel || !logoutButton) {
-        console.error("❌ שגיאה: אלמנטים לא נמצאו ב-HTML!");
-        return;
-    }
-
     loginForm.addEventListener("submit", function (event) {
         event.preventDefault();
         const email = document.getElementById("email").value;
@@ -44,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         auth.signInWithEmailAndPassword(email, password)
             .then(() => {
-                alert("✅ יאללה ביתר");
+                alert("✅ התחברת!");
                 showAdminPanel();
             })
             .catch(error => {
@@ -67,10 +60,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     auth.onAuthStateChanged(user => {
         if (user) {
-            console.log("✅ משתמש מחובר: ", user.email);
             showAdminPanel();
         } else {
-            console.log("❌ אף משתמש לא מחובר.");
             adminPanel.style.display = "none";
             logoutButton.style.display = "none";
         }
@@ -79,46 +70,34 @@ document.addEventListener("DOMContentLoaded", function () {
     articleForm.addEventListener("submit", function(event) {
         event.preventDefault();
 
-        const logoFile = document.getElementById("logoImage").files[0];
-        const imageFiles = document.getElementById("images").files;
-        const storageRef = firebase.storage().ref();
+        const logoImage = document.getElementById("logoImage").value.trim();
+        const imageLinksRaw = document.getElementById("images").value.trim();
+        const imageURLs = imageLinksRaw ? imageLinksRaw.split(",").map(s => s.trim()) : [];
 
-        if (!logoFile) {
-            alert("❌ יש לבחור תמונת לוגו!");
+        if (!logoImage) {
+            alert("❌ יש להזין קישור לתמונת לוגו מגוגל דרייב!");
             return;
         }
 
-        const logoRef = storageRef.child("logos/" + logoFile.name);
-        logoRef.put(logoFile).then(snapshot => snapshot.ref.getDownloadURL())
-        .then(logoURL => {
-            const imageUploadPromises = [];
-            for (let i = 0; i < imageFiles.length; i++) {
-                const imgRef = storageRef.child("images/" + imageFiles[i].name);
-                imageUploadPromises.push(imgRef.put(imageFiles[i]).then(snap => snap.ref.getDownloadURL()));
-            }
+        const newArticle = {
+            title: document.getElementById("title").value,
+            intro: document.getElementById("intro").value,
+            content: document.getElementById("content").value,
+            category: document.getElementById("category").value,
+            genre: document.getElementById("genre").value,
+            images: imageURLs,
+            logoImage: logoImage,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        };
 
-            return Promise.all(imageUploadPromises).then(imageURLs => {
-                const newArticle = {
-                    title: document.getElementById("title").value,
-                    intro: document.getElementById("intro").value,
-                    content: document.getElementById("content").value,
-                    category: categorySelect.value,
-                    genre: genreSelect.value,
-                    images: imageURLs,
-                    logoImage: logoURL,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                };
-
-                return db.collection("articles").add(newArticle).then(() => {
-                    alert("✅ כתבה נוספה בהצלחה!");
-                    articleForm.reset();
-                });
+        db.collection("articles").add(newArticle)
+            .then(() => {
+                alert("✅ כתבה נוספה בהצלחה!");
+                articleForm.reset();
+            })
+            .catch(error => {
+                console.error("❌ שגיאה בהוספה:", error);
+                alert("❌ שגיאה בהוספת כתבה: " + error.message);
             });
-        }).catch(error => {
-            console.error("❌ שגיאה בהעלאה:", error);
-            alert("❌ שגיאה בהעלאת כתבה: " + error.message);
-        });
-
-        return;
     });
 });

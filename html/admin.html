@@ -9,11 +9,10 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
 
     <!-- חיבור לפרויקט -->
     <script src="js/firebase-config.js"></script>
-    <script src="js/admin.js"></script>
+    <script src="js/admin_final.js"></script>
 </head>
 <body>
     <h2>🔑 התחברות לניהול כתבות</h2>
@@ -46,11 +45,11 @@
             <label>📄 תוכן הכתבה:</label>
             <textarea id="content" placeholder="תוכן הכתבה" required></textarea>
 
-            <label>🖼️ תמונות נוספות (רשות):</label>
-            <input type="file" id="images" accept="image/*" multiple>
+            <label>🖼️ קישורים לתמונות נוספות (רשות, מופרדים בפסיק):</label>
+            <input type="text" id="images" placeholder="https://drive.google.com/uc?export=view&id=... , ...">
 
-            <label>🔖 תמונת לוגו (חובה):</label>
-<input type="file" id="logoImage" accept="image/*" required>
+            <label>🔖 קישור לתמונת לוגו (חובה):</label>
+            <input type="text" id="logoImage" placeholder="https://drive.google.com/uc?export=view&id=..." required>
 
             <button type="submit">✅ צור כתבה</button>
         </form>
