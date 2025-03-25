@@ -97,12 +97,12 @@ document.addEventListener("DOMContentLoaded", () => {
             </button>
             <p><strong>${article.intro || ""}</strong></p>
             <div id="${contentId}" class="article-content" style="display:none;">
-                ${article.logoImage ? `<img src="${article.logoImage}" alt="לוגו" class="logo">` : ""}
+                ${article.logoImage ? `<img src="${article.logoImage}" alt="לוגו" class="logo" onerror="console.warn('❌ שגיאה בטעינת לוגו:', this.src)">` : ""}
                 <p>${article.content}</p>
                 <p><small>ז'אנר: ${article.genre}</small></p>
                 ${article.images && article.images.length ? `
                     <div class="image-gallery">
-                        ${article.images.map(img => `<img src="${img}" alt="תמונה">`).join("")}
+                        ${article.images.map(img => `<img src="${img}" alt="תמונה" onerror="console.warn('❌ שגיאה בטעינת תמונה:', this.src)">`).join("")}
                     </div>
                 ` : ""}
             </div>
