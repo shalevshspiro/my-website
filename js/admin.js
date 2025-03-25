@@ -116,14 +116,11 @@ document.addEventListener("DOMContentLoaded", function () {
     articleForm.addEventListener("submit", function(event) {
         event.preventDefault();
 
-        const logoImage = document.getElementById("logoImage").value.trim();
+        let logoImage = document.getElementById("logoImage").value.trim();
+        if (!logoImage) logoImage = null;
+
         const imageLinksRaw = document.getElementById("images").value.trim();
         const imageURLs = imageLinksRaw ? imageLinksRaw.split(",").map(s => s.trim()) : [];
-
-        if (!logoImage) {
-            alert("❌ יש להזין קישור לתמונת לוגו מ־Cloudinary!");
-            return;
-        }
 
         const newArticle = {
             title: document.getElementById("title").value,
