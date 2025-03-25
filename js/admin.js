@@ -101,10 +101,12 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     });
 
-    // ✅ פונקציית המרה אוטומטית לקישורים מדרייב
+    // ✅ המרה אוטומטית לקישורי גוגל דרייב + לוגים
     function convertDriveLink(link) {
         const match = link.match(/https?:\/\/drive\.google\.com\/file\/d\/([\w-]+)\/view/);
-        return match ? `https://drive.google.com/uc?export=view&id=${match[1]}` : link;
+        const final = match ? `https://drive.google.com/uc?export=view&id=${match[1]}` : link;
+        console.log("🎯 קלט:", link, "➡️ פלט:", final);
+        return final;
     }
 
     const logoInput = document.getElementById("logoImage");
@@ -112,12 +114,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (logoInput) {
         logoInput.addEventListener("blur", () => {
+            console.log("🟡 יציאה משדה לוגו");
             logoInput.value = convertDriveLink(logoInput.value.trim());
         });
     }
 
     if (imagesInput) {
         imagesInput.addEventListener("blur", () => {
+            console.log("🟡 יציאה משדה תמונות");
             const raw = imagesInput.value.trim();
             const links = raw.split(",").map(link => convertDriveLink(link.trim()));
             imagesInput.value = links.join(", ");
