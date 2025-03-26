@@ -4,7 +4,7 @@ body {
   font-family: 'Assistant', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom, #f0f8ff, #e9f1f7);
+  background: linear-gradient(to bottom, #fffbe6, #ffd700); /* לבן לזהב עדין - רקע שנותן תחושת יוקרה ונעימות */
   position: relative;
 }
 
