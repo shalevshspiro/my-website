@@ -2,27 +2,23 @@
 <html lang="he">
 <head>
   <script>
-  firebase.auth().onAuthStateChanged(user => {
-    if (!user || user.email !== "shalev6005@gmail.com") {
-      window.location.href = "https://www.youtube.com/watch?v=Z6hLOCKTpsg&t=937s";
-    }
-  });
+    firebase.auth().onAuthStateChanged(user => {
+      if (!user || user.email !== "shalev6005@gmail.com") {
+        window.location.href = "https://www.youtube.com/watch?v=Z6hLOCKTpsg&t=937s";
+      }
+    });
   </script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ניהול כתבות - My Mind</title>
   <link rel="stylesheet" href="css/admin.css">
-
-  <!-- Quill Editor -->
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
-  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-  <!-- קבצי קונפיג -->
   <script src="js/firebase-config.js"></script>
   <script src="js/admin.js" defer></script>
 </head>
@@ -62,6 +58,12 @@
     <label>🗼️ העלאת תמונות נוספות:</label>
     <input type="file" id="imageUpload" multiple>
     <button type="button" id="uploadImagesBtn">📄 העלה תמונות</button>
+    <br>
+
+    <!-- ✅ תוספת: הזנת כתובת URL לתמונה -->
+    <label>📎 הוסף תמונה לפי קישור:</label>
+    <input type="text" id="imageUrlInput" placeholder="הדבק קישור לתמונה מ־Cloudinary">
+    <button type="button" id="addImageByUrl">📎 הוסף תמונה מקישור</button>
     <br>
 
     <div id="imagePreviewArea" style="margin-top: 20px;"></div>
@@ -105,6 +107,20 @@
       hiddenInput.value = finalContent;
       form.appendChild(hiddenInput);
     });
+
+    // ✅ תוספת: הוספת תמונה לפי כתובת URL
+    const addImageBtn = document.getElementById("addImageByUrl");
+    if (addImageBtn) {
+      addImageBtn.addEventListener("click", () => {
+        const url = document.getElementById("imageUrlInput").value.trim();
+        if (!url) return alert("❗ נא להדביק קישור קודם");
+        if (typeof addImagePreview === "function") {
+          addImagePreview(url);
+        } else {
+          alert("⚠️ addImagePreview לא מוגדרת עדיין");
+        }
+      });
+    }
   });
 </script>
 </body>

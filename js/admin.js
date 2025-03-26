@@ -78,17 +78,17 @@ document.addEventListener("DOMContentLoaded", function () {
       method: "POST",
       body: formData
     })
-    .then(res => res.json())
-    .then(data => {
-      if (data.secure_url) {
-        document.getElementById("logoImage").value = data.secure_url;
-        alert("✅ הלוגו הועלה!");
-      }
-    })
-    .catch(err => alert("❌ שגיאה בהעלאת הלוגו"));
+      .then(res => res.json())
+      .then(data => {
+        if (data.secure_url) {
+          document.getElementById("logoImage").value = data.secure_url;
+          alert("✅ הלוגו הועלה!");
+        }
+      })
+      .catch(err => alert("❌ שגיאה בהעלאת הלוגו"));
   });
 
-  // העלאת תמונות ל־Cloudinary + תצוגה עם caption + כפתור הסרה
+  // העלאת תמונות ל־Cloudinary
   document.getElementById("uploadImagesBtn").addEventListener("click", () => {
     const files = document.getElementById("imageUpload").files;
     if (!files.length) return alert("יש לבחור קבצים");
@@ -114,6 +114,13 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("✅ כל התמונות הועלו והתווספו עם שדות תיאור!");
       })
       .catch(err => alert("❌ שגיאה בהעלאת תמונות"));
+  });
+
+  // ✅ תוספת: הוספת תמונה לפי URL
+  document.getElementById("addImageByUrl").addEventListener("click", () => {
+    const url = document.getElementById("imageUrlInput").value.trim();
+    if (!url) return alert("❗ נא להדביק קישור קודם");
+    addImagePreview(url);
   });
 
   // תצוגת תמונה עם תיאור + כפתור הסרה
@@ -163,13 +170,13 @@ document.addEventListener("DOMContentLoaded", function () {
     container.appendChild(wrapper);
   }
 
-  // שליחת כתבה ל-Firebase
-  articleForm.addEventListener("submit", function(event) {
+  // שליחת כתבה ל־Firebase
+  articleForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
     const title = document.getElementById("title").value.trim();
     const intro = document.getElementById("intro").value.trim();
-    const content = document.getElementById("content").value.trim(); // נוצר דינאמית מה-HTML
+    const content = document.getElementById("content").value.trim(); // נוצר דינאמית
     const category = document.getElementById("category").value;
     const genre = document.getElementById("genre").value;
 
