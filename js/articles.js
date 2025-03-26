@@ -15,11 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const backgroundStyles = {
-    "ספורט": "linear-gradient(to top, #fff176, #fefefe)",        // צהוב רך וחמים
-    "ביטחון": "linear-gradient(to top, #d3eefe, #f8fdff)",      // תכלת־לבן
-    "פוליטיקה": "linear-gradient(to top, #e0e0e0, #f9f9f9)",    // אפור רך
+    "ספורט": "linear-gradient(to top, #fff176, #fefefe)",
+    "ביטחון": "linear-gradient(to top, #d3eefe, #f8fdff)",
+    "פוליטיקה": "linear-gradient(to top, #e0e0e0, #f9f9f9)",
     "אחר": "#f8faff"
   };
+
+  const defaultBackground = "#f8faff";
 
   db.collection("articles")
     .where("category", "==", "articles")
@@ -60,27 +62,42 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.addEventListener("click", () => showCategory(genre, btn));
         categoryButtonsContainer.appendChild(btn);
       });
+
+      // כפתור סגירה
+      const closeBtn = document.createElement("button");
+      closeBtn.id = "close-category";
+      closeBtn.className = "category-toggle";
+      closeBtn.textContent = "סגור";
+      closeBtn.addEventListener("click", () => {
+        document.body.style.background = defaultBackground;
+        document.querySelectorAll(".category-section").forEach(el => el.remove());
+        document.querySelectorAll(".category-toggle").forEach(btn => {
+          btn.style.backgroundColor = "";
+          btn.style.color = "";
+        });
+        recentArticlesContainer.style.display = "block";
+      });
+      categoryButtonsContainer.appendChild(closeBtn);
     })
     .catch(error => {
       console.error("❌ שגיאה בטעינת הכתבות:", error);
     });
 
   function showCategory(genre, clickedButton) {
-    const existing = document.querySelectorAll(".category-section");
-    existing.forEach(el => el.remove());
+    document.querySelectorAll(".category-section").forEach(el => el.remove());
 
-    // רקע עמוד
-    const bg = backgroundStyles[genre] || "#f8faff";
+    const bg = backgroundStyles[genre] || defaultBackground;
     document.body.style.transition = "background 0.6s ease";
     document.body.style.background = bg;
 
-    // הדגשת כפתור שנבחר
     document.querySelectorAll(".category-toggle").forEach(btn => {
       btn.style.backgroundColor = "";
       btn.style.color = "";
     });
     clickedButton.style.backgroundColor = "rgba(255,255,255,0.9)";
     clickedButton.style.color = "#000";
+
+    recentArticlesContainer.style.display = "none";
 
     db.collection("articles")
       .where("category", "==", "articles")
