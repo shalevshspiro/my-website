@@ -202,12 +202,13 @@ button:hover {
 
 @media screen and (max-width: 768px) {
   .floating-images {
-    position: static;
+    position: relative;
     flex-direction: row;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 40px;
     margin-bottom: 10px;
     gap: 10px;
+    order: 1000;
   }
 
   .custom-header {
