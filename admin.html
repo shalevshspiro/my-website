@@ -6,6 +6,7 @@
     if (!user || user.email !== "shalev6005@gmail.com") {
       window.location.href = "https://www.youtube.com/watch?v=Z6hLOCKTpsg&t=937s";
     }
+  });
   </script>
 
   <meta charset="UTF-8">
@@ -21,7 +22,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-  <!-- קבצי קוןפיג -->
+  <!-- קבצי קונפיג -->
   <script src="js/firebase-config.js"></script>
   <script src="js/admin.js" defer></script>
 </head>
@@ -63,7 +64,9 @@
     <input type="file" id="imageUpload" multiple>
     <button type="button" id="uploadImagesBtn">📄 העלה תמונות</button>
     <br>
-    <input type="text" id="images" placeholder="או הדבק כאן קישורים לתמונות מ״Cloudinary (מופרדים בפסקים)">
+
+    <!-- אזור תצוגת תמונות עם כיתוב -->
+    <div id="imagePreviewArea" style="margin-top: 20px;"></div>
 
     <label>🔖 תמונת לוגו:</label>
     <input type="file" id="logoUpload">
