@@ -2,7 +2,7 @@ body {
     direction: rtl;
     text-align: right;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to top right, #f9f9f9, #eef3f9);
+    background: #f8faff;
     color: #222;
     margin: 0;
     padding: 0;
@@ -19,7 +19,8 @@ header {
     color: white;
     padding: 20px 0;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+	    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
 }
 
 nav ul {
@@ -211,4 +212,17 @@ a {
         background: none;
         padding: 0;
     }
+}
+h2 {
+    color: #4b6cb7;
+    border-bottom: 2px solid #4b6cb7;
+    padding-bottom: 8px;
+    font-size: 22px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+#intro p {
+    margin-bottom: 15px;
+    line-height: 1.8;
+    font-size: 18px;
 }
