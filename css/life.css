@@ -8,6 +8,12 @@ body {
     padding: 0;
 }
 
+.content-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
 header {
     background: linear-gradient(to right, #4caf50, #2e7d32);
     color: white;
@@ -54,15 +60,14 @@ a {
     text-decoration: none;
 }
 
-.article-icon {
-    width: 50px;
-    height: 50px;
-    display: inline-block;
-    margin-right: 10px;
+.article {
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
 }
 
-.article button {
-    width: 100%;
+.article > button {
+    width: 60%;
     font-size: 20px;
     padding: 12px;
     margin: 10px 0;
@@ -73,9 +78,10 @@ a {
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     border-radius: 10px;
+    display: block;
 }
 
-.article button:hover {
+.article > button:hover {
     background-color: #e3f4e7;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
@@ -88,24 +94,6 @@ a {
     margin-bottom: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-section {
-    margin-bottom: 40px;
-}
-
-@media (max-width: 768px) {
-    h1 {
-        font-size: 28px;
-    }
-
-    .article button {
-        font-size: 18px;
-    }
-
-    p {
-        font-size: 16px;
-    }
 }
 
 .article-content img.logo {
@@ -143,4 +131,32 @@ section {
 .category-toggle:hover {
     background-color: #c8e6c9;
     transform: scale(1.05);
+}
+
+.article-section,
+.article {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    .article > button {
+        font-size: 18px;
+        width: 100%;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .content-wrapper {
+        padding: 20px;
+    }
 }
