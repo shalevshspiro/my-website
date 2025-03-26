@@ -15,10 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const backgroundStyles = {
-    "ספורט": "linear-gradient(to top, #fffde7, #f0f0f0)",        // צהוב-שחור רגוע
-    "ביטחון": "linear-gradient(to top, #e8f4fb, #ffffff)",      // תכלת-לבן
-    "פוליטיקה": "linear-gradient(to top, #eeeeee, #cccccc)",    // אפור רציני
-    "אחר": "#f8faff"                                              // ברירת מחדל
+    "ספורט": "linear-gradient(to top, #fff176, #fefefe)",        // צהוב רך וחמים
+    "ביטחון": "linear-gradient(to top, #d3eefe, #f8fdff)",      // תכלת־לבן
+    "פוליטיקה": "linear-gradient(to top, #e0e0e0, #f9f9f9)",    // אפור רך
+    "אחר": "#f8faff"
   };
 
   db.collection("articles")
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const btn = document.createElement("button");
         btn.textContent = genre;
         btn.className = "category-toggle";
-        btn.addEventListener("click", () => showCategory(genre));
+        btn.addEventListener("click", () => showCategory(genre, btn));
         categoryButtonsContainer.appendChild(btn);
       });
     })
@@ -65,14 +65,22 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("❌ שגיאה בטעינת הכתבות:", error);
     });
 
-  function showCategory(genre) {
+  function showCategory(genre, clickedButton) {
     const existing = document.querySelectorAll(".category-section");
     existing.forEach(el => el.remove());
 
-    // שינוי רקע לפי קטגוריה
+    // רקע עמוד
     const bg = backgroundStyles[genre] || "#f8faff";
     document.body.style.transition = "background 0.6s ease";
     document.body.style.background = bg;
+
+    // הדגשת כפתור שנבחר
+    document.querySelectorAll(".category-toggle").forEach(btn => {
+      btn.style.backgroundColor = "";
+      btn.style.color = "";
+    });
+    clickedButton.style.backgroundColor = "rgba(255,255,255,0.9)";
+    clickedButton.style.color = "#000";
 
     db.collection("articles")
       .where("category", "==", "articles")
