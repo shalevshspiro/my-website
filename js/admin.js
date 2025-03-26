@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const genres = {
         articles: ["ספורט", "ביטחון", "פוליטיקה", "אחר"],
-        life: ["חוויה אישית", "מסע", "מפעם", "התבגרות"]
+        life: ["ילדות", "צבא", "ספורט", "טיולים"]
     };
 
     function updateGenres(category) {

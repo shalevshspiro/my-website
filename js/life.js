@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             snapshot.forEach(doc => {
                 const article = doc.data();
+                article.id = doc.id;
                 allArticles.push(article);
 
                 const genre = article.genre || "אחר";
@@ -46,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
             Object.keys(genres).forEach(genre => {
                 const btn = document.createElement("button");
                 btn.textContent = genre;
-                btn.style.margin = "0 10px 20px 0";
                 btn.className = "category-toggle";
                 btn.addEventListener("click", () => showCategory(genre));
                 categoryButtonsContainer.appendChild(btn);
@@ -57,11 +57,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
     function showCategory(genre) {
-        // הסתרת כל הקטגוריות שכבר נטענו
         const existing = document.querySelectorAll(".category-section");
         existing.forEach(el => el.remove());
 
-        // טעינה והצגה לפי ז'אנר
         db.collection("articles")
             .where("category", "==", "life")
             .where("genre", "==", genre)
@@ -74,6 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 snapshot.forEach(doc => {
                     const article = doc.data();
+                    article.id = doc.id;
                     const div = buildArticleDiv(article);
                     section.appendChild(div);
                 });
@@ -86,31 +85,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const articleDiv = document.createElement("div");
         articleDiv.classList.add("article");
 
-        const contentId = `content-${Math.random().toString(36).substr(2, 9)}`;
-
-        const formattedContent = article.content
-            .split("\\n")
-            .map(p => `<p>${p}</p>`)
-            .join("");
-
-        articleDiv.innerHTML = `
-            <button onclick="document.getElementById('${contentId}').style.display =
-                document.getElementById('${contentId}').style.display === 'none' ? 'block' : 'none'">
-                ${article.title}
-            </button>
+        const link = document.createElement("a");
+        link.href = `lifeart.html?id=${article.id}`;
+        link.innerHTML = `
+            <h3>${article.title}</h3>
             <p><strong>${article.intro || ""}</strong></p>
-            <div id="${contentId}" class="article-content" style="display:none;">
-                ${article.logoImage ? `<img src="${article.logoImage}" alt="לוגו" class="logo">` : ""}
-                ${formattedContent}
-                <p><small>ז'אנר: ${article.genre}</small></p>
-                ${article.images && article.images.length ? `
-                    <div class="image-gallery">
-                        ${article.images.map(img => `<img src="${img}" alt="תמונה">`).join("")}
-                    </div>
-                ` : ""}
-            </div>
+            ${article.logoImage ? `<img src="${article.logoImage}" alt="לוגו" class="logo">` : ""}
         `;
 
+        articleDiv.appendChild(link);
         return articleDiv;
     }
 });
