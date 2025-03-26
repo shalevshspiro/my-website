@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch(err => alert("❌ שגיאה בהעלאת הלוגו"));
   });
 
-  // העלאת תמונות ל־Cloudinary + תצוגה עם caption
+  // העלאת תמונות ל־Cloudinary + תצוגה עם caption + כפתור הסרה
   document.getElementById("uploadImagesBtn").addEventListener("click", () => {
     const files = document.getElementById("imageUpload").files;
     if (!files.length) return alert("יש לבחור קבצים");
@@ -116,12 +116,16 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch(err => alert("❌ שגיאה בהעלאת תמונות"));
   });
 
-  // תצוגת תמונה + שדה תיאור
+  // תצוגת תמונה עם תיאור + כפתור הסרה
   function addImagePreview(url) {
     const container = document.getElementById("imagePreviewArea");
 
     const wrapper = document.createElement("div");
     wrapper.style.marginBottom = "20px";
+    wrapper.style.position = "relative";
+    wrapper.style.padding = "10px";
+    wrapper.style.border = "1px solid #ddd";
+    wrapper.style.borderRadius = "8px";
 
     const img = document.createElement("img");
     img.src = url;
@@ -137,8 +141,25 @@ document.addEventListener("DOMContentLoaded", function () {
     captionInput.style.width = "100%";
     captionInput.style.padding = "6px";
 
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.textContent = "🗑 הסר";
+    removeBtn.style.position = "absolute";
+    removeBtn.style.top = "8px";
+    removeBtn.style.left = "8px";
+    removeBtn.style.background = "#eee";
+    removeBtn.style.border = "1px solid #ccc";
+    removeBtn.style.borderRadius = "6px";
+    removeBtn.style.padding = "4px 10px";
+    removeBtn.style.cursor = "pointer";
+
+    removeBtn.addEventListener("click", () => {
+      wrapper.remove();
+    });
+
     wrapper.appendChild(img);
     wrapper.appendChild(captionInput);
+    wrapper.appendChild(removeBtn);
     container.appendChild(wrapper);
   }
 
@@ -160,7 +181,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let logoImage = document.getElementById("logoImage").value.trim();
     if (!logoImage) logoImage = null;
 
-    // איסוף תמונות עם כיתוב
     const captions = document.querySelectorAll(".caption-input");
     const images = [...captions].map(input => ({
       url: input.dataset.url,
