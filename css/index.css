@@ -51,10 +51,12 @@ nav ul li a {
   transition: all 0.3s ease-in-out;
 }
 
-nav ul li a:hover {
-  background-color: white;
+nav ul li a {
   color: #000000;
-  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 6px 10px;
+  transition: all 0.3s ease-in-out;
 }
 
 main {
