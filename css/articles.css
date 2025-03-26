@@ -184,27 +184,31 @@ a {
     box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
-/* התוספות החדשות בלבד */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 28px;
+    }
 
-header {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
+    .article > button {
+        font-size: 18px;
+        width: 100%;
+    }
 
-h2 {
-    color: #4b6cb7;
-    border-bottom: 2px solid #4b6cb7;
-    padding-bottom: 8px;
-    font-size: 22px;
-    margin-top: 40px;
-    margin-bottom: 15px;
-}
+    p {
+        font-size: 16px;
+    }
 
-#intro p {
-    margin-bottom: 15px;
-    line-height: 1.8;
-    font-size: 18px;
-}
+    .content-wrapper {
+        padding: 20px;
+    }
 
-body {
-    background: #f8faff;
+    #category-buttons {
+        position: static;
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 20px;
+        box-shadow: none;
+        background: none;
+        padding: 0;
+    }
 }

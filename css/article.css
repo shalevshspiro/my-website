@@ -1,26 +1,50 @@
-/* התוכן המקורי כפי שהעלית + התוספות החדשות בלבד */
+body {
+  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: #f8faff;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
 
-.back-link {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.content-wrapper {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 20px;
 }
 
 h1 {
-    color: #4b6cb7;
-    margin-bottom: 15px;
-}
-
-#content p {
-    line-height: 1.8;
-    margin-bottom: 18px;
-    font-size: 18px;
+  font-size: 32px;
+  margin-bottom: 10px;
 }
 
 .intro {
-    font-size: 20px;
-    color: #333;
-    margin-bottom: 25px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-body {
-    background: #f8faff;
+.logo {
+  max-width: 200px;
+  max-height: 120px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  display: block;
+}
+
+#content p {
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.image-gallery img {
+  max-height: 200px;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
 }
