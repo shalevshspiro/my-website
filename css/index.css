@@ -18,7 +18,7 @@ body {
 }
 
 .custom-header {
-  background: linear-gradient(to right, #2c2c2c, #ffd700); /* שחור רך יותר לצפייה במובייל */
+  background: linear-gradient(to right, #2c2c2c, #ffd700);
   color: white;
   padding: 30px 0;
   text-align: center;
@@ -44,19 +44,17 @@ nav ul li {
 }
 
 nav ul li a {
-  color: white;
+  color: #000000;
   text-decoration: none;
   font-size: 16px;
   padding: 6px 10px;
   transition: all 0.3s ease-in-out;
 }
 
-nav ul li a {
-  color: #000000;
-  text-decoration: none;
-  font-size: 16px;
-  padding: 6px 10px;
-  transition: all 0.3s ease-in-out;
+nav ul li a:hover {
+  background-color: #ffd700;
+  color: #000;
+  border-radius: 5px;
 }
 
 main {
@@ -71,7 +69,8 @@ main {
   backdrop-filter: blur(2px);
 }
 
-.highlight-box {
+.highlight-box,
+#about-me, #mishpacha, #contact {
   background:
     linear-gradient(to bottom, #ffffff, #fdf7dd),
     repeating-linear-gradient(
@@ -120,8 +119,8 @@ a:hover {
 button {
   margin: 10px 5px 0 0;
   padding: 12px 20px;
-  background-color: #000000;
-  color: #ffd700;
+  background: linear-gradient(to right, #2c2c2c, #ffd700);
+  color: white;
   border: none;
   border-radius: 10px;
   font-size: 16px;
@@ -132,7 +131,7 @@ button {
 }
 
 button:hover {
-  background-color: #333;
+  background: linear-gradient(to right, #1a1a1a, #e6c200);
   transform: scale(1.03);
 }
 
@@ -140,16 +139,7 @@ button:hover {
   text-align: center;
   margin: 20px 0;
   padding: 30px;
-  background:
-    linear-gradient(to bottom, #ffffff, #fdf7dd),
-    repeating-linear-gradient(
-      45deg,
-      rgba(0, 0, 0, 0.01),
-      rgba(0, 0, 0, 0.01) 10px,
-      transparent 10px,
-      transparent 20px
-    );
-  background-blend-mode: overlay;
+  background: linear-gradient(to right, #2c2c2c, #ffd700);
   border-radius: 20px;
   box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
   display: flex;
@@ -161,6 +151,9 @@ button:hover {
   width: 240px;
   border-radius: 50%;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  border: 6px solid #000;
+  outline: 4px solid #ffd700;
+  outline-offset: -2px;
 }
 
 #buttons {
@@ -168,25 +161,6 @@ button:hover {
   margin-bottom: 30px;
 }
 
-#about-me, #mishpacha, #contact {
-  background:
-    linear-gradient(to bottom, #ffffff, #fdf7dd),
-    repeating-linear-gradient(
-      45deg,
-      rgba(0, 0, 0, 0.01),
-      rgba(0, 0, 0, 0.01) 10px,
-      transparent 10px,
-      transparent 20px
-    );
-  background-blend-mode: overlay;
-  padding: 15px;
-  margin: 10px 0;
-  border-radius: 6px;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
-  backdrop-filter: blur(2px);
-}
-
-/* תמונות צד ברקע האפור */
 .floating-images {
   position: absolute;
   top: 180px;
@@ -257,7 +231,6 @@ button:hover {
   margin-left: 8px;
 }
 
-/* מעבר חלק לכל האתר */
 * {
   transition: all 0.3s ease-in-out;
 }
