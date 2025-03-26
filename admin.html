@@ -1,87 +1,95 @@
 <!DOCTYPE html>
 <html lang="he">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ניהול כתבות - My Mind</title>
-    <link rel="stylesheet" href="css/admin.css">
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("access") !== "ok") {
+      document.write("<h2 style='text-align:center;margin-top:20vh;'>🚫 אין לך גישה לדף זה</h2>");
+      throw new Error("Access denied");
+    }
+  </script>
 
-    <!-- Quill Editor -->
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ניהול כתבות - My Mind</title>
+  <link rel="stylesheet" href="css/admin.css">
 
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <!-- Quill Editor -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
-    <!-- קבצי קונפיג -->
-    <script src="js/firebase-config.js"></script>
-    <script src="js/admin.js" defer></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+  <!-- קבצי קונפיג -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/admin.js" defer></script>
 </head>
 <body>
 <a href="index.html" class="back-link">← חזרה לעמוד הראשי</a>
 
 <h2>🔑 התחברות לניהול כתבות</h2>
 <form id="loginForm">
-    <input type="email" id="email" placeholder="אימייל" required>
-    <input type="password" id="password" placeholder="סיסמה" required>
-    <button type="submit">📌 התחבר</button>
+  <input type="email" id="email" placeholder="אימייל" required>
+  <input type="password" id="password" placeholder="סיסמה" required>
+  <button type="submit">📌 התחבר</button>
 </form>
 
 <button id="logout" style="display:none;">🚪 התנתק</button>
 
 <div id="adminPanel" style="display:none;">
-    <h2>📝 הוספת כתבה חדשה</h2>
-    <form id="articleForm">
-        <label>🔹 כותרת הכתבה:</label>
-        <input type="text" id="title" placeholder="כותרת" required>
+  <h2>📝 הוספת כתבה חדשה</h2>
+  <form id="articleForm">
+    <label>🔹 כותרת הכתבה:</label>
+    <input type="text" id="title" placeholder="כותרת" required>
 
-        <label>📖 הקדמה:</label>
-        <input type="text" id="intro" placeholder="הקדמה">
+    <label>📖 הקדמה:</label>
+    <input type="text" id="intro" placeholder="הקדמה">
 
-        <label>📂 קטגוריה:</label>
-        <select id="category">
-            <option value="articles">כתבות</option>
-            <option value="life">חיים</option>
-        </select>
+    <label>📂 קטגוריה:</label>
+    <select id="category">
+      <option value="articles">כתבות</option>
+      <option value="life">חיים</option>
+    </select>
 
-        <label>🎭 ז'אנר:</label>
-        <select id="genre"></select>
+    <label>🎭 ז'אנר:</label>
+    <select id="genre"></select>
 
-        <label>📄 תוכן הכתבה:</label>
-        <div id="editor"></div>
-        <input type="hidden" id="content" name="content">
+    <label>📓 תוכן הכתבה:</label>
+    <div id="editor"></div>
+    <input type="hidden" id="content" name="content">
 
-        <label>🖼️ העלאת תמונות נוספות:</label>
-        <input type="file" id="imageUpload" multiple>
-        <button type="button" id="uploadImagesBtn">📤 העלה תמונות</button>
-        <br>
-        <input type="text" id="images" placeholder="או הדבק כאן קישורים לתמונות מ־Cloudinary (מופרדים בפסיקים)">
+    <label>🗼️ העלאת תמונות נוספות:</label>
+    <input type="file" id="imageUpload" multiple>
+    <button type="button" id="uploadImagesBtn">📄 העלה תמונות</button>
+    <br>
+    <input type="text" id="images" placeholder="או הדבק כאן קישורים לתמונות מ״Cloudinary (מופרדים בפסקים)">
 
-        <label>🔖 תמונת לוגו:</label>
-        <input type="file" id="logoUpload">
-        <button type="button" id="uploadLogoBtn">📤 העלה לוגו</button>
-        <br>
-        <input type="text" id="logoImage" placeholder="או הדבק כאן קישור לתמונת לוגו מ־Cloudinary">
+    <label>🔖 תמונת לוגו:</label>
+    <input type="file" id="logoUpload">
+    <button type="button" id="uploadLogoBtn">📄 העלה לוגו</button>
+    <br>
+    <input type="text" id="logoImage" placeholder="או הדבק כאן קישור לתמונת לוגו מ״Cloudinary">
 
-        <button type="submit">✅ צור כתבה</button>
-    </form>
+    <button type="submit">✅ צור כתבה</button>
+  </form>
 </div>
 
 <!-- Quill Scripts -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const quill = new Quill('#editor', {
-            theme: 'snow',
-            placeholder: 'כתוב כאן את תוכן הכתבה...'
-        });
-
-        const form = document.getElementById("articleForm");
-        form.addEventListener("submit", function () {
-            document.getElementById("content").value = quill.root.innerHTML;
-        });
+  document.addEventListener("DOMContentLoaded", function () {
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: 'כתוב כאן את תוכן הכתבה...'
     });
+
+    const form = document.getElementById("articleForm");
+    form.addEventListener("submit", function () {
+      document.getElementById("content").value = quill.root.innerHTML;
+    });
+  });
 </script>
 </body>
 </html>
