@@ -2,8 +2,8 @@
 <html lang="he">
 <head>
   <script>
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("access") !== "ok") {
+  firebase.auth().onAuthStateChanged(user => {
+    if (!user || user.email !== "shalev6005@gmail.com") {
       window.location.href = "https://www.youtube.com/watch?v=Z6hLOCKTpsg&t=937s";
     }
   </script>
