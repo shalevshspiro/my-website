@@ -137,6 +137,21 @@ button:hover {
 #my-photo {
   text-align: center;
   margin: 20px 0;
+  padding: 30px;
+  background:
+    linear-gradient(to bottom, #ffffff, #fdf7dd),
+    repeating-linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.01),
+      rgba(0, 0, 0, 0.01) 10px,
+      transparent 10px,
+      transparent 20px
+    );
+  background-blend-mode: overlay;
+  border-radius: 20px;
+  box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
+  display: inline-block;
+  backdrop-filter: blur(2px);
 }
 
 #my-photo img {
