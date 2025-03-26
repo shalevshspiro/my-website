@@ -18,7 +18,7 @@ body {
 }
 
 .custom-header {
-  background: linear-gradient(to right, #2c2c2c, #ffd700); /* צבעי בית"ר */
+  background: linear-gradient(to right, #2c2c2c, #ffd700); /* שחור רך יותר לצפייה במובייל */
   color: white;
   padding: 30px 0;
   text-align: center;
@@ -70,8 +70,16 @@ main {
 }
 
 .highlight-box {
-  background: linear-gradient(to right, #2c2c2c, #ffd700); /* כמו הכותרת העליונה */
-  color: white;
+  background:
+    linear-gradient(to bottom, #ffffff, #fdf7dd),
+    repeating-linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.01),
+      rgba(0, 0, 0, 0.01) 10px,
+      transparent 10px,
+      transparent 20px
+    );
+  background-blend-mode: overlay;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
