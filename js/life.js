@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const articlesContainer = document.getElementById("articles-container");
   const recentArticlesContainer = document.getElementById("recent-articles");
+  const recentArticlesSection = document.getElementById("recent-articles-section");
 
-  if (!articlesContainer || !recentArticlesContainer) {
+  if (!articlesContainer || !recentArticlesContainer || !recentArticlesSection) {
     console.error("❌ אלמנט להצגת הכתבות לא נמצא!");
     return;
   }
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const defaultBackground = "linear-gradient(to top, #fdfaf5, #dce6f2)";
+  let closeBtn;
 
   db.collection("articles")
     .where("category", "==", "life")
@@ -59,11 +61,12 @@ document.addEventListener("DOMContentLoaded", () => {
         categoryButtonsContainer.appendChild(btn);
       });
 
-      // כפתור סגירה
-      const closeBtn = document.createElement("button");
+      // כפתור סגירה (מוסתר בהתחלה)
+      closeBtn = document.createElement("button");
       closeBtn.id = "close-category";
       closeBtn.className = "category-toggle";
       closeBtn.textContent = "סגור";
+      closeBtn.style.display = "none";
       closeBtn.addEventListener("click", () => {
         document.body.style.background = defaultBackground;
         document.querySelectorAll(".category-section").forEach(el => el.remove());
@@ -71,7 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
           btn.style.backgroundColor = "";
           btn.style.color = "";
         });
-        recentArticlesContainer.style.display = "block";
+        recentArticlesSection.style.display = "block";
+        closeBtn.style.display = "none";
       });
       categoryButtonsContainer.appendChild(closeBtn);
     })
@@ -93,7 +97,8 @@ document.addEventListener("DOMContentLoaded", () => {
     clickedButton.style.backgroundColor = "rgba(255,255,255,0.9)";
     clickedButton.style.color = "#000";
 
-    recentArticlesContainer.style.display = "none";
+    recentArticlesSection.style.display = "none";
+    if (closeBtn) closeBtn.style.display = "inline-block";
 
     db.collection("articles")
       .where("category", "==", "life")
