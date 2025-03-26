@@ -14,6 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
     "אחר": []
   };
 
+  const backgroundStyles = {
+    "ספורט": "linear-gradient(to top, #fffde7, #f0f0f0)",        // צהוב-שחור רגוע
+    "ביטחון": "linear-gradient(to top, #e8f4fb, #ffffff)",      // תכלת-לבן
+    "פוליטיקה": "linear-gradient(to top, #eeeeee, #cccccc)",    // אפור רציני
+    "אחר": "#f8faff"                                              // ברירת מחדל
+  };
+
   db.collection("articles")
     .where("category", "==", "articles")
     .orderBy("createdAt", "desc")
@@ -23,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       snapshot.forEach(doc => {
         const article = doc.data();
-        article.id = doc.id; // שימוש במזהה של המסמך
+        article.id = doc.id;
         allArticles.push(article);
 
         const genre = article.genre || "אחר";
@@ -62,6 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const existing = document.querySelectorAll(".category-section");
     existing.forEach(el => el.remove());
 
+    // שינוי רקע לפי קטגוריה
+    const bg = backgroundStyles[genre] || "#f8faff";
+    document.body.style.transition = "background 0.6s ease";
+    document.body.style.background = bg;
+
     db.collection("articles")
       .where("category", "==", "articles")
       .where("genre", "==", genre)
@@ -89,11 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const link = document.createElement("a");
     link.href = `article.html?id=${article.id}`;
-link.innerHTML = `
-  <h2 class="article-title">${article.title}</h2>
-  <p class="article-subtitle">${article.intro || ""}</p>
-  ${article.logoImage ? `<img src="${article.logoImage}" alt="לוגו" class="logo">` : ""}
-`;
+    link.innerHTML = `
+      <h2 class="article-title">${article.title}</h2>
+      <p class="article-subtitle">${article.intro || ""}</p>
+      ${article.logoImage ? `<img src="${article.logoImage}" alt="לוגו" class="logo">` : ""}
+    `;
 
     articleDiv.appendChild(link);
     return articleDiv;
