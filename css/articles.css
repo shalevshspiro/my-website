@@ -142,6 +142,23 @@ a {
     margin-bottom: 40px;
 }
 
+/* תוספת לעיצוב כתבות כלינק נפרד */
+.article a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 20px;
+    border: 2px solid #4b6cb7;
+    border-radius: 12px;
+    background-color: white;
+    transition: background-color 0.2s ease;
+    margin-bottom: 20px;
+}
+
+.article a:hover {
+    background-color: #eaf1ff;
+}
+
 @media (max-width: 768px) {
     h1 {
         font-size: 28px;
