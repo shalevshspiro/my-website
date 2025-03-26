@@ -1,10 +1,9 @@
 body {
   direction: rtl;
-    transition: background 0.5s ease;
-
+  transition: background 0.5s ease;
   font-family: 'Segoe UI', Tahoma, sans-serif;
-    background: #f8faff;
-  color: #222;
+  background: #f8faff;
+  color: #2d2d2d;
   margin: 0;
   padding: 0;
 }
@@ -17,8 +16,7 @@ body {
 
 h1 {
   font-size: 32px;
-    color: #4b6cb7;
-    margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .intro {
@@ -35,8 +33,6 @@ h1 {
 }
 
 #content p {
-	    font-size: 18px;
-
   line-height: 1.6;
   margin-bottom: 16px;
 }
@@ -54,8 +50,18 @@ h1 {
   box-shadow: 0 1px 6px rgba(0,0,0,0.1);
 }
 
-.intro {
-    font-size: 20px;
-    color: #333;
-    margin-bottom: 25px;
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #4b6cb7;
+  text-decoration: none;
+  border: 1px solid #4b6cb7;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.back-link:hover {
+  background-color: #eaf1ff;
 }
