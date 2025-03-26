@@ -77,15 +77,18 @@ a {
 }
 
 .article {
-    margin-bottom: 50px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ccc;
+    margin-bottom: 35px;
+    padding-bottom: 15px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
 }
 
 .article > button {
     width: 60%;
-    font-size: 20px;
-    padding: 12px;
+    font-size: 18px;
+    padding: 10px;
     margin: 10px 0;
     background-color: #ffffff;
     border: 2px solid #b0bccf;
@@ -105,7 +108,9 @@ a {
 .article-content {
     display: none;
     background-color: #f9f9f5;
-    padding: 20px;
+    padding: 16px;
+    font-size: 16px;
+    line-height: 1.6;
     border: 1px solid #dcdcdc;
     margin-bottom: 20px;
     border-radius: 10px;
@@ -135,7 +140,7 @@ a {
 }
 
 .image-gallery img {
-    max-height: 180px;
+    max-height: 150px;
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
@@ -175,15 +180,6 @@ a {
 .category-toggle:hover {
     background-color: #e6ebf5;
     transform: scale(1.05);
-}
-
-.article-section,
-.article {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    margin-bottom: 40px;
 }
 
 .article a {
@@ -248,8 +244,8 @@ a {
 }
 
 .article-subtitle {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 400;
-    color: #555;
-    margin-bottom: 12px;
+    color: #666;
+    margin-bottom: 8px;
 }
