@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const article = doc.data();
 
-    // שינוי רקע לפי ז'אנר
     const genre = article.genre || "אחר";
     const bg = backgroundStyles[genre] || defaultBackground;
     document.body.style.transition = "background 0.5s ease";
@@ -40,16 +39,14 @@ document.addEventListener("DOMContentLoaded", () => {
       logo.alt = "לוגו";
     }
 
-    document.getElementById("content").innerHTML = article.content
-      .split("\\n")
-      .map(p => `<p>${p}</p>`)
-      .join("");
+    // הצגת תוכן הכתבה כמו שהוא – עם <p> ו-<br>
+    document.getElementById("content").innerHTML = article.content;
 
     if (article.images && article.images.length) {
       const gallery = document.getElementById("gallery");
-      article.images.forEach(imgUrl => {
+      article.images.forEach(imgObj => {
         const img = document.createElement("img");
-        img.src = imgUrl;
+        img.src = imgObj.url || imgObj;
         img.alt = "תמונה";
         gallery.appendChild(img);
       });

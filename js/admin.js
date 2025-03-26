@@ -163,13 +163,13 @@ document.addEventListener("DOMContentLoaded", function () {
     container.appendChild(wrapper);
   }
 
-  // שליחת כתבה
+  // שליחת כתבה ל-Firebase
   articleForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
     const title = document.getElementById("title").value.trim();
     const intro = document.getElementById("intro").value.trim();
-    const content = document.getElementById("content").value.trim();
+    const content = document.getElementById("content").value.trim(); // נוצר דינאמית מה-HTML
     const category = document.getElementById("category").value;
     const genre = document.getElementById("genre").value;
 

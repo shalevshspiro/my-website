@@ -58,14 +58,12 @@
 
     <label>📓 תוכן הכתבה:</label>
     <div id="editor"></div>
-    <input type="hidden" id="content" name="content">
 
     <label>🗼️ העלאת תמונות נוספות:</label>
     <input type="file" id="imageUpload" multiple>
     <button type="button" id="uploadImagesBtn">📄 העלה תמונות</button>
     <br>
 
-    <!-- אזור תצוגת תמונות עם כיתוב -->
     <div id="imagePreviewArea" style="margin-top: 20px;"></div>
 
     <label>🔖 תמונת לוגו:</label>
@@ -89,7 +87,23 @@
 
     const form = document.getElementById("articleForm");
     form.addEventListener("submit", function () {
-      document.getElementById("content").value = quill.root.innerHTML;
+      let raw = quill.root.innerHTML;
+      raw = raw
+        .replace(/<p><br><\\/p>/g, '___PARAGRAPH___')
+        .replace(/<\\/p><p>/g, '<br>')
+        .replace(/^<p>/, '')
+        .replace(/<\\/p>$/, '')
+        .replace(/<\\/p>/g, '')
+        .replace(/<p>/g, '')
+        .replace(/___PARAGRAPH___/g, '</p><p>');
+      const finalContent = `<p>${raw}</p>`;
+
+      const hiddenInput = document.createElement("input");
+      hiddenInput.type = "hidden";
+      hiddenInput.name = "content";
+      hiddenInput.id = "content";
+      hiddenInput.value = finalContent;
+      form.appendChild(hiddenInput);
     });
   });
 </script>
