@@ -89,11 +89,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const link = document.createElement("a");
     link.href = `article.html?id=${article.id}`;
-    link.innerHTML = `
-      <h3>${article.title}</h3>
-      <p><strong>${article.intro || ""}</strong></p>
-      ${article.logoImage ? `<img src="${article.logoImage}" alt="לוגו" class="logo">` : ""}
-    `;
+link.innerHTML = `
+  <h2 class="article-title">${article.title}</h2>
+  <p class="article-subtitle">${article.intro || ""}</p>
+  ${article.logoImage ? `<img src="${article.logoImage}" alt="לוגו" class="logo">` : ""}
+`;
 
     articleDiv.appendChild(link);
     return articleDiv;
