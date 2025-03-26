@@ -4,8 +4,7 @@
   <script>
     const params = new URLSearchParams(window.location.search);
     if (params.get("access") !== "ok") {
-      document.write("<h2 style='text-align:center;margin-top:20vh;'>🚫 אין לך גישה לדף זה</h2>");
-      throw new Error("Access denied");
+      window.location.href = "https://www.cnn.com";
     }
   </script>
 
@@ -22,7 +21,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-  <!-- קבצי קונפיג -->
+  <!-- קבצי קוןפיג -->
   <script src="js/firebase-config.js"></script>
   <script src="js/admin.js" defer></script>
 </head>
