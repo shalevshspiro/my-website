@@ -7,6 +7,15 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  const backgroundStyles = {
+    "ספורט": "linear-gradient(to top, #fffbe7, #ffffff)",
+    "ביטחון": "linear-gradient(to top, #eef7fc, #ffffff)",
+    "פוליטיקה": "linear-gradient(to top, #f2f2f2, #ffffff)",
+    "אחר": "#f8faff"
+  };
+
+  const defaultBackground = "#f8faff";
+
   db.collection("articles").doc(id).get().then(doc => {
     if (!doc.exists) {
       document.body.innerHTML = "<h2>❌ כתבה לא קיימת</h2>";
@@ -14,6 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const article = doc.data();
+
+    // שינוי רקע לפי ז'אנר
+    const genre = article.genre || "אחר";
+    const bg = backgroundStyles[genre] || defaultBackground;
+    document.body.style.transition = "background 0.5s ease";
+    document.body.style.background = bg;
 
     document.getElementById("title").innerText = article.title || "ללא כותרת";
     document.getElementById("intro").innerText = article.intro || "";
@@ -38,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    document.getElementById("genre").innerText = `ז'אנר: ${article.genre || "לא צויין"}`;
+    document.getElementById("genre").innerText = `ז'אנר: ${genre}`;
   }).catch(err => {
     console.error("שגיאה בשליפת כתבה:", err);
     document.body.innerHTML = "<h2>⚠️ שגיאה בטעינת הכתבה</h2>";
