@@ -159,6 +159,15 @@ a {
     background-color: #eaf1ff;
 }
 
+.article a img {
+    max-width: 120px;
+    max-height: 80px;
+    border-radius: 8px;
+    display: block;
+    margin-top: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
 @media (max-width: 768px) {
     h1 {
         font-size: 28px;
