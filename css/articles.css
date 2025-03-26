@@ -1,7 +1,7 @@
 body {
     direction: rtl;
     text-align: right;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(to top right, #f9f9f9, #eef3f9);
     color: #222;
     margin: 0;
@@ -19,7 +19,6 @@ header {
 nav ul {
     list-style: none;
     padding: 0;
-    margin: 0;
 }
 
 nav ul li {
@@ -55,30 +54,18 @@ a {
     text-decoration: none;
 }
 
-/* ✅ עוטף כללי עם מקסימום רוחב – כמו וואלה */
-.content-wrapper {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 30px 20px;
+.article-icon {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    margin-right: 10px;
 }
 
-/* ✅ מבנה כתבה */
-.article {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: flex-start;
-    gap: 40px;
-    margin-bottom: 50px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ccc;
-}
-
-.article > button {
-    width: fit-content;
-    max-width: 100%;
+.article button {
+    width: 100%;
     font-size: 20px;
-    padding: 12px 18px;
-    margin-bottom: 10px;
+    padding: 12px;
+    margin: 10px 0;
     background-color: #ffffff;
     border: 2px solid #4b6cb7;
     color: #333;
@@ -88,55 +75,63 @@ a {
     border-radius: 10px;
 }
 
-.article > button:hover {
+.article button:hover {
     background-color: #eaf1ff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .article-content {
-    width: 65%;
     display: none;
     background-color: #ffffff;
-    padding: 24px;
+    padding: 20px;
     border: 1px solid #ddd;
+    margin-bottom: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    line-height: 1.8;
-    font-size: 1.1em;
 }
 
+section {
+    margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    .article button {
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+}
+
+/* תמונת לוגו */
 .article-content img.logo {
-    display: inline-block;
-    vertical-align: middle;
-    max-width: 100px;
-    max-height: 70px;
-    margin: 0 10px 10px 0;
+    display: block;
+    max-width: 150px;
+    max-height: 100px;
+    margin-bottom: 20px;
     border-radius: 8px;
 }
 
+/* גלריית תמונות */
 .image-gallery {
-    width: 30%;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 10px;
+    margin-top: 15px;
 }
 
 .image-gallery img {
-    max-width: 100%;
-    height: auto;
+    max-height: 180px;
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
-.article-content p {
-    margin-bottom: 12px;
-}
-
-.article-content p small {
-    color: #666;
-    font-size: 0.9em;
-}
-
+/* כפתורי קטגוריה */
 .category-toggle {
     font-size: 18px;
     padding: 10px 20px;
@@ -151,32 +146,4 @@ a {
 .category-toggle:hover {
     background-color: #dfe9ff;
     transform: scale(1.05);
-}
-
-section {
-    margin-bottom: 40px;
-}
-
-@media (max-width: 768px) {
-    .article {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .article-content,
-    .image-gallery {
-        width: 100%;
-    }
-
-    h1 {
-        font-size: 28px;
-    }
-
-    .article > button {
-        font-size: 18px;
-    }
-
-    p {
-        font-size: 16px;
-    }
 }
