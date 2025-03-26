@@ -18,7 +18,7 @@ body {
 }
 
 .custom-header {
-  background: linear-gradient(to right, #2c2c2c, #ffd700);
+  background: linear-gradient(to right, #2c2c2c, #ffd700); /* שחור רך יותר לצפייה במובייל */
   color: white;
   padding: 30px 0;
   text-align: center;
@@ -70,8 +70,16 @@ main {
 }
 
 .highlight-box {
-  background: linear-gradient(to right, #2c2c2c, #ffd700);
-  color: white;
+  background:
+    linear-gradient(to bottom, #ffffff, #fdf7dd),
+    repeating-linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.01),
+      rgba(0, 0, 0, 0.01) 10px,
+      transparent 10px,
+      transparent 20px
+    );
+  background-blend-mode: overlay;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
@@ -110,8 +118,8 @@ a:hover {
 button {
   margin: 10px 5px 0 0;
   padding: 12px 20px;
-  background: linear-gradient(to right, #2c2c2c, #ffd700);
-  color: white;
+  background-color: #000000;
+  color: #ffd700;
   border: none;
   border-radius: 10px;
   font-size: 16px;
@@ -122,7 +130,7 @@ button {
 }
 
 button:hover {
-  background: linear-gradient(to right, #1a1a1a, #e6c200);
+  background-color: #333;
   transform: scale(1.03);
 }
 
@@ -130,7 +138,16 @@ button:hover {
   text-align: center;
   margin: 20px 0;
   padding: 30px;
-  background: linear-gradient(to right, #2c2c2c, #ffd700);
+  background:
+    linear-gradient(to bottom, #ffffff, #fdf7dd),
+    repeating-linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.01),
+      rgba(0, 0, 0, 0.01) 10px,
+      transparent 10px,
+      transparent 20px
+    );
+  background-blend-mode: overlay;
   border-radius: 20px;
   box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
   display: flex;
@@ -167,6 +184,7 @@ button:hover {
   backdrop-filter: blur(2px);
 }
 
+/* תמונות צד ברקע האפור */
 .floating-images {
   position: absolute;
   top: 180px;
@@ -237,6 +255,7 @@ button:hover {
   margin-left: 8px;
 }
 
+/* מעבר חלק לכל האתר */
 * {
   transition: all 0.3s ease-in-out;
 }
