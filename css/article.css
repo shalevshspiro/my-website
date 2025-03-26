@@ -1,5 +1,7 @@
 body {
   direction: rtl;
+    transition: background 0.5s ease;
+
   font-family: 'Segoe UI', Tahoma, sans-serif;
     background: #f8faff;
   color: #222;
