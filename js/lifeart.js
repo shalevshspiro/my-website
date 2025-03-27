@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const defaultBackground = "#fdfaf5";
 
-  db.collection("articles").doc(id).get().then(doc => {
+  db.collection("life").doc(id).get().then(doc => {
     if (!doc.exists) {
       document.body.innerHTML = "<h2>❌ כתבה לא קיימת</h2>";
       return;

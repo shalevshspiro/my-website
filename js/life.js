@@ -25,8 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const defaultBackground = "linear-gradient(to top, #fdfaf5, #dce6f2)";
   let closeBtn;
 
-  db.collection("articles")
-    .where("category", "==", "life")
+  db.collection("life")
     .orderBy("createdAt", "desc")
     .get()
     .then(snapshot => {
@@ -100,8 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
     recentArticlesSection.style.display = "none";
     if (closeBtn) closeBtn.style.display = "inline-block";
 
-    db.collection("articles")
-      .where("category", "==", "life")
+    db.collection("life")
       .where("genre", "==", genre)
       .orderBy("createdAt", "desc")
       .get()
