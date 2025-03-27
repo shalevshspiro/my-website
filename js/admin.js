@@ -1,12 +1,13 @@
-// admin.js - כולל תיקון העלאת לוגו ושליחת כתבה ✅
+// admin.js - כולל העלאת לוגו, יצירת כתבה, וחיפוש/עריכה ✅
 
 document.addEventListener("DOMContentLoaded", function () {
   const cloudName = "dtuomb64g";
   const unsignedPreset = "unsigned";
-  const db = firebase.firestore();
 
   const categorySelect = document.getElementById("category");
   const genreSelect = document.getElementById("genre");
+  const articleIdInput = document.getElementById("articleId");
+  const submitBtn = document.getElementById("submitBtn");
 
   const genres = {
     articles: ["ספורט", "ביטחון", "פוליטיקה", "אחר"],
@@ -28,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const loginForm = document.getElementById("loginForm");
   const articleForm = document.getElementById("articleForm");
-  const adminPanel = document.getElementById("adminPanel");
   const logoutButton = document.getElementById("logout");
 
   loginForm.addEventListener("submit", function (event) {
@@ -68,7 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // ✅ העלאת לוגו ל-Cloudinary
   document.getElementById("uploadLogoBtn").addEventListener("click", () => {
     const file = document.getElementById("logoUpload").files[0];
     if (!file) return alert("יש לבחור קובץ קודם");
@@ -96,7 +95,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 
-  // ✅ שליחת כתבה ל-Firebase
   articleForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -113,9 +111,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const title = document.getElementById("title").value.trim();
     const intro = document.getElementById("intro").value.trim();
-    const category = document.getElementById("category").value;
-    const genre = document.getElementById("genre").value;
+    const category = categorySelect.value;
+    const genre = genreSelect.value;
     const logoImage = document.getElementById("logoImage").value.trim();
+    const editingId = articleIdInput.value;
 
     const captions = document.querySelectorAll(".caption-input");
     const images = [...captions].map(input => ({
@@ -123,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
       caption: input.value.trim()
     }));
 
-    const newArticle = {
+    const articleData = {
       title,
       intro,
       content: finalContent,
@@ -131,23 +130,72 @@ document.addEventListener("DOMContentLoaded", function () {
       genre,
       logoImage,
       images,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     };
 
-    db.collection(category).add(newArticle)
-      .then(() => {
-        alert("✅ כתבה נוספה בהצלחה!");
-        articleForm.reset();
-        document.getElementById("imagePreviewArea").innerHTML = "";
-        quill.setText("");
-      })
-      .catch(error => {
-        console.error("❌ שגיאה בהוספת כתבה:", error);
-        alert("❌ שגיאה בהוספת כתבה: " + error.message);
-      });
+    if (editingId) {
+      db.collection(category).doc(editingId).update(articleData)
+        .then(() => {
+          alert("💾 שינויים נשמרו בהצלחה!");
+          articleForm.reset();
+          quill.setText("");
+          document.getElementById("imagePreviewArea").innerHTML = "";
+          articleIdInput.value = "";
+          submitBtn.textContent = "✅ צור כתבה";
+        })
+        .catch(error => {
+          console.error("❌ שגיאה בעדכון כתבה:", error);
+          alert("❌ שגיאה בעדכון כתבה: " + error.message);
+        });
+    } else {
+      db.collection(category).add({ ...articleData, createdAt: firebase.firestore.FieldValue.serverTimestamp() })
+        .then(() => {
+          alert("✅ כתבה נוספה בהצלחה!");
+          articleForm.reset();
+          document.getElementById("imagePreviewArea").innerHTML = "";
+          quill.setText("");
+        })
+        .catch(error => {
+          console.error("❌ שגיאה בהוספת כתבה:", error);
+          alert("❌ שגיאה בהוספת כתבה: " + error.message);
+        });
+    }
   });
 
-  // ✅ העלאת תמונות נוספות ל-Cloudinary
+  document.getElementById("searchForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const searchTitle = document.getElementById("searchTitle").value.trim();
+    const searchGenre = document.getElementById("searchGenre").value.trim();
+    const category = categorySelect.value;
+
+    let query = db.collection(category);
+    if (searchTitle) query = query.where("title", "==", searchTitle);
+    if (searchGenre) query = query.where("genre", "==", searchGenre);
+
+    query.limit(1).get().then(snapshot => {
+      if (snapshot.empty) return alert("❌ לא נמצאה כתבה תואמת");
+
+      const doc = snapshot.docs[0];
+      const article = doc.data();
+      articleIdInput.value = doc.id;
+
+      document.getElementById("title").value = article.title;
+      document.getElementById("intro").value = article.intro;
+      document.getElementById("logoImage").value = article.logoImage || "";
+      categorySelect.value = article.category;
+      updateGenres(article.category);
+      genreSelect.value = article.genre;
+      quill.root.innerHTML = article.content;
+      document.getElementById("imagePreviewArea").innerHTML = "";
+
+      if (article.images && article.images.length) {
+        article.images.forEach(img => addImagePreview(img.url, img.caption));
+      }
+
+      submitBtn.textContent = "💾 שמור שינויים";
+    });
+  });
+
   document.getElementById("uploadImagesBtn").addEventListener("click", () => {
     const files = document.getElementById("imageUpload").files;
     if (!files.length) return alert("יש לבחור קבצים");
@@ -180,15 +228,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // ✅ הוספת תמונה לפי קישור URL
   document.getElementById("addImageByUrl").addEventListener("click", () => {
     const url = document.getElementById("imageUrlInput").value.trim();
     if (!url) return alert("⚠️ נא להדביק קישור קודם");
     addImagePreview(url);
   });
 
-  // ✅ הצגת תמונה עם שדה תיאור וכפתור הסרה
-  function addImagePreview(url) {
+  function addImagePreview(url, caption = "") {
     const container = document.getElementById("imagePreviewArea");
 
     const wrapper = document.createElement("div");
@@ -209,6 +255,7 @@ document.addEventListener("DOMContentLoaded", function () {
     captionInput.placeholder = "כתוב תיאור לתמונה זו";
     captionInput.className = "caption-input";
     captionInput.dataset.url = url;
+    captionInput.value = caption;
     captionInput.style.width = "100%";
     captionInput.style.padding = "6px";
 

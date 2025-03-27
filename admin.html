@@ -28,7 +28,7 @@
 <button id="logout" style="display:none;">🚪 התנתק</button>
 
 <div id="adminPanel" style="display:none;">
-  <h2>📝 הוספת כתבה חדשה</h2>
+  <h2>📝 הוספת או עריכת כתבה</h2>
   <form id="articleForm">
     <label>🔹 כותרת הכתבה:</label>
     <input type="text" id="title" placeholder="כותרת" required>
@@ -52,14 +52,14 @@
     <input type="file" id="articleFileInput" accept=".txt,.docx">
     <button type="button" id="loadFromFileBtn">טען כתבה</button>
 
-    <label>🗜️ העלאת תמונות נוספות:</label>
+    <label>🗼️ העלאת תמונות נוספות:</label>
     <input type="file" id="imageUpload" multiple>
     <button type="button" id="uploadImagesBtn">📄 העלה תמונות</button>
     <br>
 
-    <label>📌 הוסף תמונה לפי קישור:</label>
-    <input type="text" id="imageUrlInput" placeholder="הדבק קישור לתמונה מַּCloudinary">
-    <button type="button" id="addImageByUrl">📌 הוסף תמונה מקישור</button>
+    <label>📎 הוסף תמונה לפי קישור:</label>
+    <input type="text" id="imageUrlInput" placeholder="הדבק קישור לתמונה מ־Cloudinary">
+    <button type="button" id="addImageByUrl">📎 הוסף תמונה מקישור</button>
     <br>
 
     <div id="imagePreviewArea" style="margin-top: 20px;"></div>
@@ -68,13 +68,22 @@
     <input type="file" id="logoUpload">
     <button type="button" id="uploadLogoBtn">📄 העלה לוגו</button>
     <br>
-    <input type="text" id="logoImage" placeholder="או הדבק כאן קישור לתמונת לוגו מַּCloudinary">
+    <input type="text" id="logoImage" placeholder="או הדבק כאן קישור לתמונת לוגו מ״Cloudinary">
 
-    <button type="submit">✅ צור כתבה</button>
+    <input type="hidden" id="articleId">
+
+    <button type="submit" id="submitBtn">✅ צור כתבה</button>
+  </form>
+
+  <hr>
+  <h3>🔍 חפש כתבה לעריכה</h3>
+  <form id="searchForm">
+    <input type="text" id="searchTitle" placeholder="חפש לפי כותרת">
+    <input type="text" id="searchGenre" placeholder="או לפי ז'אנר">
+    <button type="submit">🔎 חפש</button>
   </form>
 </div>
 
-<!-- Quill Scripts + אבטחה -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
