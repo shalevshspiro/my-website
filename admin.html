@@ -29,7 +29,7 @@
 
 <div id="adminPanel" style="display:none;">
   <h2>📝 הוספת כתבה חדשה</h2>
-  <form id="articleForm" onsubmit="return false;">
+  <form id="articleForm">
     <label>🔹 כותרת הכתבה:</label>
     <input type="text" id="title" placeholder="כותרת" required>
 
@@ -52,14 +52,14 @@
     <input type="file" id="articleFileInput" accept=".txt,.docx">
     <button type="button" id="loadFromFileBtn">טען כתבה</button>
 
-    <label>🗼️ העלאת תמונות נוספות:</label>
+    <label>🗜️ העלאת תמונות נוספות:</label>
     <input type="file" id="imageUpload" multiple>
     <button type="button" id="uploadImagesBtn">📄 העלה תמונות</button>
     <br>
 
-    <label>📎 הוסף תמונה לפי קישור:</label>
-    <input type="text" id="imageUrlInput" placeholder="הדבק קישור לתמונה מ־Cloudinary">
-    <button type="button" id="addImageByUrl">📎 הוסף תמונה מקישור</button>
+    <label>📌 הוסף תמונה לפי קישור:</label>
+    <input type="text" id="imageUrlInput" placeholder="הדבק קישור לתמונה מַּCloudinary">
+    <button type="button" id="addImageByUrl">📌 הוסף תמונה מקישור</button>
     <br>
 
     <div id="imagePreviewArea" style="margin-top: 20px;"></div>
@@ -68,7 +68,7 @@
     <input type="file" id="logoUpload">
     <button type="button" id="uploadLogoBtn">📄 העלה לוגו</button>
     <br>
-    <input type="text" id="logoImage" placeholder="או הדבק כאן קישור לתמונת לוגו מ״Cloudinary">
+    <input type="text" id="logoImage" placeholder="או הדבק כאן קישור לתמונת לוגו מַּCloudinary">
 
     <button type="submit">✅ צור כתבה</button>
   </form>
@@ -116,32 +116,6 @@
       } else {
         alert("פורמט קובץ לא נתמך. נא להעלות קובץ .txt או .docx בלבד.");
       }
-    });
-
-    const form = document.getElementById("articleForm");
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      let raw = quill.root.innerHTML;
-      raw = raw
-        .replace(/<p><br><\/p>/g, '___PARAGRAPH___')
-        .replace(/<\/p><p>/g, '<br>')
-        .replace(/^<p>/, '')
-        .replace(/<\/p>$/, '')
-        .replace(/<\/p>/g, '')
-        .replace(/<p>/g, '')
-        .replace(/___PARAGRAPH___/g, '</p><p>');
-      const finalContent = `<p>${raw}</p>`;
-
-      let hiddenInput = document.getElementById("content");
-      if (!hiddenInput) {
-        hiddenInput = document.createElement("input");
-        hiddenInput.type = "hidden";
-        hiddenInput.name = "content";
-        hiddenInput.id = "content";
-        form.appendChild(hiddenInput);
-      }
-      hiddenInput.value = finalContent;
     });
   });
 </script>
