@@ -1,3 +1,5 @@
+// admin.js - משופר ומלא
+
 document.addEventListener("DOMContentLoaded", function () {
   const cloudName = "dtuomb64g";
   const unsignedPreset = "unsigned";
@@ -35,17 +37,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     auth.signInWithEmailAndPassword(email, password)
       .then(() => {
-        alert("✅ התחברת!");
+        alert("\u2705 התחברת!");
         showAdminPanel();
       })
       .catch(error => {
-        alert("❌ שגיאה: " + error.message);
+        alert("\u274C שגיאה: " + error.message);
       });
   });
 
   logoutButton.addEventListener("click", function () {
     auth.signOut().then(() => {
-      alert("🚪 התנתקת!");
+      alert("\ud83d\udeaa התנתקת!");
       location.reload();
     });
   });
@@ -80,15 +82,18 @@ document.addEventListener("DOMContentLoaded", function () {
     })
       .then(res => res.json())
       .then(data => {
+        console.log("\ud83d\udcf7 Cloudinary response (logo):", data);
         if (data.secure_url) {
           document.getElementById("logoImage").value = data.secure_url;
-          alert("✅ הלוגו הועלה!");
+          alert("\u2705 הלוגו הועלה!");
+        } else {
+          alert("\u274C העלאת לוגו נכשלה");
         }
       })
-      .catch(err => alert("❌ שגיאה בהעלאת הלוגו"));
+      .catch(err => alert("\u274C שגיאה בהעלאת הלוגו"));
   });
 
-  // העלאת תמונות ל־Cloudinary
+  // העלאת תמונות רגילות ל־Cloudinary עם בדיקות מלאות
   document.getElementById("uploadImagesBtn").addEventListener("click", () => {
     const files = document.getElementById("imageUpload").files;
     if (!files.length) return alert("יש לבחור קבצים");
@@ -106,24 +111,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
     Promise.all(uploadPromises)
       .then(results => {
+        let successful = 0;
         results.forEach(result => {
-          if (result.secure_url) {
-            addImagePreview(result.secure_url);
+          console.log("\ud83d\udcf7 Cloudinary response (image):", result);
+          if (result.error) {
+            console.error("\u274C Cloudinary error:", result.error);
+            return;
           }
+          const url = result.secure_url || result.url;
+          if (!url) return;
+          addImagePreview(url);
+          successful++;
         });
-        alert("✅ כל התמונות הועלו והתווספו עם שדות תיאור!");
+        if (successful > 0) {
+          alert(`\u2705 ${successful} תמונות הועלו בהצלחה!`);
+        } else {
+          alert("\u274C לא הועלתה אף תמונה");
+        }
       })
-      .catch(err => alert("❌ שגיאה בהעלאת תמונות"));
+      .catch(err => {
+        console.error("\u274C שגיאה כללית בהעלאת תמונות:", err);
+        alert("\u274C שגיאה כללית בהעלאת תמונות");
+      });
   });
 
-  // ✅ תוספת: הוספת תמונה לפי URL
+  // הוספת תמונה לפי קישור URL
   document.getElementById("addImageByUrl").addEventListener("click", () => {
     const url = document.getElementById("imageUrlInput").value.trim();
-    if (!url) return alert("❗ נא להדביק קישור קודם");
+    if (!url) return alert("\u26a0\ufe0f נא להדביק קישור קודם");
     addImagePreview(url);
   });
 
-  // תצוגת תמונה עם תיאור + כפתור הסרה
+  // הצגת תמונה עם שדה תיאור וכפתור הסרה
   function addImagePreview(url) {
     const container = document.getElementById("imagePreviewArea");
 
@@ -150,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const removeBtn = document.createElement("button");
     removeBtn.type = "button";
-    removeBtn.textContent = "🗑 הסר";
+    removeBtn.textContent = "\ud83d\uddd1 הסר";
     removeBtn.style.position = "absolute";
     removeBtn.style.top = "8px";
     removeBtn.style.left = "8px";
@@ -159,10 +178,7 @@ document.addEventListener("DOMContentLoaded", function () {
     removeBtn.style.borderRadius = "6px";
     removeBtn.style.padding = "4px 10px";
     removeBtn.style.cursor = "pointer";
-
-    removeBtn.addEventListener("click", () => {
-      wrapper.remove();
-    });
+    removeBtn.addEventListener("click", () => wrapper.remove());
 
     wrapper.appendChild(img);
     wrapper.appendChild(captionInput);
@@ -176,12 +192,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const title = document.getElementById("title").value.trim();
     const intro = document.getElementById("intro").value.trim();
-    const content = document.getElementById("content").value.trim(); // נוצר דינאמית
+    const contentInput = document.getElementById("content");
+    const content = contentInput ? contentInput.value.trim() : "";
     const category = document.getElementById("category").value;
     const genre = document.getElementById("genre").value;
 
     if (!title || !intro || !content || !category || !genre) {
-      alert("❌ חובה למלא את כל השדות החיוניים!");
+      alert("\u274C חובה למלא את כל השדות החיוניים!");
       return;
     }
 
@@ -207,13 +224,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     db.collection("articles").add(newArticle)
       .then(() => {
-        alert("✅ כתבה נוספה בהצלחה!");
+        alert("\u2705 כתבה נוספה בהצלחה!");
         articleForm.reset();
         document.getElementById("imagePreviewArea").innerHTML = "";
       })
       .catch(error => {
-        console.error("❌ שגיאה בהוספה:", error);
-        alert("❌ שגיאה בהוספת כתבה: " + error.message);
+        console.error("\u274C שגיאה בהוספה:", error);
+        alert("\u274C שגיאה בהוספת כתבה: " + error.message);
       });
   });
 });
