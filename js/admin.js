@@ -3,7 +3,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const cloudName = "dtuomb64g";
   const unsignedPreset = "unsigned";
-  const db = firebase.firestore();
 
   const categorySelect = document.getElementById("category");
   const genreSelect = document.getElementById("genre");
