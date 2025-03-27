@@ -29,7 +29,7 @@
 
 <div id="adminPanel" style="display:none;">
   <h2>📝 הוספת כתבה חדשה</h2>
-  <form id="articleForm">
+  <form id="articleForm" onsubmit="return false;">
     <label>🔹 כותרת הכתבה:</label>
     <input type="text" id="title" placeholder="כותרת" required>
 
@@ -119,7 +119,9 @@
     });
 
     const form = document.getElementById("articleForm");
-    form.addEventListener("submit", function () {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
       let raw = quill.root.innerHTML;
       raw = raw
         .replace(/<p><br><\/p>/g, '___PARAGRAPH___')
@@ -131,12 +133,15 @@
         .replace(/___PARAGRAPH___/g, '</p><p>');
       const finalContent = `<p>${raw}</p>`;
 
-      const hiddenInput = document.createElement("input");
-      hiddenInput.type = "hidden";
-      hiddenInput.name = "content";
-      hiddenInput.id = "content";
+      let hiddenInput = document.getElementById("content");
+      if (!hiddenInput) {
+        hiddenInput = document.createElement("input");
+        hiddenInput.type = "hidden";
+        hiddenInput.name = "content";
+        hiddenInput.id = "content";
+        form.appendChild(hiddenInput);
+      }
       hiddenInput.value = finalContent;
-      form.appendChild(hiddenInput);
     });
   });
 </script>
