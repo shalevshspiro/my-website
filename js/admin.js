@@ -1,4 +1,4 @@
-// admin.js - משופר כולל תמיכה בקובצי כתבה ותיקון העלאת תמונות מהמחשב
+// admin.js - משופר כולל העלאת תמונות ולוגו תקינה
 
 document.addEventListener("DOMContentLoaded", function () {
   const cloudName = "dtuomb64g";
@@ -67,6 +67,35 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // העלאת תמונת לוגו ל־Cloudinary
+  document.getElementById("uploadLogoBtn").addEventListener("click", () => {
+    const file = document.getElementById("logoUpload").files[0];
+    if (!file) return alert("יש לבחור קובץ קודם");
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", unsignedPreset);
+
+    fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+      method: "POST",
+      body: formData
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("📷 Cloudinary response (logo):", data);
+        if (data.secure_url) {
+          document.getElementById("logoImage").value = data.secure_url;
+          alert("✅ הלוגו הועלה!");
+        } else {
+          alert("❌ שגיאה: לא התקבל קישור מהשרת");
+        }
+      })
+      .catch(err => {
+        console.error("❌ שגיאה בהעלאת לוגו", err);
+        alert("❌ שגיאה בהעלאת לוגו");
+      });
+  });
+
   // העלאת תמונות נוספות ל־Cloudinary
   document.getElementById("uploadImagesBtn").addEventListener("click", () => {
     const files = document.getElementById("imageUpload").files;
@@ -87,23 +116,23 @@ document.addEventListener("DOMContentLoaded", function () {
           if (data.secure_url) {
             addImagePreview(data.secure_url);
           } else {
-            alert("\u274C שגיאה בהעלאת תמונה: לא התקבל קישור תקף");
+            alert("❌ שגיאה בהעלאת תמונה: לא התקבל קישור תקף");
           }
         })
         .catch(err => {
-          console.error("\u274C שגיאה בהעלאת תמונה", err);
+          console.error("❌ שגיאה בהעלאת תמונה", err);
         });
     });
 
     Promise.all(uploadPromises).then(() => {
-      alert("\u2705 כל התמונות הועלו!");
+      alert("✅ כל התמונות הועלו!");
     });
   });
 
   // הוספת תמונה לפי קישור URL
   document.getElementById("addImageByUrl").addEventListener("click", () => {
     const url = document.getElementById("imageUrlInput").value.trim();
-    if (!url) return alert("\u26a0\ufe0f נא להדביק קישור קודם");
+    if (!url) return alert("⚠️ נא להדביק קישור קודם");
     addImagePreview(url);
   });
 
