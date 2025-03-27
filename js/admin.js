@@ -1,4 +1,4 @@
-// admin.js - משופר כולל תמיכה בקובצי כתבה
+// admin.js - משופר כולל תמיכה בקובצי כתבה ותיקון העלאת תמונות מהמחשב
 
 document.addEventListener("DOMContentLoaded", function () {
   const cloudName = "dtuomb64g";
@@ -67,64 +67,87 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // כפתור טעינת תוכן מקובץ (TXT או DOCX) אל Quill
-  const loadFromFileBtn = document.getElementById("loadFromFileBtn");
-  if (loadFromFileBtn) {
-    loadFromFileBtn.addEventListener("click", () => {
-      const fileInput = document.getElementById("articleFileInput");
-      const file = fileInput.files[0];
-      if (!file) return alert("יש לבחור קובץ קודם");
+  // העלאת תמונות נוספות ל־Cloudinary
+  document.getElementById("uploadImagesBtn").addEventListener("click", () => {
+    const files = document.getElementById("imageUpload").files;
+    if (!files.length) return alert("יש לבחור קבצים");
 
-      const reader = new FileReader();
+    const uploadPromises = [...files].map(file => {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", unsignedPreset);
 
-      if (file.name.endsWith(".txt")) {
-        reader.onload = () => {
-          quill.root.innerHTML = reader.result
-            .split(/\n\n+/)
-            .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)
-            .join('');
-        };
-        reader.readAsText(file);
-      } else if (file.name.endsWith(".docx")) {
-        reader.onload = () => {
-          mammoth.convertToHtml({ arrayBuffer: reader.result })
-            .then(result => {
-              quill.root.innerHTML = result.value;
-            })
-            .catch(err => alert("שגיאה בקריאת קובץ Word"));
-        };
-        reader.readAsArrayBuffer(file);
-      } else {
-        alert("פורמט קובץ לא נתמך. נא להעלות קובץ .txt או .docx בלבד.");
-      }
-    });
-  }
-
-  // העלאת לוגו ל־Cloudinary
-  document.getElementById("uploadLogoBtn").addEventListener("click", () => {
-    const file = document.getElementById("logoUpload").files[0];
-    if (!file) return alert("יש לבחור קובץ קודם");
-
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", unsignedPreset);
-
-    fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-      method: "POST",
-      body: formData
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log("\ud83d\udcf7 Cloudinary response (logo):", data);
-        if (data.secure_url) {
-          document.getElementById("logoImage").value = data.secure_url;
-          alert("\u2705 הלוגו הועלה!");
-        } else {
-          alert("\u274C העלאת לוגו נכשלה");
-        }
+      return fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+        method: "POST",
+        body: formData
       })
-      .catch(err => alert("\u274C שגיאה בהעלאת הלוגו"));
+        .then(res => res.json())
+        .then(data => {
+          console.log("📷 Cloudinary image upload:", data);
+          if (data.secure_url) {
+            addImagePreview(data.secure_url);
+          } else {
+            alert("\u274C שגיאה בהעלאת תמונה: לא התקבל קישור תקף");
+          }
+        })
+        .catch(err => {
+          console.error("\u274C שגיאה בהעלאת תמונה", err);
+        });
+    });
+
+    Promise.all(uploadPromises).then(() => {
+      alert("\u2705 כל התמונות הועלו!");
+    });
   });
 
-  // (שאר הקוד – נשאר זהה כמו לפני)
+  // הוספת תמונה לפי קישור URL
+  document.getElementById("addImageByUrl").addEventListener("click", () => {
+    const url = document.getElementById("imageUrlInput").value.trim();
+    if (!url) return alert("\u26a0\ufe0f נא להדביק קישור קודם");
+    addImagePreview(url);
+  });
+
+  // הצגת תמונה עם שדה תיאור וכפתור הסרה
+  function addImagePreview(url) {
+    const container = document.getElementById("imagePreviewArea");
+
+    const wrapper = document.createElement("div");
+    wrapper.style.marginBottom = "20px";
+    wrapper.style.position = "relative";
+    wrapper.style.padding = "10px";
+    wrapper.style.border = "1px solid #ddd";
+    wrapper.style.borderRadius = "8px";
+
+    const img = document.createElement("img");
+    img.src = url;
+    img.style.maxWidth = "200px";
+    img.style.display = "block";
+    img.style.marginBottom = "8px";
+
+    const captionInput = document.createElement("input");
+    captionInput.type = "text";
+    captionInput.placeholder = "כתוב תיאור לתמונה זו";
+    captionInput.className = "caption-input";
+    captionInput.dataset.url = url;
+    captionInput.style.width = "100%";
+    captionInput.style.padding = "6px";
+
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.textContent = "🗑 הסר";
+    removeBtn.style.position = "absolute";
+    removeBtn.style.top = "8px";
+    removeBtn.style.left = "8px";
+    removeBtn.style.background = "#eee";
+    removeBtn.style.border = "1px solid #ccc";
+    removeBtn.style.borderRadius = "6px";
+    removeBtn.style.padding = "4px 10px";
+    removeBtn.style.cursor = "pointer";
+    removeBtn.addEventListener("click", () => wrapper.remove());
+
+    wrapper.appendChild(img);
+    wrapper.appendChild(captionInput);
+    wrapper.appendChild(removeBtn);
+    container.appendChild(wrapper);
+  }
 });
