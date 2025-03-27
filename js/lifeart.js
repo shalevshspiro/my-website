@@ -42,13 +42,22 @@ document.addEventListener("DOMContentLoaded", () => {
     // הצגת תוכן הכתבה כמו שהוא – עם <p> ו-<br>
     document.getElementById("content").innerHTML = article.content;
 
+    // תמונות עם כיתוב
     if (article.images && article.images.length) {
       const gallery = document.getElementById("gallery");
       article.images.forEach(imgObj => {
+        const figure = document.createElement("figure");
+
         const img = document.createElement("img");
         img.src = imgObj.url || imgObj;
-        img.alt = "תמונה";
-        gallery.appendChild(img);
+        img.alt = imgObj.caption || "תמונה";
+
+        const caption = document.createElement("figcaption");
+        caption.textContent = imgObj.caption || "";
+
+        figure.appendChild(img);
+        figure.appendChild(caption);
+        gallery.appendChild(figure);
       });
     }
 
