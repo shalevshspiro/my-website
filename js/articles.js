@@ -15,14 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "אחר": []
   };
 
-  const backgroundStyles = {
-    "ספורט": "linear-gradient(to top, #fff176, #fefefe)",
-    "ביטחון": "linear-gradient(to top, #d3eefe, #f8fdff)",
-    "פוליטיקה": "linear-gradient(to top, #e0e0e0, #f9f9f9)",
-    "אחר": "#f8faff"
-  };
-
-  const defaultBackground = "#f8faff";
+  const defaultBackground = "#f5f5f5";
   let closeBtn;
 
   db.collection("articles")
@@ -87,9 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function showCategory(genre, clickedButton) {
     document.querySelectorAll(".category-section").forEach(el => el.remove());
 
-    const bg = backgroundStyles[genre] || defaultBackground;
     document.body.style.transition = "background 0.6s ease";
-    document.body.style.background = bg;
+    document.body.style.background = defaultBackground;
 
     document.querySelectorAll(".category-toggle").forEach(btn => {
       btn.style.backgroundColor = "";
@@ -121,9 +113,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         articlesContainer.appendChild(section);
 
-        setTimeout(() => {
-          section.scrollIntoView({ behavior: "smooth" });
-        }, 100);
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            section.scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+        });
       });
   }
 
@@ -133,6 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const link = document.createElement("a");
     link.href = `article.html?id=${article.id}`;
+    link.target = "_blank";
 
     const tag = `<span class="category-tag" data-genre="${article.genre}">${article.genre}</span>`;
     const title = `<h2 class="article-title">${article.title}</h2>`;
