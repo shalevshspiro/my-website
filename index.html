@@ -43,15 +43,17 @@
 
 </p>
       </div>
+<button onclick="scrollToButtons()" class="scroll-button">הכר את האדם שמאחורי המילים ↓</button>
 
       <div id="my-photo"></div>
 
-      <div id="buttons">
-        <button onclick="toggleSection('about-me', this)">🧍‍♂️ מי אני באמת?</button>
-        <button onclick="toggleSection('mishpacha', this)">❤️ מאחורי משפאחה</button>
-        <button onclick="toggleSection('contact', this)">✉️ צור קשר</button>
-      </div>
-    </section>
+<section id="buttons-section">
+  <ul class="info-list">
+    <li><button onclick="toggleSection('about-me', this)">🧍‍♂️ מי אני באמת?</button></li>
+    <li><button onclick="toggleSection('mishpacha', this)">❤️ מאחורי משפאחה</button></li>
+    <li><button onclick="toggleSection('contact', this)">✉️ צור קשר</button></li>
+  </ul>
+</section>
 
     <div id="about-me" style="display:none;"></div>
     <div id="mishpacha" style="display:none;"></div>

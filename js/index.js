@@ -71,6 +71,12 @@ function toggleSection(id, btn) {
     }
   });
 }
+function scrollToButtons() {
+  const target = document.getElementById("buttons-section");
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth" });
+  }
+}
 
 function getOriginalText(id) {
   switch (id) {
