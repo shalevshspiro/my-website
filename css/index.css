@@ -5,7 +5,7 @@ body {
   margin: 0;
   padding: 0;
   background:
-    linear-gradient(to bottom, #FFFFFF, #F5F5F5),
+    linear-gradient(to bottom, #FFFFFFfff, #F5F5F5),
     repeating-linear-gradient(
       45deg,
       rgba(0, 0, 0, 0.01),
@@ -20,7 +20,7 @@ body {
 .custom-header {
   background: linear-gradient(to right, #1F2A40, #4A90E2);
   color: white;
-  padding: 5px 0;
+  padding: 5px 0; /* במקום 30px */
   text-align: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
@@ -89,7 +89,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  background-color: #A2C2F4;
+  background-color: #4A90E2;
   color: #000;
   border-radius: 5px;
 }
@@ -99,7 +99,7 @@ main {
   margin: 20px auto;
   padding: 20px;
   background:
-    linear-gradient(to bottom, #ffffff, #f4f0ff),
+    linear-gradient(to bottom, #FFFFFFfff, #F5F5F5),
     repeating-linear-gradient(
       45deg,
       rgba(0, 0, 0, 0.01),
@@ -118,7 +118,7 @@ main {
 .highlight-box,
 #about-me, #mishpacha, #contact {
   background:
-    linear-gradient(to bottom, #ffffff, #f4f0ff),
+    linear-gradient(to bottom, #FFFFFFfff, #F5F5F5),
     repeating-linear-gradient(
       45deg,
       rgba(0, 0, 0, 0.01),
@@ -144,7 +144,7 @@ p {
 h1, h2 {
   font-family: 'Assistant', sans-serif;
   font-weight: 700;
-  color: #1F2A40;
+  color: #2A3D66;
   margin-bottom: 12px;
 }
 
@@ -153,7 +153,7 @@ h2 {
 }
 
 a {
-  color: #4A90E2;
+  color: #2A3D66;
   text-decoration: none;
   font-weight: bold;
 }
@@ -162,35 +162,30 @@ a:hover {
   text-decoration: underline;
 }
 
-/* --- עיצוב כפתורים מעודכן --- */
-button,
-.info-list button,
-.scroll-button {
-  background: #4A90E2;
-  color: #ffffff;
+button {
+  margin: 10px 5px 0 0;
+  padding: 12px 20px;
+  background: linear-gradient(to right, #4A90E2, #1F2A40);
+  color: white;
   border: none;
-  font-weight: bold;
-  padding: 14px 24px;
-  border-radius: 12px;
+  border-radius: 10px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
-button:hover,
-.info-list button:hover,
-.scroll-button:hover {
-  background: #357ABD;
+button:hover {
+  background: linear-gradient(to right, #4A90E2, #1F2A40);
   transform: scale(1.03);
 }
 
-/* תמונת פרופיל */
 #my-photo {
   text-align: center;
   margin: 20px 0;
   padding: 30px;
-  background: linear-gradient(to bottom, #f4f0ff, #e6ecf3, #ffffff);
+  background: linear-gradient(to bottom, #F5F5F5, #E6ECF3, #FFFFFFfff);
   background-blend-mode: overlay;
   border-radius: 20px;
   box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
@@ -205,7 +200,11 @@ button:hover,
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* תמונות צד */
+#buttons {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 .floating-images {
   position: absolute;
   top: 180px;
@@ -244,7 +243,7 @@ button:hover,
   }
 
   .custom-header {
-    background: linear-gradient(to right, #1F2A40, #4A90E2);
+    background: linear-gradient(to right, #3a3a3a, #4A90E2);
   }
 }
 
@@ -278,4 +277,59 @@ button:hover,
 
 * {
   transition: all 0.3s ease-in-out;
+}
+.scroll-button {
+  display: block;
+  margin: 30px auto;
+  padding: 14px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  background: linear-gradient(to right, #1F2A40, #4A90E2);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+.scroll-button:hover {
+  background: linear-gradient(to right, #1F2A40, #4A90E2);
+  transform: scale(1.05);
+}
+
+#buttons-section {
+  margin-top: 40px;
+  padding: 20px;
+  text-align: center;
+}
+
+.info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 400px;
+}
+
+.info-list li {
+  margin-bottom: 15px;
+}
+
+.info-list button {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  background: #F5F5F5;
+  color: #000;
+  border: 1px solid #ccc;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.info-list button:hover {
+  background: #E6ECF3;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
