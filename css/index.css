@@ -5,7 +5,7 @@ body {
   margin: 0;
   padding: 0;
   background:
-    linear-gradient(to bottom, #ffffff, #fdf7dd),
+    linear-gradient(to bottom, #ffffff, #f4f0ff),
     repeating-linear-gradient(
       45deg,
       rgba(0, 0, 0, 0.01),
@@ -18,9 +18,9 @@ body {
 }
 
 .custom-header {
-  background: linear-gradient(to right, #2c2c2c, #ffd700);
+  background: linear-gradient(to right, #8E7AB5, #4A4E69);
   color: white;
-  padding: 5px 0; /* במקום 30px */
+  padding: 5px 0;
   text-align: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
@@ -33,8 +33,8 @@ body {
 }
 
 .opening-quote {
-  background-color: rgba(255, 215, 0, 0.1);
-  border-right: 4px solid #ffd700;
+  background-color: rgba(142, 122, 181, 0.1);
+  border-right: 4px solid #8E7AB5;
   padding: 16px;
   margin: 20px auto;
   max-width: 500px;
@@ -65,7 +65,7 @@ body {
 }
 
 .highlight-text {
-  color: #ffd700;
+  color: #8E7AB5;
   font-weight: bold;
 }
 
@@ -89,7 +89,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  background-color: #ffd700;
+  background-color: #A393EB;
   color: #000;
   border-radius: 5px;
 }
@@ -99,7 +99,7 @@ main {
   margin: 20px auto;
   padding: 20px;
   background:
-    linear-gradient(to bottom, #ffffff, #fdf7dd),
+    linear-gradient(to bottom, #ffffff, #f4f0ff),
     repeating-linear-gradient(
       45deg,
       rgba(0, 0, 0, 0.01),
@@ -118,7 +118,7 @@ main {
 .highlight-box,
 #about-me, #mishpacha, #contact {
   background:
-    linear-gradient(to bottom, #ffffff, #fdf7dd),
+    linear-gradient(to bottom, #ffffff, #f4f0ff),
     repeating-linear-gradient(
       45deg,
       rgba(0, 0, 0, 0.01),
@@ -165,7 +165,7 @@ a:hover {
 button {
   margin: 10px 5px 0 0;
   padding: 12px 20px;
-  background: linear-gradient(to right, #f4c542, #2c2c2c);
+  background: linear-gradient(to right, #8E7AB5, #4A4E69);
   color: white;
   border: none;
   border-radius: 10px;
@@ -177,7 +177,7 @@ button {
 }
 
 button:hover {
-  background: linear-gradient(to right, #f4c542, #2c2c2c);
+  background: linear-gradient(to right, #A393EB, #4A4E69);
   transform: scale(1.03);
 }
 
@@ -185,7 +185,7 @@ button:hover {
   text-align: center;
   margin: 20px 0;
   padding: 30px;
-  background: linear-gradient(to bottom, #fdf7dd, #dcdcdc, #ffffff);
+  background: linear-gradient(to bottom, #f4f0ff, #dcdcdc, #ffffff);
   background-blend-mode: overlay;
   border-radius: 20px;
   box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
@@ -198,11 +198,6 @@ button:hover {
   width: 240px;
   border-radius: 50%;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-#buttons {
-  text-align: center;
-  margin-bottom: 30px;
 }
 
 .floating-images {
@@ -243,7 +238,7 @@ button:hover {
   }
 
   .custom-header {
-    background: linear-gradient(to right, #3a3a3a, #ffd700);
+    background: linear-gradient(to right, #8E7AB5, #4A4E69);
   }
 }
 
@@ -275,16 +270,13 @@ button:hover {
   margin-left: 8px;
 }
 
-* {
-  transition: all 0.3s ease-in-out;
-}
 .scroll-button {
   display: block;
   margin: 30px auto;
   padding: 14px 24px;
   font-size: 18px;
   font-weight: bold;
-  background: linear-gradient(to right, #2c2c2c, #f4c542);
+  background: linear-gradient(to right, #8E7AB5, #4A4E69);
   color: #fff;
   border: none;
   border-radius: 20px;
@@ -294,7 +286,7 @@ button:hover {
 }
 
 .scroll-button:hover {
-  background: linear-gradient(to right, #2c2c2c, #f4c542);
+  background: linear-gradient(to right, #A393EB, #4A4E69);
   transform: scale(1.05);
 }
 
@@ -321,7 +313,7 @@ button:hover {
   font-size: 16px;
   font-weight: 600;
   border-radius: 12px;
-  background: #fdf7dd;
+  background: #f4f0ff;
   color: #000;
   border: 1px solid #ccc;
   text-align: center;
@@ -330,6 +322,10 @@ button:hover {
 }
 
 .info-list button:hover {
-  background: #fff3b0;
+  background: #e7dffc;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  transition: all 0.3s ease-in-out;
 }
