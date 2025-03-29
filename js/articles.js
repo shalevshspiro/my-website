@@ -63,7 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
         categoryButtonsContainer.appendChild(btn);
       });
 
-      // כפתור סגירה (מוכן מראש אך מוסתר)
       closeBtn = document.createElement("button");
       closeBtn.id = "close-category";
       closeBtn.className = "category-toggle";
@@ -110,6 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(snapshot => {
         const section = document.createElement("section");
         section.classList.add("category-section");
+        section.id = `genre-${genre}`;
         section.innerHTML = `<h2>${genre}</h2>`;
 
         snapshot.forEach(doc => {
@@ -120,6 +120,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         articlesContainer.appendChild(section);
+
+        section.scrollIntoView({ behavior: "smooth" });
       });
   }
 
@@ -129,11 +131,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const link = document.createElement("a");
     link.href = `article.html?id=${article.id}`;
-    link.innerHTML = `
-      <h2 class="article-title">${article.title}</h2>
-      <p class="article-subtitle">${article.intro || ""}</p>
-      ${article.logoImage ? `<img src="${article.logoImage}" alt="לוגו" class="logo">` : ""}
-    `;
+
+    const tag = `<span class="category-tag" data-genre="${article.genre}">${article.genre}</span>`;
+    const title = `<h2 class="article-title">${article.title}</h2>`;
+    const subtitle = `<p class="article-subtitle">${article.intro || ""}</p>`;
+    const logo = article.logoImage ? `<img src="${article.logoImage}" alt="לוגו" class="logo">` : "";
+
+    link.innerHTML = `${tag}${title}${subtitle}${logo}`;
 
     articleDiv.appendChild(link);
     return articleDiv;
