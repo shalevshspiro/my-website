@@ -165,7 +165,7 @@ a:hover {
 button {
   margin: 10px 5px 0 0;
   padding: 12px 20px;
-  background: linear-gradient(to right, #2c2c2c, #f4c542);
+  background: linear-gradient(to right, #f4c542, #2c2c2c);
   color: white;
   border: none;
   border-radius: 10px;
@@ -177,7 +177,7 @@ button {
 }
 
 button:hover {
-  background: linear-gradient(to right, #1a1a1a, #e6c200);
+  background: linear-gradient(to right, #f4c542, #2c2c2c);
   transform: scale(1.03);
 }
 
