@@ -74,6 +74,7 @@ header h1 {
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transition: transform 0.3s ease;
   cursor: zoom-in;
+  text-align: center;
 }
 
 .article-image:hover {
@@ -81,9 +82,11 @@ header h1 {
 }
 
 .article-image img {
-  width: 100%;
+  max-width: 70%;
+  max-height: 400px;
   height: auto;
   display: block;
+  margin: 0 auto;
 }
 
 .article-image span {
@@ -133,5 +136,10 @@ header h1 {
 
   .intro {
     font-size: 18px;
+  }
+
+  .article-image img {
+    max-width: 100%;
+    max-height: 250px;
   }
 }
