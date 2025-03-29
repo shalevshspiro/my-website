@@ -121,7 +121,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         articlesContainer.appendChild(section);
 
-        section.scrollIntoView({ behavior: "smooth" });
+        setTimeout(() => {
+          section.scrollIntoView({ behavior: "smooth" });
+        }, 100);
       });
   }
 
