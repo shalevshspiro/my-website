@@ -284,7 +284,7 @@ button:hover {
   padding: 14px 24px;
   font-size: 18px;
   font-weight: bold;
-  background: linear-gradient(to right, #f4c542, #2c2c2c);
+  background: linear-gradient(to right, #2c2c2c, #f4c542);
   color: #fff;
   border: none;
   border-radius: 20px;
@@ -294,7 +294,7 @@ button:hover {
 }
 
 .scroll-button:hover {
-  background: linear-gradient(to right, #f4c542, #2c2c2c);
+  background: linear-gradient(to right, #2c2c2c, #f4c542);
   transform: scale(1.05);
 }
 
