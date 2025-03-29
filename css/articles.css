@@ -210,3 +210,11 @@ a:hover {
     padding: 0;
   }
 }
+.quote {
+  font-size: 20px;
+  font-style: italic;
+  text-align: center;
+  margin: 40px auto 20px;
+  color: #2A3D66;
+  padding: 0 10px;
+}
