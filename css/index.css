@@ -20,7 +20,7 @@ body {
 .custom-header {
   background: linear-gradient(to right, #2c2c2c, #ffd700);
   color: white;
-  padding: 15px 0; /* במקום 30px */
+  padding: 10px 0; /* במקום 30px */
   text-align: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
