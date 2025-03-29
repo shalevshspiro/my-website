@@ -22,13 +22,45 @@ header h1 {
   margin-bottom: 10px;
 }
 
-.quote {
+.opening-quote, .quote {
   font-size: 20px;
   font-style: italic;
   text-align: center;
   margin: 10px auto 20px;
   color: #ffffff;
   padding: 0 10px;
+}
+
+.opening-quote span {
+  display: block;
+  font-size: 16px;
+  color: #e0e0e0;
+  margin-top: 4px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0 0 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 12px;
+}
+
+nav ul li a {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 6px 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+  background-color: #4A90E2;
+  color: #000;
+  border-radius: 5px;
 }
 
 .content-wrapper {
@@ -38,6 +70,38 @@ header h1 {
   background: linear-gradient(to bottom, #FFFFFF, #F5F5F5);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-top: 40px;
+  margin-bottom: 15px;
+  color: #2A3D66;
+  border-bottom: 2px solid #4A90E2;
+  padding-bottom: 8px;
+}
+
+h2::before {
+  content: "✦ ";
+  color: #4A90E2;
+  margin-left: 5px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+a {
+  color: #2A3D66;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .article {
@@ -70,20 +134,6 @@ header h1 {
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   margin-top: 10px;
-}
-
-.article-title {
-  font-size: 28px;
-  font-weight: 700;
-  color: #2A3D66;
-  margin-bottom: 8px;
-}
-
-.article-subtitle {
-  font-size: 15px;
-  font-weight: 400;
-  color: #666;
-  margin-bottom: 8px;
 }
 
 #category-buttons {
@@ -148,4 +198,18 @@ header h1 {
     background: none;
     padding: 0;
   }
+}
+
+.article-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2A3D66;
+  margin-bottom: 8px;
+}
+
+.article-subtitle {
+  font-size: 15px;
+  font-weight: 400;
+  color: #666;
+  margin-bottom: 8px;
 }
