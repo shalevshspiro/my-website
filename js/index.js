@@ -61,16 +61,14 @@ function toggleSection(id, btn) {
   sections.forEach(sectionId => {
     const section = document.getElementById(sectionId);
     const button = document.querySelector(`button[onclick*='${sectionId}']`);
-if (sectionId === id) {
-  const isHidden = section.style.display === "none";
-  section.style.display = isHidden ? "block" : "none";
-  btn.textContent = isHidden ? "סגור" : getOriginalText(id);
-  if (isHidden) {
-    section.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-}
-}
-
+    if (sectionId === id) {
+      const isHidden = section.style.display === "none";
+      section.style.display = isHidden ? "block" : "none";
+      btn.textContent = isHidden ? "הסתר" : getOriginalText(id);
+    } else {
+      section.style.display = "none";
+      if (button) button.textContent = getOriginalText(sectionId);
+	  
     }
   });
 }
