@@ -2,55 +2,46 @@ document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   const articleId = urlParams.get("id");
 
-  if (!articleId) {
-    document.getElementById("article-container").innerHTML = "<p>לא נמצאה כתבה.</p>";
-    return;
-  }
+  if (!articleId) return;
 
   db.collection("articles").doc(articleId).get()
     .then(doc => {
-      if (!doc.exists) {
-        document.getElementById("article-container").innerHTML = "<p>הכתבה לא קיימת.</p>";
-        return;
-      }
+      if (!doc.exists) return;
 
       const article = doc.data();
 
       document.title = article.title || "כתבה";
 
-      const container = document.getElementById("article-container");
-      container.innerHTML = `
-        <div class="content-wrapper">
-          <header>
-            <h1>${article.title}</h1>
-          </header>
+      if (article.title) document.getElementById("title").textContent = article.title;
+      if (article.intro) document.getElementById("intro").textContent = article.intro;
+      if (article.logoImage) {
+        const logo = document.getElementById("logo");
+        logo.src = article.logoImage;
+        logo.alt = "לוגו";
+      }
+      if (article.content) document.getElementById("content").innerHTML = article.content;
+      if (article.genre) document.getElementById("genre").textContent = `ז'אנר: ${article.genre}`;
 
-          ${article.logoImage ? `<img src="${article.logoImage}" class="logo" alt="לוגו">` : ""}
-          <p class="intro">${article.intro || ""}</p>
+      const gallery = document.getElementById("gallery");
+      if (article.images && Array.isArray(article.images)) {
+        article.images.forEach(img => {
+          const container = document.createElement("div");
+          container.className = "article-image";
 
-          <div class="article-content"></div>
+          const image = document.createElement("img");
+          image.src = img.url;
+          image.alt = img.caption || "";
 
-          ${article.images && article.images.length > 0 ? `
-            <div class="article-images">
-              ${article.images.map(img => `
-                <div class="article-image">
-                  <img src="${img.url}" alt="תמונה">
-                  <span>${img.caption || ""}</span>
-                </div>
-              `).join("")}
-            </div>` : ""}
+          const caption = document.createElement("span");
+          caption.textContent = img.caption || "";
 
-          <a href="articles.html" class="back-link">⬅ חזרה לדף הכתבות</a>
-        </div>
-      `;
-
-      const contentDiv = container.querySelector(".article-content");
-      if (contentDiv && article.content) {
-        contentDiv.innerHTML = article.content;
+          container.appendChild(image);
+          container.appendChild(caption);
+          gallery.appendChild(container);
+        });
       }
     })
     .catch(error => {
       console.error("שגיאה בטעינת הכתבה:", error);
-      document.getElementById("article-container").innerHTML = "<p>אירעה שגיאה בטעינת הכתבה.</p>";
     });
 });
