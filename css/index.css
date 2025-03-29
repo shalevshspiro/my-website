@@ -26,10 +26,11 @@ body {
 }
 
 .header-content h1 {
-  font-size: 32px;
-  margin: 0;
+  font-size: 36px;
   font-weight: 700;
-  color: #000;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px #000;
+  margin-bottom: 10px;
 }
 
 .opening-quote {
