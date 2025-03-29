@@ -321,7 +321,7 @@ button:hover {
   font-size: 16px;
   font-weight: 600;
   border-radius: 12px;
-  background: #fdf7dd;
+  background: linear-gradient(to right, #1a1a1a, #e6c200);
   color: #000;
   border: 1px solid #ccc;
   text-align: center;
@@ -330,6 +330,6 @@ button:hover {
 }
 
 .info-list button:hover {
-  background: #fff3b0;
+  background: linear-gradient(to right, #1a1a1a, #e6c200);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
