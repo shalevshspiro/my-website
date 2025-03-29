@@ -8,34 +8,38 @@ body {
   padding: 0;
 }
 
-header {
+.custom-header {
   background: linear-gradient(to right, #1F2A40, #4A90E2);
   color: white;
-  padding: 30px 0 20px;
+  padding: 5px 0; /* במקום 30px */
   text-align: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-header h1 {
-  font-size: 36px;
+.header-content h1 {
+  font-size: 32px;
+  margin: 0;
   font-weight: 700;
-  margin-bottom: 10px;
+  color: #000;
 }
 
-.opening-quote, .quote {
-  font-size: 20px;
+.opening-quote {
+  background-color: rgba(255, 215, 0, 0.1);
+  border-right: 4px solid #4A90E2;
+  padding: 16px;
+  margin: 20px auto;
+  max-width: 500px;
   font-style: italic;
-  text-align: center;
-  margin: 10px auto 20px;
-  color: #ffffff;
-  padding: 0 10px;
+  font-size: 20px;
+  color: white;
+  animation: fadeIn 1.2s ease forwards;
 }
 
 .opening-quote span {
   display: block;
+  margin-top: 8px;
   font-size: 16px;
-  color: #e0e0e0;
-  margin-top: 4px;
+  color: white;
 }
 
 nav ul {
