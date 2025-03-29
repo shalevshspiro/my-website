@@ -15,14 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "ילדות": []
   };
 
-  const backgroundStyles = {
-    "טיולים": "linear-gradient(to top, #d6f2f2, #f0fff8)",
-    "ספורט": "linear-gradient(to top, #fff176, #fffde7)",
-    "צבא": "linear-gradient(to top, #d7ecff, #f2faff)",
-    "ילדות": "linear-gradient(to top, #ffeef7, #ffffff)"
-  };
-
-  const defaultBackground = "linear-gradient(to top, #fdfaf5, #dce6f2)";
+  const defaultBackground = "#f5f5f5";
   let closeBtn;
 
   db.collection("life")
@@ -60,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
         categoryButtonsContainer.appendChild(btn);
       });
 
-      // כפתור סגירה (מוסתר בהתחלה)
       closeBtn = document.createElement("button");
       closeBtn.id = "close-category";
       closeBtn.className = "category-toggle";
@@ -85,9 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function showCategory(genre, clickedButton) {
     document.querySelectorAll(".category-section").forEach(el => el.remove());
 
-    const bg = backgroundStyles[genre] || defaultBackground;
     document.body.style.transition = "background 0.6s ease";
-    document.body.style.background = bg;
+    document.body.style.background = defaultBackground;
 
     document.querySelectorAll(".category-toggle").forEach(btn => {
       btn.style.backgroundColor = "";
@@ -106,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(snapshot => {
         const section = document.createElement("section");
         section.classList.add("category-section");
+        section.id = `genre-${genre}`;
         section.innerHTML = `<h2>${genre}</h2>`;
 
         snapshot.forEach(doc => {
@@ -116,6 +108,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         articlesContainer.appendChild(section);
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            section.scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+        });
       });
   }
 
@@ -125,11 +123,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const link = document.createElement("a");
     link.href = `lifeart.html?id=${article.id}`;
-    link.innerHTML = `
-      <h2 class="article-title">${article.title}</h2>
-      <p class="article-subtitle">${article.intro || ""}</p>
-      ${article.logoImage ? `<img src="${article.logoImage}" alt="לוגו" class="logo">` : ""}
-    `;
+    link.target = "_blank";
+
+    const tag = `<span class="category-tag" data-genre="${article.genre}">${article.genre}</span>`;
+    const title = `<h2 class="article-title">${article.title}</h2>`;
+    const subtitle = `<p class="article-subtitle">${article.intro || ""}</p>`;
+    const logo = article.logoImage ? `<img src="${article.logoImage}" alt="לוגו" class="logo">` : "";
+
+    link.innerHTML = `${tag}${title}${subtitle}${logo}`;
 
     articleDiv.appendChild(link);
     return articleDiv;
