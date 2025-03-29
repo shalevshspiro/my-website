@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
   `;
 });
 
-// כפתורי פתיחה/סגירה
+// כפתורי פתיחה/סגירה + גלילה
 function toggleSection(id, btn) {
   const sections = ["about-me", "mishpacha", "contact"];
   sections.forEach(sectionId => {
@@ -65,13 +65,19 @@ function toggleSection(id, btn) {
       const isHidden = section.style.display === "none";
       section.style.display = isHidden ? "block" : "none";
       btn.textContent = isHidden ? "הסתר" : getOriginalText(id);
+
+      if (isHidden) {
+        setTimeout(() => {
+          section.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 50);
+      }
     } else {
       section.style.display = "none";
       if (button) button.textContent = getOriginalText(sectionId);
-	  
     }
   });
 }
+
 function scrollToButtons() {
   const target = document.getElementById("buttons-section");
   if (target) {
