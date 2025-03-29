@@ -7,63 +7,47 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const backgroundStyles = {
-    "טיולים": "linear-gradient(to top, #e9fefc, #ffffff)",
-    "ספורט": "linear-gradient(to top, #fffce2, #ffffff)",
-    "צבא": "linear-gradient(to top, #e5f4ff, #ffffff)",
-    "ילדות": "linear-gradient(to top, #fff0f7, #ffffff)",
-    "אחר": "#fdfaf5"
-  };
+  db.collection("life").doc(id).get()
+    .then(doc => {
+      if (!doc.exists) {
+        document.body.innerHTML = "<h2>❌ כתבה לא קיימת</h2>";
+        return;
+      }
 
-  const defaultBackground = "#fdfaf5";
+      const article = doc.data();
+      document.title = article.title || "כתבה אישית";
 
-  db.collection("life").doc(id).get().then(doc => {
-    if (!doc.exists) {
-      document.body.innerHTML = "<h2>❌ כתבה לא קיימת</h2>";
-      return;
-    }
+      if (article.title) document.getElementById("title").textContent = article.title;
+      if (article.intro) document.getElementById("intro").textContent = article.intro;
+      if (article.logoImage) {
+        const logo = document.getElementById("logo");
+        logo.src = article.logoImage;
+        logo.alt = "לוגו";
+      }
+      if (article.content) document.getElementById("content").innerHTML = article.content;
+      if (article.genre) document.getElementById("genre").textContent = `ז'אנר: ${article.genre}`;
 
-    const article = doc.data();
-
-    const genre = article.genre || "אחר";
-    const bg = backgroundStyles[genre] || defaultBackground;
-    document.body.style.transition = "background 0.5s ease";
-    document.body.style.background = bg;
-
-    document.getElementById("title").innerText = article.title || "ללא כותרת";
-    document.getElementById("intro").innerText = article.intro || "";
-
-    if (article.logoImage) {
-      const logo = document.getElementById("logo");
-      logo.src = article.logoImage;
-      logo.alt = "לוגו";
-    }
-
-    // הצגת תוכן הכתבה כמו שהוא – עם <p> ו-<br>
-    document.getElementById("content").innerHTML = article.content;
-
-    // תמונות עם כיתוב
-    if (article.images && article.images.length) {
       const gallery = document.getElementById("gallery");
-      article.images.forEach(imgObj => {
-        const figure = document.createElement("figure");
+      if (article.images && Array.isArray(article.images)) {
+        article.images.forEach(imgObj => {
+          const figure = document.createElement("figure");
+          figure.classList.add("article-image");
 
-        const img = document.createElement("img");
-        img.src = imgObj.url || imgObj;
-        img.alt = imgObj.caption || "תמונה";
+          const img = document.createElement("img");
+          img.src = imgObj.url || imgObj;
+          img.alt = imgObj.caption || "תמונה";
 
-        const caption = document.createElement("figcaption");
-        caption.textContent = imgObj.caption || "";
+          const caption = document.createElement("span");
+          caption.textContent = imgObj.caption || "";
 
-        figure.appendChild(img);
-        figure.appendChild(caption);
-        gallery.appendChild(figure);
-      });
-    }
-
-    document.getElementById("genre").innerText = `ז'אנר: ${genre}`;
-  }).catch(err => {
-    console.error("שגיאה בשליפת כתבה:", err);
-    document.body.innerHTML = "<h2>⚠️ שגיאה בטעינת הכתבה</h2>";
-  });
+          figure.appendChild(img);
+          figure.appendChild(caption);
+          gallery.appendChild(figure);
+        });
+      }
+    })
+    .catch(err => {
+      console.error("שגיאה בשליפת כתבה:", err);
+      document.body.innerHTML = "<h2>⚠️ שגיאה בטעינת הכתבה</h2>";
+    });
 });

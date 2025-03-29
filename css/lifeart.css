@@ -1,84 +1,111 @@
 body {
   direction: rtl;
-  transition: background 0.5s ease;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  background: #f9fdf9;
-  color: #2d2d2d;
+  font-family: 'Assistant', sans-serif;
+  background: linear-gradient(to bottom, #FFFFFF, #F5F5F5);
+  color: #2A3D66;
   margin: 0;
   padding: 0;
 }
 
 .content-wrapper {
-  max-width: 720px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 40px 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 36px;
+  font-weight: 700;
   margin-bottom: 10px;
 }
 
 .intro {
-  font-weight: bold;
-  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  color: #2A3D66;
 }
 
 .logo {
-  max-width: 200px;
-  max-height: 120px;
-  margin-bottom: 30px;
+  max-width: 120px;
+  margin-bottom: 20px;
   border-radius: 8px;
-  display: block;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 #content p {
-  line-height: 1.6;
-  margin-bottom: 16px;
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 20px;
 }
 
-.image-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 25px;
-  justify-content: center;
-}
-
-.image-gallery figure {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 200px;
-}
-
-.image-gallery img {
-  max-height: 200px;
-  border-radius: 10px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
-  width: 100%;
-  height: auto;
-}
-
-.image-gallery figcaption {
-  font-size: 0.85em;
-  color: #666;
-  margin-top: 8px;
+.article-image {
+  position: relative;
+  margin: 20px 0;
   text-align: center;
+}
+
+.article-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+}
+
+.article-image img:hover {
+  transform: scale(1.02);
+}
+
+.article-image span {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #555;
+}
+
+#genre {
+  font-size: 16px;
+  color: #4A90E2;
+  font-weight: bold;
+  margin-top: 40px;
 }
 
 .back-link {
   display: inline-block;
-  margin-bottom: 20px;
-  font-size: 16px;
-  color: #4b6cb7;
+  margin: 30px 0 20px;
+  padding: 10px 20px;
+  background-color: #4A90E2;
+  color: white;
   text-decoration: none;
-  border: 1px solid #4b6cb7;
-  padding: 8px 12px;
-  border-radius: 8px;
-  transition: background-color 0.2s ease;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .back-link:hover {
-  background-color: #eaf1ff;
+  background-color: #2A3D66;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 28px;
+  }
+
+  .content-wrapper {
+    padding: 25px 15px;
+  }
+
+  .intro {
+    font-size: 18px;
+  }
+
+  #content p {
+    font-size: 17px;
+  }
 }
