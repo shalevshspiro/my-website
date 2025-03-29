@@ -17,13 +17,12 @@ body {
   position: relative;
 }
 
-.header-content h1 {
-  font-size: 32px;
-  margin: 0;
-  font-weight: 700;
-  color: #ffffff; /* טקסט לבן ברור יותר */
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* להבלטה */
-}
+.custom-header {
+  background: linear-gradient(to right, #1F2A40, #4A90E2);
+  color: white;
+  padding: 5px 0; /* במקום 30px */
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 .header-content h1 {
