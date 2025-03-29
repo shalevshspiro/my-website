@@ -8,21 +8,34 @@ body {
   padding: 0;
 }
 
-.content-wrapper {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 30px 20px;
-  background: linear-gradient(to bottom, #FFFFFF, #F5F5F5);
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
-}
-
 header {
   background: linear-gradient(to right, #1F2A40, #4A90E2);
   color: white;
-  padding: 20px 0;
+  padding: 30px 0 20px;
   text-align: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+header h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.opening-quote, .quote {
+  font-size: 20px;
+  font-style: italic;
+  text-align: center;
+  margin: 10px auto 20px;
+  color: #ffffff;
+  padding: 0 10px;
+}
+
+.opening-quote span {
+  display: block;
+  font-size: 16px;
+  color: #e0e0e0;
+  margin-top: 4px;
 }
 
 nav ul {
@@ -50,11 +63,13 @@ nav ul li a:hover {
   border-radius: 5px;
 }
 
-h1 {
-  font-size: 32px;
-  font-weight: 700;
-  color: #FFFFFF;
-  margin: 0;
+.content-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background: linear-gradient(to bottom, #FFFFFF, #F5F5F5);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
 }
 
 h2 {
@@ -151,7 +166,7 @@ a:hover {
 #category-buttons {
   position: fixed;
   right: 20px;
-  top: 200px;
+  top: 250px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -168,53 +183,4 @@ a:hover {
   padding: 10px;
   text-align: center;
   background: #F5F5F5;
-  border: 2px solid #4A90E2;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  color: #2A3D66;
-  font-weight: 600;
-}
-
-.category-toggle:hover {
-  background-color: #E6ECF3;
-  transform: scale(1.05);
-}
-
-@media (max-width: 768px) {
-  h1 {
-    font-size: 28px;
-  }
-
-  .article {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .article a img.logo {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .content-wrapper {
-    padding: 20px;
-  }
-
-  #category-buttons {
-    position: static;
-    flex-direction: row;
-    justify-content: center;
-    margin-bottom: 20px;
-    box-shadow: none;
-    background: none;
-    padding: 0;
-  }
-}
-.quote {
-  font-size: 20px;
-  font-style: italic;
-  text-align: center;
-  margin: 40px auto 20px;
-  color: #2A3D66;
-  padding: 0 10px;
-}
+  border: 2px
