@@ -97,6 +97,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   articleForm.addEventListener("submit", function (e) {
     e.preventDefault();
+const rawContent = quill.getText().trim();
+document.getElementById("contentCheck").value = rawContent;
+
+const contentInput = document.getElementById("contentCheck");
+if (!contentInput.checkValidity()) {
+  contentInput.reportValidity(); // יציג את ההתרעה "זהו שדה חובה"
+  return;
+}
 
     let raw = quill.root.innerHTML;
     raw = raw
