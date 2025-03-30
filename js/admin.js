@@ -286,8 +286,9 @@ document.addEventListener("DOMContentLoaded", function () {
     wrapper.appendChild(removeBtn);
     container.appendChild(wrapper);
   }
-});
-// ✅ הוספת רשימת כתבות לעריכה (שם + ז'אנר בלבד)
+  
+  
+  // ✅ הוספת רשימת כתבות לעריכה (שם + ז'אנר בלבד)
 function loadArticleList() {
   const selectedCategory = categorySelect.value;
   const articleList = document.getElementById("articleList");
@@ -359,4 +360,6 @@ document.addEventListener("DOMContentLoaded", function () {
       loadArticleList();
     }
   });
+});
+
 });
