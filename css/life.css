@@ -23,7 +23,7 @@ header h1 {
 }
 
 
-.opening-quote {
+.quote {
   background-color: rgba(255, 215, 0, 0.1);
   border-right: 4px solid #4A90E2;
   padding: 16px;
@@ -33,20 +33,25 @@ header h1 {
   font-size: 20px;
   color: white;
   animation: fadeIn 1.2s ease forwards;
+  text-align: center;
 }
 
-.opening-quote span {
+.quote span {
   display: block;
   margin-top: 8px;
   font-size: 16px;
-  color: white;
+  color: #e0e0e0;
 }
 
-.fade-in {
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeIn 1s ease forwards;
+/* אנימציית הופעה עדינה */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
+
 nav ul {
   list-style: none;
   padding: 0;
