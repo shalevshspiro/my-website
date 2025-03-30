@@ -97,24 +97,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   articleForm.addEventListener("submit", function (e) {
     e.preventDefault();
-  const rawContent = quill.getText().trim();
-  if (rawContent === "") {
-    alert("⚠️ לא ניתן לשמור כתבה ריקה. יש להזין תוכן כלשהו.");
-    return;
-  }
-
-  const title = document.getElementById("title").value.trim();
-  const intro = document.getElementById("intro").value.trim();
-
-  if (title === "") {
-    alert("⚠️ חובה להזין כותרת.");
-    return;
-  }
-
-  if (intro === "") {
-    alert("⚠️ חובה להזין הקדמה.");
-    return;
-  }
 
     let raw = quill.root.innerHTML;
     raw = raw
