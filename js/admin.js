@@ -38,17 +38,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     auth.signInWithEmailAndPassword(email, password)
       .then(() => {
-        alert("\u2705 התחברת!");
+        alert("✅ התחברת!");
         showAdminPanel();
       })
       .catch(error => {
-        alert("\u274C שגיאה: " + error.message);
+        alert("❌ שגיאה: " + error.message);
       });
   });
 
   logoutButton.addEventListener("click", function () {
     auth.signOut().then(() => {
-      alert("\ud83d\udeaa התנתקת!");
+      alert("🚪 התנתקת!");
       location.reload();
     });
   });
@@ -166,33 +166,42 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
     const searchTitle = document.getElementById("searchTitle").value.trim();
     const searchGenre = document.getElementById("searchGenre").value.trim();
-    const category = categorySelect.value;
 
-    let query = db.collection(category);
-    if (searchTitle) query = query.where("title", "==", searchTitle);
-    if (searchGenre) query = query.where("genre", "==", searchGenre);
+    const tryCollections = ["articles", "life"];
+    let found = false;
 
-    query.limit(1).get().then(snapshot => {
-      if (snapshot.empty) return alert("❌ לא נמצאה כתבה תואמת");
+    Promise.all(tryCollections.map(collection => {
+      let query = db.collection(collection);
+      if (searchTitle) query = query.where("title", "==", searchTitle);
+      if (searchGenre) query = query.where("genre", "==", searchGenre);
 
-      const doc = snapshot.docs[0];
-      const article = doc.data();
-      articleIdInput.value = doc.id;
+      return query.limit(1).get().then(snapshot => {
+        if (!found && !snapshot.empty) {
+          found = true;
+          const doc = snapshot.docs[0];
+          const article = doc.data();
+          articleIdInput.value = doc.id;
 
-      document.getElementById("title").value = article.title;
-      document.getElementById("intro").value = article.intro;
-      document.getElementById("logoImage").value = article.logoImage || "";
-      categorySelect.value = article.category;
-      updateGenres(article.category);
-      genreSelect.value = article.genre;
-      quill.root.innerHTML = article.content;
-      document.getElementById("imagePreviewArea").innerHTML = "";
+          document.getElementById("title").value = article.title;
+          document.getElementById("intro").value = article.intro;
+          document.getElementById("logoImage").value = article.logoImage || "";
 
-      if (article.images && article.images.length) {
-        article.images.forEach(img => addImagePreview(img.url, img.caption));
-      }
+          categorySelect.value = article.category || collection;
+          updateGenres(categorySelect.value);
+          genreSelect.value = article.genre;
 
-      submitBtn.textContent = "💾 שמור שינויים";
+          quill.root.innerHTML = article.content;
+          document.getElementById("imagePreviewArea").innerHTML = "";
+
+          if (article.images && article.images.length) {
+            article.images.forEach(img => addImagePreview(img.url, img.caption));
+          }
+
+          submitBtn.textContent = "💾 שמור שינויים";
+        }
+      });
+    })).then(() => {
+      if (!found) alert("❌ לא נמצאה כתבה תואמת");
     });
   });
 
