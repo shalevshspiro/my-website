@@ -38,8 +38,8 @@ h1 {
 
 #content p {
   font-size: 18px;
-  line-height: 1.7;
-  margin-bottom: 20px;
+  line-height: 1.4;  /* פחות מרווח בין השורות */
+  margin-bottom: 15px;  /* מרווח קטן יותר בין פסקאות */
 }
 
 .article-image {
