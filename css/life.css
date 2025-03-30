@@ -22,6 +22,7 @@ header h1 {
   margin-bottom: 10px;
 }
 
+
 .opening-quote {
   background-color: rgba(255, 215, 0, 0.1);
   border-right: 4px solid #4A90E2;
@@ -41,6 +42,11 @@ header h1 {
   color: white;
 }
 
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 1s ease forwards;
+}
 nav ul {
   list-style: none;
   padding: 0;
