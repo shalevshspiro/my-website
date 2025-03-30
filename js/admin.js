@@ -287,3 +287,76 @@ document.addEventListener("DOMContentLoaded", function () {
     container.appendChild(wrapper);
   }
 });
+// ✅ הוספת רשימת כתבות לעריכה (שם + ז'אנר בלבד)
+function loadArticleList() {
+  const selectedCategory = categorySelect.value;
+  const articleList = document.getElementById("articleList");
+  articleList.innerHTML = "";
+
+  db.collection(selectedCategory)
+    .orderBy("createdAt", "desc")
+    .limit(30)
+    .get()
+    .then(snapshot => {
+      if (snapshot.empty) {
+        articleList.innerHTML = "<li>❌ לא נמצאו כתבות.</li>";
+        return;
+      }
+
+      snapshot.forEach(doc => {
+        const article = doc.data();
+        const li = document.createElement("li");
+        li.style.marginBottom = "12px";
+
+        li.innerHTML = `
+          <strong>${article.title}</strong> (${article.genre || "לא צוין"}) 
+          <button style="margin-right: 10px;" data-id="${doc.id}">ערוך</button>
+        `;
+
+        li.querySelector("button").addEventListener("click", () => {
+          loadArticleForEdit(doc.id, selectedCategory);
+        });
+
+        articleList.appendChild(li);
+      });
+    });
+}
+
+function loadArticleForEdit(id, collection) {
+  db.collection(collection).doc(id).get().then(doc => {
+    if (!doc.exists) return alert("❌ כתבה לא נמצאה");
+
+    const article = doc.data();
+    articleIdInput.value = doc.id;
+
+    document.getElementById("title").value = article.title;
+    document.getElementById("intro").value = article.intro;
+    document.getElementById("logoImage").value = article.logoImage || "";
+
+    categorySelect.value = article.category || collection;
+    updateGenres(categorySelect.value);
+    genreSelect.value = article.genre;
+
+    quill.root.innerHTML = article.content;
+    document.getElementById("imagePreviewArea").innerHTML = "";
+
+    if (article.images && article.images.length) {
+      article.images.forEach(img => addImagePreview(img.url, img.caption));
+    }
+
+    submitBtn.textContent = "💾 שמור שינויים";
+  });
+}
+
+// קריאה לפונקציה לאחר טעינה מלאה
+document.addEventListener("DOMContentLoaded", function () {
+  categorySelect.addEventListener("change", () => {
+    loadArticleList();
+  });
+
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      loadArticleList();
+    }
+  });
+});
