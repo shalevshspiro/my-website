@@ -259,6 +259,7 @@ Promise.all(queries)
     console.error("❌ שגיאה בחיפוש כתבות:", error);
     alert("❌ שגיאה בחיפוש כתבות: " + error.message);
   });
+});
 
   document.getElementById("uploadImagesBtn").addEventListener("click", () => {
     const files = document.getElementById("imageUpload").files;
