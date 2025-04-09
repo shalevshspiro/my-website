@@ -197,75 +197,67 @@ if (editingId) {
   });
 
   document.getElementById("searchForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-    const searchTitle = document.getElementById("searchTitle").value.trim();
-    const searchGenre = document.getElementById("searchGenre").value.trim();
+e.preventDefault();
 
-    const tryCollections = ["articles", "life"];
+const searchTitle = document.getElementById("searchTitle").value.trim();
+const searchGenre = document.getElementById("searchGenre").value.trim();
+const selectedCategory = document.getElementById("category").value;
+const articleList = document.getElementById("articleList");
+articleList.innerHTML = "";
+
+const collectionsToSearch = selectedCategory ? [selectedCategory] : ["articles", "life"];
+const queries = collectionsToSearch.map(col => {
+  let q = db.collection(col);
+  if (searchTitle) q = q.where("title", "==", searchTitle);
+  if (searchGenre) q = q.where("genre", "==", searchGenre);
+  return q.get().then(snapshot => ({ col, snapshot }));
+});
+
+Promise.all(queries)
+  .then(results => {
     let found = false;
+    results.forEach(({ col, snapshot }) => {
+      if (snapshot.empty) return;
 
-    Promise.all(tryCollections.map(collection => {
-      let query = db.collection(collection);
-      if (searchTitle) query = query.where("title", "==", searchTitle);
-      if (searchGenre) query = query.where("genre", "==", searchGenre);
+      found = true;
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const li = document.createElement("li");
+        li.textContent = `📝 [${col}] ${data.title}`;
+        li.style.cursor = "pointer";
 
-      return query.limit(1).get().then(snapshot => {
-        if (!found && !snapshot.empty) {
-          found = true;
-          const doc = snapshot.docs[0];
-          const article = doc.data();
+        li.addEventListener("click", () => {
+          document.getElementById("title").value = data.title;
+          document.getElementById("intro").value = data.intro || "";
+          document.getElementById("logoImage").value = data.logoImage || "";
+
+          categorySelect.value = col;
+          updateGenres(col);
+          genreSelect.value = data.genre;
+
+          quill.root.innerHTML = data.content;
           articleIdInput.value = doc.id;
-articleIdInput.dataset.originalCategory = collection;
+          articleIdInput.dataset.originalCategory = col;
 
-          document.getElementById("title").value = article.title;
-          document.getElementById("intro").value = article.intro;
-          document.getElementById("logoImage").value = article.logoImage || "";
-
-          categorySelect.value = article.category || collection;
-          updateGenres(categorySelect.value);
-          genreSelect.value = article.genre;
-
-          quill.root.innerHTML = article.content;
           document.getElementById("imagePreviewArea").innerHTML = "";
-
-          if (article.images && article.images.length) {
-            article.images.forEach(img => addImagePreview(img.url, img.caption));
+          if (data.images && data.images.length) {
+            data.images.forEach(img => addImagePreview(img.url, img.caption));
           }
-function loadAllArticles() {
-  const articleList = document.getElementById("articleList");
-  articleList.innerHTML = "";
-
-  const collections = ["articles", "life"];
-  collections.forEach(col => {
-    db.collection(col)
-      .orderBy("updatedAt", "desc")
-      .limit(20)
-      .get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          const data = doc.data();
-          const li = document.createElement("li");
-          li.textContent = `📰 [${col}] ${data.title}`;
-          li.style.cursor = "pointer";
-          li.addEventListener("click", () => {
-            document.getElementById("searchTitle").value = data.title;
-            document.getElementById("searchForm").dispatchEvent(new Event("submit"));
-          });
-          articleList.appendChild(li);
-        });
-      })
-      .catch(err => {
-        console.error("⚠️ שגיאה בטעינת כתבות מאוסף", col, err);
-      });
-  });
-}
 
           submitBtn.textContent = "💾 שמור שינויים";
-        }
+        });
+
+        articleList.appendChild(li);
       });
-    })).then(() => {
-      if (!found) alert("❌ לא נמצאה כתבה תואמת");
     });
+
+    if (!found) {
+      alert("❌ לא נמצאו כתבות תואמות");
+    }
+  })
+  .catch(error => {
+    console.error("❌ שגיאה בחיפוש כתבות:", error);
+    alert("❌ שגיאה בחיפוש כתבות: " + error.message);
   });
 
   document.getElementById("uploadImagesBtn").addEventListener("click", () => {
