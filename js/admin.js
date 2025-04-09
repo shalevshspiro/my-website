@@ -69,8 +69,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   document.getElementById("uploadLogoBtn").addEventListener("click", () => {
-  try {
-    console.log("🔁 התחלת העלאת לוגו");
     const file = document.getElementById("logoUpload").files[0];
     if (!file) return alert("יש לבחור קובץ קודם");
 
@@ -86,12 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(data => {
         console.log("📷 Cloudinary response (logo):", data);
         if (data.secure_url) {
-          const logoInput = document.getElementById("logoImage");
-if (logoInput) {
-  logoInput.value = data.secure_url;
-} else {
-  console.error("🛑 שגיאה: האלמנט logoImage לא קיים ב-DOM");
-}
+          document.getElementById("logoImage").value = data.secure_url;
           alert("✅ הלוגו הועלה!");
         } else {
           alert("❌ שגיאה בהעלאת לוגו");
@@ -105,9 +98,11 @@ if (logoInput) {
   articleForm.addEventListener("submit", function (e) {
     e.preventDefault();
 const rawContent = quill.getText().trim();
-if (rawContent === "" || rawContent === "\n") {
-  console.error("🛑 שגיאה: התוכן ריק");
-  alert("📝 יש למלא את תוכן הכתבה");
+document.getElementById("contentCheck").value = rawContent;
+
+const contentInput = document.getElementById("contentCheck");
+if (!contentInput.checkValidity()) {
+  contentInput.reportValidity(); // יציג את ההתרעה "זהו שדה חובה"
   return;
 }
 
@@ -159,10 +154,7 @@ if (rawContent === "" || rawContent === "\n") {
         .catch(error => {
           console.error("❌ שגיאה בעדכון כתבה:", error);
           alert("❌ שגיאה בעדכון כתבה: " + error.message);
-          } catch (err) {
-    console.error("🛑 שגיאה במהלך הפעולה:", err);
-  }
-});
+        });
     } else {
       db.collection(category).add({ ...articleData, createdAt: firebase.firestore.FieldValue.serverTimestamp() })
         .then(() => {
@@ -174,16 +166,11 @@ if (rawContent === "" || rawContent === "\n") {
         .catch(error => {
           console.error("❌ שגיאה בהוספת כתבה:", error);
           alert("❌ שגיאה בהוספת כתבה: " + error.message);
-          } catch (err) {
-    console.error("🛑 שגיאה במהלך הפעולה:", err);
-  }
-});
+        });
     }
   });
 
   document.getElementById("searchForm").addEventListener("submit", function (e) {
-  try {
-    console.log("🔍 התחלת חיפוש כתבה");
     e.preventDefault();
     const searchTitle = document.getElementById("searchTitle").value.trim();
     const searchGenre = document.getElementById("searchGenre").value.trim();
@@ -220,18 +207,13 @@ if (rawContent === "" || rawContent === "\n") {
 
           submitBtn.textContent = "💾 שמור שינויים";
         }
-        } catch (err) {
-    console.error("🛑 שגיאה במהלך הפעולה:", err);
-  }
-});
+      });
     })).then(() => {
       if (!found) alert("❌ לא נמצאה כתבה תואמת");
     });
   });
 
   document.getElementById("uploadImagesBtn").addEventListener("click", () => {
-  try {
-    console.log("🔁 התחלת העלאת תמונות");
     const files = document.getElementById("imageUpload").files;
     if (!files.length) return alert("יש לבחור קבצים");
 
@@ -255,10 +237,7 @@ if (rawContent === "" || rawContent === "\n") {
         })
         .catch(err => {
           console.error("❌ שגיאה בהעלאת תמונה", err);
-          } catch (err) {
-    console.error("🛑 שגיאה במהלך הפעולה:", err);
-  }
-});
+        });
     });
 
     Promise.all(uploadPromises).then(() => {
@@ -267,8 +246,6 @@ if (rawContent === "" || rawContent === "\n") {
   });
 
   document.getElementById("addImageByUrl").addEventListener("click", () => {
-  try {
-    console.log("🔗 התחלת הוספת תמונה מקישור");
     const url = document.getElementById("imageUrlInput").value.trim();
     if (!url) return alert("⚠️ נא להדביק קישור קודם");
     addImagePreview(url);
