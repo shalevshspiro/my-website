@@ -36,15 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-auth.signInWithEmailAndPassword(email, password)
-  .then(() => {
-    alert("✅ התחברת!");
-    showAdminPanel();
-    loadAllArticles(); // ← כאן זה המקום הנכון
-  })
-  .catch(error => {
-    alert("❌ שגיאה: " + error.message);
-  });
+    auth.signInWithEmailAndPassword(email, password)
+      .then(() => {
+        alert("✅ התחברת!");
+        showAdminPanel();
+      })
 
       .catch(error => {
         alert("❌ שגיאה: " + error.message);
