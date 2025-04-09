@@ -140,20 +140,47 @@ if (rawContent === "" || rawContent === "\n") {
       updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     };
 
-    if (editingId) {
-      db.collection(category).doc(editingId).update(articleData)
-        .then(() => {
-          alert("💾 שינויים נשמרו בהצלחה!");
-          articleForm.reset();
-          quill.setText("");
-          document.getElementById("imagePreviewArea").innerHTML = "";
-          articleIdInput.value = "";
-          submitBtn.textContent = "✅ צור כתבה";
-        })
-        .catch(error => {
-          console.error("❌ שגיאה בעדכון כתבה:", error);
-          alert("❌ שגיאה בעדכון כתבה: " + error.message);
+if (editingId) {
+  const originalCategory = articleIdInput.dataset.originalCategory;
+
+  if (originalCategory !== category) {
+    // שינית קטגוריה – מחיקה מהאוסף הישן ושמירה חדש
+    db.collection(originalCategory).doc(editingId).delete()
+      .then(() => {
+        return db.collection(category).add({ 
+          ...articleData, 
+          createdAt: firebase.firestore.FieldValue.serverTimestamp() 
         });
+      })
+      .then(() => {
+        alert("🔄 הכתבה הועברה ונתונים נשמרו!");
+        articleForm.reset();
+        document.getElementById("imagePreviewArea").innerHTML = "";
+        quill.setText("");
+        articleIdInput.value = "";
+        submitBtn.textContent = "✅ צור כתבה";
+      })
+      .catch(error => {
+        console.error("❌ שגיאה בהעברה/עדכון:", error);
+        alert("❌ שגיאה בהעברה/עדכון: " + error.message);
+      });
+  } else {
+    // לא שינית קטגוריה – עדכון רגיל
+    db.collection(category).doc(editingId).update(articleData)
+      .then(() => {
+        alert("💾 שינויים נשמרו בהצלחה!");
+        articleForm.reset();
+        quill.setText("");
+        document.getElementById("imagePreviewArea").innerHTML = "";
+        articleIdInput.value = "";
+        submitBtn.textContent = "✅ צור כתבה";
+      })
+      .catch(error => {
+        console.error("❌ שגיאה בעדכון כתבה:", error);
+        alert("❌ שגיאה בעדכון כתבה: " + error.message);
+      });
+  }
+
     } else {
       db.collection(category).add({ ...articleData, createdAt: firebase.firestore.FieldValue.serverTimestamp() })
         .then(() => {
@@ -188,6 +215,7 @@ if (rawContent === "" || rawContent === "\n") {
           const doc = snapshot.docs[0];
           const article = doc.data();
           articleIdInput.value = doc.id;
+articleIdInput.dataset.originalCategory = collection;
 
           document.getElementById("title").value = article.title;
           document.getElementById("intro").value = article.intro;
