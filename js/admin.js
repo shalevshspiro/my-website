@@ -98,11 +98,9 @@ document.addEventListener("DOMContentLoaded", function () {
   articleForm.addEventListener("submit", function (e) {
     e.preventDefault();
 const rawContent = quill.getText().trim();
-document.getElementById("contentCheck").value = rawContent;
-
-const contentInput = document.getElementById("contentCheck");
-if (!contentInput.checkValidity()) {
-  contentInput.reportValidity(); // יציג את ההתרעה "זהו שדה חובה"
+if (rawContent === "" || rawContent === "\n") {
+  console.error("🛑 שגיאה: תוכן הכתבה ריק");
+  alert("📝 יש למלא את תוכן הכתבה");
   return;
 }
 
