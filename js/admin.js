@@ -36,11 +36,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    auth.signInWithEmailAndPassword(email, password)
-      .then(() => {
-        alert("✅ התחברת!");
-        showAdminPanel();
-      })
+auth.signInWithEmailAndPassword(email, password)
+  .then(() => {
+    alert("✅ התחברת!");
+    showAdminPanel();
+    loadAllArticles(); // ← כאן זה המקום הנכון
+  })
+  .catch(error => {
+    alert("❌ שגיאה: " + error.message);
+  });
+
       .catch(error => {
         alert("❌ שגיאה: " + error.message);
       });
@@ -202,6 +207,34 @@ if (rawContent === "" || rawContent === "\n") {
           if (article.images && article.images.length) {
             article.images.forEach(img => addImagePreview(img.url, img.caption));
           }
+function loadAllArticles() {
+  const articleList = document.getElementById("articleList");
+  articleList.innerHTML = "";
+
+  const collections = ["articles", "life"];
+  collections.forEach(col => {
+    db.collection(col)
+      .orderBy("updatedAt", "desc")
+      .limit(20)
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const li = document.createElement("li");
+          li.textContent = `📰 [${col}] ${data.title}`;
+          li.style.cursor = "pointer";
+          li.addEventListener("click", () => {
+            document.getElementById("searchTitle").value = data.title;
+            document.getElementById("searchForm").dispatchEvent(new Event("submit"));
+          });
+          articleList.appendChild(li);
+        });
+      })
+      .catch(err => {
+        console.error("⚠️ שגיאה בטעינת כתבות מאוסף", col, err);
+      });
+  });
+}
 
           submitBtn.textContent = "💾 שמור שינויים";
         }
